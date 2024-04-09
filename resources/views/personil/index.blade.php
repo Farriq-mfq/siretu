@@ -16,7 +16,7 @@
         </div>
         <form class="max-w-md my-3">
             <div class="flex gap-2">
-                <input @if ($search) autofocus @endif name="search" value="{{ $search }}"
+                <input autocomplete="off" @if ($search) autofocus @endif name="search" value="{{ $search }}"
                     type="search" id="default-search"
                     class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Cari data" required />
@@ -38,7 +38,7 @@
                 <thead class="text-xs uppercase bg-blue-500 text-white">
                     <tr>
                         <th scope="col" class="px-6 py-3 text-nowrap rounded-l-lg">
-                            Nomer
+                            Nomor
                         </th>
                         <th scope="col" class="px-6 py-3 text-nowrap rounded-l-lg">
                             NoTelp

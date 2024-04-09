@@ -12,22 +12,14 @@
 </head>
 
 <body class="bg-gray-50">
-    <x-header></x-header>
-    <div class="flex overflow-hidden bg-white pt-14">
-        <x-sidebar></x-sidebar>
-        <div class="bg-gray-900 opacity-50 hidden fixed inset-0 z-10" id="sidebarBackdrop"></div>
-
-        <div id="main-content" class="h-full w-full bg-gray-50 min-h-screen relative overflow-y-auto lg:ml-64">
-            <main class="pt-6 px-4">
+    <div class="h-full w-full bg-gray-50 min-h-screen relative">
+        <main class="bg-gray-50">
+            <div class="mx-auto md:h-screen flex flex-col justify-center items-center px-6 pt-8 pt:mt-0">
                 @yield('content')
-            </main>
-        </div>
-
+            </div>
+        </main>
     </div>
     @vite('resources/js/app.js')
-    <script type="module">
-        $('#select2').select2();
-    </script>
     @stack('scripts')
 </body>
 

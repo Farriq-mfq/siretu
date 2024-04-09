@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PersonilController;
 use App\Http\Controllers\ReportPresencesController;
@@ -16,23 +17,33 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+Route::middleware('auth')->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::prefix('/presensi-tu')->group(function () {
-    Route::get('/', [ReportPresencesController::class, 'presensi_tu'])->name('presensi-tu');
-    Route::delete('/{id}', [ReportPresencesController::class, 'resetPresensiTu'])->name('presensi-tu-reset');
-    Route::get('export/{type}', [ReportPresencesController::class, 'exportPresensiTU'])->name('presensi-tu-export');
+    Route::prefix('/presensi-tu')->group(function () {
+        Route::get('/', [ReportPresencesController::class, 'presensi_tu'])->name('presensi-tu');
+        Route::delete('/{id}', [ReportPresencesController::class, 'resetPresensiTu'])->name('presensi-tu-reset');
+        Route::get('export/{type}', [ReportPresencesController::class, 'exportPresensiTU'])->name('presensi-tu-export');
+    });
+    Route::prefix('/presensi-guru')->group(function () {
+        Route::get('/', [ReportPresencesController::class, 'presensi_guru'])->name('presensi-guru');
+        Route::get('export/{type}', [ReportPresencesController::class, 'exportPresensiGuru'])->name('presensi-guru-export');
+        Route::delete('/{id}', [ReportPresencesController::class, 'resetPresensiGuru'])->name('presensi-guru-reset');
+    });
+    Route::prefix('/personil')->group(function () {
+        Route::get('/', [PersonilController::class, 'index'])->name('personil');
+        Route::get('/export/{type}', [PersonilController::class, 'exportPersonil'])->name('export-personil');
+    });
+    Route::get('/about', function () {
+        return view('tentang.index');
+    })->name('about');
+    Route::delete('logout', [AuthController::class, 'logout'])->name('logout');
 });
-Route::get('/presensi-guru', [ReportPresencesController::class, 'presensi_guru'])->name('presensi-guru');
-Route::prefix('/personil')->group(function () {
-    Route::get('/', [PersonilController::class, 'index'])->name('personil');
-    Route::get('/export/{type}', [PersonilController::class, 'exportPersonil'])->name('export-personil');
+
+
+Route::middleware('guest')->group(function () {
+    Route::get('login', [AuthController::class, 'login'])->name('login');
+    Route::post('login', [AuthController::class, 'loginProcess'])->name('login.action');
 });
 
 
-// Route::get();
-
-
-Route::get('/about', function () {
-    return view('tentang.index');
-})->name('about');

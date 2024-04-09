@@ -1,4 +1,4 @@
 @extends('templates.main')
 @section('content')
-    testing
+    Selamat datang
 @endsection

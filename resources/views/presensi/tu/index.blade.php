@@ -57,6 +57,15 @@
                 <option @if ($show === 'uncompleted') selected @endif value="uncompleted">Belum Lengkap</option>
             </select>
         </div>
+        {{-- <div class="max-w-sm">
+            <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                Cari Personil
+            </label>
+            <select class="w-full" id="select2" name="state">
+                <option value="AL">Alabama</option>
+                <option value="WY">Wyoming</option>
+            </select>
+        </div> --}}
 
 
         <div class="flex gap-1">
@@ -91,6 +100,7 @@
                 </a>
             @endif
         </div>
+
 
         <div id="tab---presences--tu">
             <div class="hidden mt-1 rounded-lg" id="Data" role="tabpanel" aria-labelledby="data-tab">
@@ -302,8 +312,6 @@
 @push('scripts')
     <script type="module">
         $(document).ready(function() {
-
-
             $("#change_show_rek_tu").on("change", function(e) {
                 const show_var = $(this).val()
                 const urlParams = new URLSearchParams(window.location.search);
@@ -352,6 +360,7 @@
                     }
                 }
             );
+
         });
     </script>
 @endpush

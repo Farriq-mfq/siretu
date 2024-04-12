@@ -12,11 +12,13 @@ class BaseContent extends Component
      * Create a new component instance.
      */
     public string $title;
-    public string $description;
-    public function __construct($title, $description)
+    public ?string $description;
+    public ?string $customClass;
+    public function __construct($title, $description = null, $customClass = null)
     {
         $this->title = $title;
         $this->description = $description;
+        $this->customClass = $customClass;
     }
 
     /**
@@ -24,6 +26,6 @@ class BaseContent extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.base-content', ['title' => $this->title]);
+        return view('components.base-content');
     }
 }

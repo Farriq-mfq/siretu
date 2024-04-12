@@ -34,13 +34,11 @@ class PersonilController extends Controller
         $today = Carbon::today()->format('Y-m-d');
 
         $columns = [
-            'NoTelp' => 'NoTelp',
+            'NoTelp' => 'NOTELP',
             'Kelompok' => "KELOMPOKGURU",
-            'Nama Saja' => "NAMASAJA",
-            'Jabatan' => "JABATAN",
             'Nama Lengkap' => "NAMALENGKAP",
+            'Jabatan' => "JABATAN",
             'Jenis Kelamin' => "KELAMIN",
-            'Panggilan' => "PANGGILAN",
             "Status" => "STATUS",
             "No Induk" => "INDUKPEGAWAI",
             "Email" => "EMAIL"

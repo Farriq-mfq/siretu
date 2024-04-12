@@ -3,9 +3,10 @@
     Tentang
 @endsection
 @section('content')
-    <x-base-content title="Tentang Aplikasi" description="Penjelasan tentang aplikasi SIRETU">
+    <x-base-content title="Tentang Aplikasi">
         <p>
             &copy; TIM IT SMK Negeri 1 Pekalongan
+            Versi aplikasi v:1.0.0
         </p>
     </x-base-content>
 @endsection

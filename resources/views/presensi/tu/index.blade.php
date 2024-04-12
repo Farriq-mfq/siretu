@@ -287,7 +287,7 @@
             <div class="hidden p-4" id="stats" role="tabpanel" aria-labelledby="data-tab">
                 <div class="flex gap-2 items-center">
                     <div class="shadow rounded  p-3 mb-4 flex h-[250px] w-[250px]">
-                        <canvas id="chart-test"></canvas>
+                        <canvas id="presensi-visualisasi"></canvas>
                     </div>
                     <div class="flex-1">
                         <table class="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-40">
@@ -346,7 +346,7 @@
             }];
 
             new Chart(
-                document.getElementById('chart-test'), {
+                document.getElementById('presensi-visualisasi'), {
                     type: 'doughnut',
                     options: {
                         responsive: true

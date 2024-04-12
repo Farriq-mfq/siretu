@@ -30,15 +30,15 @@
                               </span>
                           </a>
                       </li>
-                      {{-- <li>
-                          <a href={{ route('presensi-tu') }}
-                              class="text-base text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group @active('presensi-tu')">
+                      <li>
+                          <a href={{ route('jurnal') }}
+                              class="text-base text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group @active('jurnal')">
                               <i data-lucide="list" class="w-4 h-4"></i>
                               <span class="ml-3">
                                   Rekap Jurnal
                               </span>
                           </a>
-                      </li> --}}
+                      </li>
                       <li>
                           <a href={{ route('personil') }}
                               class="text-base text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group @active('personil')">

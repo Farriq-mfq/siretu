@@ -7,9 +7,9 @@
     </a> --}}
 
     <div class="bg-white shadow rounded-lg md:mt-0 w-full sm:max-w-screen-sm xl:p-0">
-        <div class="p-6 sm:p-8 lg:p-16 space-y-8">
+        <div class="px-7 py-8 space-y-8">
             <h2 class="text-2xl lg:text-3xl font-bold text-gray-900">
-                Sign in
+                Masuk
             </h2>
 
             @if (Session::has('unauthorized'))

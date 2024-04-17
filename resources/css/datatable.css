@@ -1,0 +1,64 @@
+.dataTables_wrapper  {
+    @apply !relative !overflow-x-auto;
+}
+.dataTable {
+    @apply !w-full text-sm text-gray-500 dark:text-gray-400;
+}
+.dataTable thead {
+    @apply text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400;
+}
+.dataTable th {
+    @apply !px-6 !py-3;
+}
+.dataTable tbody tr {
+    @apply bg-white border-b dark:bg-gray-800 dark:border-gray-700;
+}
+.dataTable tbody td {
+    @apply px-6 py-4;
+}
+.pagination {
+    @apply flex gap-2 flex-wrap justify-center;
+}
+.pagination .paginate_button {
+    @apply flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white rounded-lg;
+}
+.pagination .paginate_button.active {
+    @apply !bg-blue-500 text-white;
+}
+
+.pagination .previous {
+    @apply mr-2
+    flex items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white;
+}
+
+.pagination .next {
+    @apply ml-2  flex items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white;
+}
+
+.dataTables_filter {
+    @apply relative;
+}
+.dataTables_filter input {
+    @apply block p-2 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500;
+}
+.dataTables_filter label {
+    @apply text-sm;
+}
+
+.dataTables_length select {
+    @apply inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700;
+}
+.dataTables_length label {
+    @apply text-sm;
+}
+
+.dataTables_info {
+    @apply text-sm text-gray-400;
+}
+
+.dt-buttons {
+    @apply flex flex-wrap gap-2 border-b pb-3;
+}
+.dt-buttons button {
+    @apply flex items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white;
+}

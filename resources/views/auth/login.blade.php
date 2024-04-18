@@ -9,7 +9,7 @@
     <div class="bg-white shadow rounded-lg md:mt-0 w-full sm:max-w-screen-sm xl:p-0">
         <div class="px-7 py-8 space-y-8">
             <h2 class="text-2xl lg:text-3xl font-bold text-gray-900">
-                Masuk
+                Masuk ke Sistem Report
             </h2>
 
             @if (Session::has('unauthorized'))

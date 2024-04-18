@@ -2,17 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\PersonilDataTable;
 use App\Models\Jurnal;
 use App\Models\Personil;
 use App\Models\PresensiGuru;
 use App\Models\PresensiTu;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class DashboardController extends Controller
 {
     public function index()
+    // public function index(PersonilDataTable $dataTable)
     {
+
+        // return $dataTable->render('test');
         return view('index', $this->getStats());
     }
 

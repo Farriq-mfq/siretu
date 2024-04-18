@@ -13,11 +13,12 @@ use Yajra\DataTables\DataTables;
 
 class DashboardController extends Controller
 {
-    public function index(PersonilDataTable $dataTable)
+    public function index()
+    // public function index(PersonilDataTable $dataTable)
     {
 
-        return $dataTable->render('test');
-        // return view('index', $this->getStats());
+        // return $dataTable->render('test');
+        return view('index', $this->getStats());
     }
 
     protected function getStats(): array

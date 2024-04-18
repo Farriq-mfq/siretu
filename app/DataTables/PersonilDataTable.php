@@ -40,7 +40,7 @@ class PersonilDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->setTableId('personil')
+            ->setTableId('personil-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->buttons([

@@ -157,9 +157,9 @@ class ReportPresencesController extends Controller
 
     }
 
-    public function resetPresensiTu(string $id)
+    public function resetPresensiTu(string $id, string $tgl)
     {
-        $deleted = $this->presensiTu->where('NoFormulir', $id)->delete();
+        $deleted = $this->presensiTu->where('NoFormulir', $id)->where("TglFormulir", $tgl)->delete();
         if ($deleted) {
             return back()->with('message', [
                 'message' => "Berhasil reset presensi",
@@ -311,9 +311,9 @@ class ReportPresencesController extends Controller
     }
 
 
-    public function resetPresensiGuru(string $id)
+    public function resetPresensiGuru(string $id, string $tgl)
     {
-        $deleted = $this->presensiGuru->where('NoFormulir', $id)->delete();
+        $deleted = $this->presensiGuru->where('NoFormulir', $id)->where('TglFormulir', $tgl)->delete();
         if ($deleted) {
             return back()->with('message', [
                 'message' => "Berhasil reset presensi",

@@ -229,7 +229,7 @@
                                                                     class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
                                                                     Yakin ingin mereset data ini ?</h3>
                                                                 <form
-                                                                    action="{{ route('presensi-guru-reset', ['id' => $presence->NoFormulir]) }}"
+                                                                    action="{{ route('presensi-guru-reset', ['id' => $presence->NoFormulir, 'tgl' => $presence->TglFormulir]) }}"
                                                                     method="POST" class="inline-block">
                                                                     @csrf
                                                                     @method('DELETE')

@@ -23,13 +23,13 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('/presensi-tu')->group(function () {
         Route::get('/', [ReportPresencesController::class, 'presensi_tu'])->name('presensi-tu');
-        Route::delete('/{id}', [ReportPresencesController::class, 'resetPresensiTu'])->name('presensi-tu-reset');
+        Route::delete('/{id}/{tgl}', [ReportPresencesController::class, 'resetPresensiTu'])->name('presensi-tu-reset');
         Route::get('export/{type}', [ReportPresencesController::class, 'exportPresensiTU'])->name('presensi-tu-export');
     });
     Route::prefix('/presensi-guru')->group(function () {
         Route::get('/', [ReportPresencesController::class, 'presensi_guru'])->name('presensi-guru');
         Route::get('export/{type}', [ReportPresencesController::class, 'exportPresensiGuru'])->name('presensi-guru-export');
-        Route::delete('/{id}', [ReportPresencesController::class, 'resetPresensiGuru'])->name('presensi-guru-reset');
+        Route::delete('/{id}/{tgl}', [ReportPresencesController::class, 'resetPresensiGuru'])->name('presensi-guru-reset');
     });
     Route::prefix('/personil')->group(function () {
         Route::get('/', [PersonilController::class, 'index'])->name('personil');

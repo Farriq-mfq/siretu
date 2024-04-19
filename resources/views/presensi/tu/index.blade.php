@@ -285,25 +285,32 @@
         </div>
         <div id="tab---presences--tu">
             <div class="hidden p-4" id="stats" role="tabpanel" aria-labelledby="data-tab">
-                <div class="flex gap-2 items-center">
-                    <div class="shadow rounded  p-3 mb-4 flex h-[250px] w-[250px]">
-                        <canvas id="presensi-visualisasi"></canvas>
+                @if ($presences->count() > 0)
+                    <div class="flex gap-2 items-center">
+                        <div class="shadow rounded  p-3 mb-4 flex h-[250px] w-[250px]">
+                            <canvas id="presensi-visualisasi"></canvas>
+                        </div>
+                        <div class="flex-1">
+                            <table class="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-40">
+                                <tbody>
+                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                        <th scope="col" class="px-6 py-3">Total Data Lengkap</th>
+                                        <td>{{ $presences_count['lengkap'] }}</td>
+                                    </tr>
+                                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                        <th scope="col" class="px-6 py-3">Total Data Belum Lengkap</th>
+                                        <td>{{ $presences_count['belum_lengkap'] }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <div class="flex-1">
-                        <table class="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-40">
-                            <tbody>
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                    <th scope="col" class="px-6 py-3">Total Data Lengkap</th>
-                                    <td>{{ $presences_count['lengkap'] }}</td>
-                                </tr>
-                                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                    <th scope="col" class="px-6 py-3">Total Data Belum Lengkap</th>
-                                    <td>{{ $presences_count['belum_lengkap'] }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                @else
+                    <p class="text-sm flex items-center">
+                        <i data-lucide="info" class="mr-2"></i>
+                        Data Belum mencukupi untuk menampilkan grafik
+                    </p>
+                @endif
             </div>
         </div>
     </x-base-content>

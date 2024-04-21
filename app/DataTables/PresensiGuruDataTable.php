@@ -25,9 +25,6 @@ class PresensiGuruDataTable extends DataTable
             ->addColumn('status', function ($row) {
                 return view('presensi.guru.status', compact('row'));
             })
-            ->addColumn('Nama Lengkap', function ($row) {
-                return $row->NAMALENGKAP;
-            })
             ->setRowId('NoFormulir');
     }
 
@@ -80,7 +77,7 @@ class PresensiGuruDataTable extends DataTable
         return [
             Column::make('NoFormulir'),
             Column::make('status'),
-            Column::make('Nama Lengkap'),
+            Column::make('NAMALENGKAP'),
             Column::make('TglFormulir'),
             Column::make('JAM_DATANG'),
             Column::make('JAM_PULANG'),

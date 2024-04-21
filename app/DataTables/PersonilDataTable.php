@@ -8,8 +8,6 @@ use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class PersonilDataTable extends DataTable
@@ -22,7 +20,7 @@ class PersonilDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'datatables.actions.personil', true)
+            ->addColumn('action', 'personil.action')
             ->setRowId('NOMOR');
     }
 
@@ -46,7 +44,7 @@ class PersonilDataTable extends DataTable
             ->buttons([
                 Button::make('excel'),
                 Button::make('csv'),
-                Button::make('pdf'),
+                // Button::make('pdf'),
                 Button::make('print'),
                 Button::make('reset'),
                 Button::make('reload')
@@ -64,11 +62,7 @@ class PersonilDataTable extends DataTable
             Column::make("NOTELP"),
             Column::make('KELOMPOKGURU'),
             Column::make('JABATAN'),
-            Column::make('NAMALENGKAP'),
-            Column::make('KELAMIN'),
-            Column::make('STATUS'),
-            Column::make('INDUKPEGAWAI'),
-            Column::computed('action'),
+            Column::computed('action')->printable(false)->exportable(false),
         ];
     }
 

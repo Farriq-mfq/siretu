@@ -24,6 +24,10 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('active', function ($route) {
             return "<?php echo request()->routeIs($route) ? 'active' : ''; ?>";
         });
+        Blade::directive('activeHasChild', function ($route) {
+            return "<?php echo request()->is($route.'*') ? 'active open':'' ?>";
+        });
+
         Builder::useVite();
     }
 }

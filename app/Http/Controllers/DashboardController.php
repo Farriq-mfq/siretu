@@ -14,10 +14,8 @@ use Yajra\DataTables\DataTables;
 class DashboardController extends Controller
 {
     public function index()
-    // public function index(PersonilDataTable $dataTable)
     {
 
-        // return $dataTable->render('test');
         return view('index', $this->getStats());
     }
 

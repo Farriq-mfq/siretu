@@ -23,8 +23,8 @@ class ReportPresencesController extends Controller
         $showAvailable = ['all', 'current', 'filter'];
         $by = request('show') ? in_array(request('show'), $showAvailable) ? request('show') : 'current' : "current";
         $filter = request('show') === 'filter' ? [
-            'start' => request('start'),
-            'end' => request('end'),
+            'start_date' => request('start_date'),
+            'end_date' => request('end_date'),
             'personil' => request('personil'),
         ] : [];
         $personil = $this->personil->whereNot('NOMOR', 0)->get();
@@ -54,8 +54,8 @@ class ReportPresencesController extends Controller
         $showAvailable = ['all', 'current', 'filter'];
         $by = request('show') ? in_array(request('show'), $showAvailable) ? request('show') : 'current' : "current";
         $filter = request('show') === 'filter' ? [
-            'start' => request('start'),
-            'end' => request('end'),
+            'start_date' => request('start_date'),
+            'end_date' => request('end_date'),
             'personil' => request('personil'),
         ] : [];
         $personil = $this->personil->whereNot('NOMOR', 0)->get();

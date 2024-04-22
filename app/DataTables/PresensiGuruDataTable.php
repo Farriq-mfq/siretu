@@ -43,16 +43,16 @@ class PresensiGuruDataTable extends DataTable
             return $model
                 ->whereNot('NoFormulir', '-')->newQuery();
         } else if ($by === 'filter') {
-            if (request()->has('personil') && request()->has('start') && request()->has('end')) {
+            if (request()->has('personil') && request()->has('start_date') && request()->has('end_date')) {
                 return $model
                     ->whereNot('NoFormulir', '-')
                     ->where('NAMALENGKAP', request()->get('personil'))
-                    ->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') >= ?", request()->get('start'))->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') <= ?", request()->get('end'))
+                    ->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') >= ?", request()->get('start_date'))->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') <= ?", request()->get('end_date'))
                     ->newQuery();
-            } else if (request()->has('start') && request()->has('end')) {
+            } else if (request()->has('start_date') && request()->has('end_date')) {
                 return $model
                     ->whereNot('NoFormulir', '-')
-                    ->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') >= ?", request()->get('start'))->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') <= ?", request()->get('end'))
+                    ->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') >= ?", request()->get('start_date'))->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') <= ?", request()->get('end_date'))
                     ->newQuery();
             } else if (request()->has('personil')) {
                 return $model

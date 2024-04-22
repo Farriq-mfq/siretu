@@ -16,14 +16,14 @@
                         Tanggal awal
                     </label>
                     <input type="date" wire:model="start" class="form-control" name="start"
-                        value="{{ $filter['start'] }}" />
+                        value="{{ $filter['start_date'] }}" />
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">
                         Tanggal akhir
                     </label>
                     <input type="date" wire:model="end" class="form-control  @error('end') is-invalid @enderror"
-                        name="end" value="{{ $filter['end'] }}" />
+                        name="end" value="{{ $filter['end_date'] }}" />
                     @error('end')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -53,7 +53,7 @@
                 </div>
                 Tampilkan
             </button>
-            @if ($filter['personil'] || ($filter['start'] && $filter['end']))
+            @if ($filter['personil'] || ($filter['start_date'] && $filter['end_date']))
                 <a href="{{ route('presensi-guru', ['show' => 'filter']) }}" class="btn btn-danger">
                     Clear
                 </a>

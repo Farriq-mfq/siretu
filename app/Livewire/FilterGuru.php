@@ -30,11 +30,11 @@ class FilterGuru extends Component
         $data = [];
         if ($this->selectedPersonil && $this->start && $this->end) {
             $data['personil'] = $this->selectedPersonil;
-            $data['start'] = $this->start;
-            $data['end'] = $this->end;
+            $data['start_date'] = $this->start;
+            $data['end_date'] = $this->end;
         } else if ($this->start && $this->end) {
-            $data['start'] = $this->start;
-            $data['end'] = $this->end;
+            $data['start_date'] = $this->start;
+            $data['end_date'] = $this->end;
         } else if ($this->selectedPersonil) {
             $data['personil'] = $this->selectedPersonil;
         }
@@ -43,10 +43,10 @@ class FilterGuru extends Component
 
     public function mount(array $filter, $personil)
     {
-        $this->showFilterTanggal = request('show') === 'filter' && request()->has('start') && request()->has('end') ? true : false;
+        $this->showFilterTanggal = request('show') === 'filter' && request()->has('start_date') && request()->has('end_date') ? true : false;
         $this->selectedPersonil = request('show') === 'filter' && request()->has('personil') ? request()->get('personil') : null;
-        $this->start = request('show') === 'filter' && request()->has('start') ? request()->get('start') : null;
-        $this->end = request('show') === 'filter' && request()->has('end') ? request()->get('end') : null;
+        $this->start = request('show') === 'filter' && request()->has('start_date') ? request()->get('start_date') : null;
+        $this->end = request('show') === 'filter' && request()->has('end_date') ? request()->get('end_date') : null;
         $this->filter = $filter;
         $this->personil = $personil;
     }

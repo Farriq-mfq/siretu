@@ -43,7 +43,7 @@
                     @if ($by === 'filter')
                         <div class="tab-pane fade show active">
                             <livewire:FilterGuru :filter="$filter" :personil="$personil" />
-                            @if ($filter['personil'] || ($filter['start'] && $filter['end']))
+                            @if ($filter['personil'] || ($filter['start_date'] && $filter['end_date']))
                                 <div class="mt-3">
                                     {{ $dataTable->table() }}
                                 </div>

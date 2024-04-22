@@ -3,7 +3,13 @@
     Jurnal
 @endsection
 @section('content')
-    <x-base-content title="Data Jurnal" description="Data rekaptulasi jurnal">
-       <p class="flex text-xl items-center"><i data-lucide="cog" class="mr-2 animate-spin"></i> MASIH DALAM PROSES PENGEMBANGAN</p>
-    </x-base-content>
+    <div class="card">
+        <div class="card-body">
+            {{ $dataTable->table() }}
+        </div>
+    </div>
 @endsection
+
+@push('scripts')
+    {{ $dataTable->scripts() }}
+@endpush

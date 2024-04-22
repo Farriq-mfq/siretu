@@ -6,6 +6,7 @@ nProgress.configure({
     showSpinner: false,
 })
 
+
 $(document).ready(function () {
     const form = $("#form-delete-button")
     $(document).on("click", "#delete_confirmation", function () {
@@ -27,10 +28,7 @@ $(document).ready(function () {
     // window.select2 = select2
     // const select2comp = $(document).find("#select2")
     // $("#select2").select2()
-
 })
-
-
 
 document.addEventListener("DOMContentLoaded", () => {
     Livewire.hook('message.sent', (message, component) => {
@@ -41,3 +39,9 @@ document.addEventListener("DOMContentLoaded", () => {
         nProgress.done();
     })
 });
+
+
+$.toast('alert')
+
+
+// console.log($)

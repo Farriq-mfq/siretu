@@ -1,4 +1,4 @@
-<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme sidebar">
     <div class="app-brand demo">
         <a href="index.html" class="app-brand-link">
             {{-- <span class="app-brand-logo demo">
@@ -108,6 +108,35 @@
                 </li>
             </ul>
         </li>
+        <li class="menu-item @active('jurnal')">
+            <a href="{{ route('jurnal') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-pencil"></i>
+                <div data-i18n="Analytics">Jurnal</div>
+            </a>
+        </li>
+        {{-- <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">
+                Surat
+            </span>
+        </li> --}}
+        {{-- <li class="menu-item @activeHasChild('ijin')">
+            <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-envelope"></i>
+                <div data-i18n="Layouts">
+                    Input Surat
+                </div>
+            </a>
+
+            <ul class="menu-sub">
+                <li class="menu-item @active('ijin-guru')">
+                    <a href="{{ route('ijin-guru') }}" class="menu-link">
+                        <div data-i18n="Without menu">
+                            Ijin Guru
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </li> --}}
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">
                 Master

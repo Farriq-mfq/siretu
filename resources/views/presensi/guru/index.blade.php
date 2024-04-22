@@ -21,6 +21,13 @@
                             Semua Presensi
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('presensi-guru', ['show' => 'filter']) }}"
+                            class="nav-link @if ($by === 'filter') active @endif"
+                            aria-selected="@if ($by === 'filter') active @endif">
+                            Filter
+                        </a>
+                    </li>
                 </ul>
                 <div class="tab-content">
                     @if ($by === 'current')
@@ -31,6 +38,16 @@
                     @if ($by === 'all')
                         <div class="tab-pane fade show active">
                             {{ $dataTable->table() }}
+                        </div>
+                    @endif
+                    @if ($by === 'filter')
+                        <div class="tab-pane fade show active">
+                            <livewire:FilterGuru :filter="$filter" :personil="$personil" />
+                            @if ($filter['personil'] || ($filter['start'] && $filter['end']))
+                                <div class="mt-3">
+                                    {{ $dataTable->table() }}
+                                </div>
+                            @endif
                         </div>
                     @endif
                 </div>

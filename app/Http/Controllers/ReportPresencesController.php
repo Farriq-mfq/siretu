@@ -4,18 +4,16 @@ namespace App\Http\Controllers;
 
 use App\DataTables\PresensiGuruDataTable;
 use App\DataTables\PresensiTuDataTable;
+use App\Models\Personil;
 use App\Models\PresensiGuru;
 use App\Models\PresensiTu;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
-use PdfReport;
-use ExcelReport;
 
 class ReportPresencesController extends Controller
 {
     public function __construct(
         private readonly PresensiTu $presensiTu,
-        private readonly PresensiGuru $presensiGuru
+        private readonly PresensiGuru $presensiGuru,
+        private readonly Personil $personil
     ) {
 
     }
@@ -24,7 +22,13 @@ class ReportPresencesController extends Controller
     {
         $showAvailable = ['all', 'current', 'filter'];
         $by = request('show') ? in_array(request('show'), $showAvailable) ? request('show') : 'current' : "current";
-        return $dataTable->render('presensi.tu.index', compact('by'));
+        $filter = request('show') === 'filter' ? [
+            'start' => request('start'),
+            'end' => request('end'),
+            'personil' => request('personil'),
+        ] : [];
+        $personil = $this->personil->whereNot('NOMOR', 0)->get();
+        return $dataTable->render('presensi.tu.index', compact('by', 'filter', 'personil'));
 
     }
 
@@ -47,9 +51,15 @@ class ReportPresencesController extends Controller
     // public function presensi_guru(Request $request)
     public function presensi_guru(PresensiGuruDataTable $dataTable)
     {
-        $showAvailable = ['all', 'current'];
+        $showAvailable = ['all', 'current', 'filter'];
         $by = request('show') ? in_array(request('show'), $showAvailable) ? request('show') : 'current' : "current";
-        return $dataTable->render('presensi.guru.index', compact('by'));
+        $filter = request('show') === 'filter' ? [
+            'start' => request('start'),
+            'end' => request('end'),
+            'personil' => request('personil'),
+        ] : [];
+        $personil = $this->personil->whereNot('NOMOR', 0)->get();
+        return $dataTable->render('presensi.guru.index', compact('by', 'filter', 'personil'));
     }
 
     public function resetPresensiGuru(string $id, string $tgl)

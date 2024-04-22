@@ -42,42 +42,12 @@
                     @endif
                     @if ($by === 'filter')
                         <div class="tab-pane fade show active">
-                            <button class="btn btn-primary" id="btn-show-filter-tu">
-                                Tampilkan filter tanggal
-                            </button>
-                            <form class="row" method="GET">
-                                <div id="filter-range-tu" class="row mt-2" style="display: none">
-                                    <div class="col-md-6">
-                                        <label class="form-label">
-                                            Tanggal awal
-                                        </label>
-                                        <input type="date" class="form-control" name="start" />
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="form-label">
-                                            Tanggal akhir
-                                        </label>
-                                        <input type="date" class="form-control" name="end" />
-                                    </div>
-                                </div>
-                                <div class="col-md-12 mt-2">
-                                    <label class="form-label">
-                                        Pilih personil
-                                    </label>
-                                    <select name="" id="" placeholder="" class="form-control">
-                                        <option value="">--Pilih Personil--</option>
-                                    </select>
-                                </div>
+                            <livewire:FilterTu :filter="$filter" :personil="$personil" />
+                            @if ($filter['personil'] || ($filter['start'] && $filter['end']))
                                 <div class="mt-3">
-                                    <button class="btn btn-primary">
-                                        <i class="bx bx-filter"></i>
-                                        Tampilkan
-                                    </button>
+                                    {{ $dataTable->table() }}
                                 </div>
-                            </form>
-                            {{-- <div class="mt-3">
-                                {{ $dataTable->table() }}
-                            </div> --}}
+                            @endif
                         </div>
                     @endif
                 </div>
@@ -88,10 +58,4 @@
 
 @push('scripts')
     {{ $dataTable->scripts() }}
-    <script>
-        $("#btn-show-filter-tu").on('click', function(e) {
-            e.preventDefault()
-            $("#filter-range-tu").fadeToggle()
-        })
-    </script>
 @endpush

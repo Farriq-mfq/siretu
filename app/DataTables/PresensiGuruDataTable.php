@@ -42,6 +42,24 @@ class PresensiGuruDataTable extends DataTable
         } else if ($by === 'all') {
             return $model
                 ->whereNot('NoFormulir', '-')->newQuery();
+        } else if ($by === 'filter') {
+            if (request()->has('personil') && request()->has('start') && request()->has('end')) {
+                return $model
+                    ->whereNot('NoFormulir', '-')
+                    ->where('NAMALENGKAP', request()->get('personil'))
+                    ->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') >= ?", request()->get('start'))->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') <= ?", request()->get('end'))
+                    ->newQuery();
+            } else if (request()->has('start') && request()->has('end')) {
+                return $model
+                    ->whereNot('NoFormulir', '-')
+                    ->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') >= ?", request()->get('start'))->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') <= ?", request()->get('end'))
+                    ->newQuery();
+            } else if (request()->has('personil')) {
+                return $model
+                    ->whereNot('NoFormulir', '-')
+                    ->where('NAMALENGKAP', request()->get('personil'))
+                    ->newQuery();
+            }
         } else {
             return $model
                 ->whereNot('NoFormulir', '-')->newQuery();

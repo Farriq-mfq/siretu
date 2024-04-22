@@ -13,6 +13,7 @@
 
     <meta name="description" content="Siretu application report SMK Negeri 1 Pekalongan" />
     @include('includes.basic-style')
+    @livewireStyles
 </head>
 
 <body>
@@ -93,6 +94,7 @@
         <div class="layout-overlay layout-menu-toggle"></div>
     </div>
     @include('includes.basic-script')
+    @livewireScripts
 </body>
 
 </html>

@@ -45,8 +45,8 @@
                     </g>
                 </svg>
             </span> --}}
-            <span class="app-brand-text demo menu-text fw-bolder ms-2">
-                Siretu V.1.0.0
+            <span class="app-brand-text demo menu-text fw-bolder ms-2 text-uppercase">
+                {{ config('app.name') }} <sub class="fs-6 text-muted">{{ env('APP_VERSION') }}</sub>
             </span>
         </a>
 

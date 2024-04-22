@@ -1,6 +1,7 @@
 import 'laravel-datatables-vite';
 import nProgress from 'nprogress';
 import 'nprogress/nprogress.css'
+// import select2 from 'select2'
 nProgress.configure({
     showSpinner: false,
 })
@@ -22,5 +23,21 @@ $(document).ready(function () {
     $(document).ajaxStop(function () {
         nProgress.done();
     });
+
+    // window.select2 = select2
+    // const select2comp = $(document).find("#select2")
+    // $("#select2").select2()
+
 })
 
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    Livewire.hook('message.sent', (message, component) => {
+        nProgress.start();
+    })
+
+    Livewire.hook('message.processed', (message, component) => {
+        nProgress.done();
+    })
+});

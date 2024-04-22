@@ -4,11 +4,6 @@
 @endsection
 @section('content')
     <div class="card">
-        <div class="card-header">
-            <h2 class="card-title">
-                Personil
-            </h2>
-        </div>
         <div class="card-body">
             {{ $dataTable->table() }}
         </div>

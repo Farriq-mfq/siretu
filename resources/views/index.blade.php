@@ -1,4 +1,7 @@
 @extends('templates.main')
+@section('title')
+    Dashboard
+@endsection
 @section('content')
     <div class="card">
         <div class="card-header">

@@ -22,7 +22,7 @@ class ReportPresencesController extends Controller
     // public function presensi_tu(Request $request)
     public function presensi_tu(PresensiTuDataTable $dataTable)
     {
-        $showAvailable = ['all', 'current'];
+        $showAvailable = ['all', 'current', 'filter'];
         $by = request('show') ? in_array(request('show'), $showAvailable) ? request('show') : 'current' : "current";
         return $dataTable->render('presensi.tu.index', compact('by'));
 

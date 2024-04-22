@@ -8,9 +8,6 @@
             <h2 class="card-title">
                 Personil
             </h2>
-            <p class="card-description">
-                Ini data personil
-            </p>
         </div>
         <div class="card-body">
             {{ $dataTable->table() }}

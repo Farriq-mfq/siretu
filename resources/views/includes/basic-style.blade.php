@@ -10,6 +10,4 @@
 <link rel="stylesheet" href="{{ url('assets/css/demo.css') }}" />
 <link rel="stylesheet" href="{{ url('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
 <link rel="stylesheet" href="{{ url('assets/vendor/select2/select2.min.css') }}" />
-<script src="{{ url('assets/js/config.js') }}"></script>
-<script src="{{ url('assets/vendor/js/helpers.js') }}"></script>
 @vite('resources/css/app.css')

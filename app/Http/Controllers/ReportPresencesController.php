@@ -36,12 +36,12 @@ class ReportPresencesController extends Controller
     {
         $deleted = $this->presensiTu->where('NoFormulir', $id)->where("TglFormulir", $tgl)->delete();
         if ($deleted) {
-            return back()->with('message', [
+            return back()->with('alert', [
                 'message' => "Berhasil reset presensi",
                 'type' => 'success'
             ]);
         } else {
-            return back()->with('message', [
+            return back()->with('alert', [
                 'message' => "Gagal reset presensi",
                 'type' => 'error'
             ]);
@@ -66,12 +66,12 @@ class ReportPresencesController extends Controller
     {
         $deleted = $this->presensiGuru->where('NoFormulir', $id)->where('TglFormulir', $tgl)->delete();
         if ($deleted) {
-            return back()->with('message', [
+            return back()->with('alert', [
                 'message' => "Berhasil reset presensi",
                 'type' => 'success'
             ]);
         } else {
-            return back()->with('message', [
+            return back()->with('alert', [
                 'message' => "Gagal reset presensi",
                 'type' => 'error'
             ]);

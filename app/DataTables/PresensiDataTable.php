@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\PresensiTu;
+use App\Models\Presensi;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
@@ -11,7 +11,7 @@ use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 
-class PresensiTuDataTable extends DataTable
+class PresensiDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -21,7 +21,7 @@ class PresensiTuDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'presensi.tu.action')
+            ->addColumn('action', 'presensi.action')
             ->addColumn('status', function ($row) {
                 return view('presensi.status', compact('row'));
             })
@@ -31,7 +31,7 @@ class PresensiTuDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(PresensiTu $model): QueryBuilder
+    public function query(Presensi $model): QueryBuilder
     {
         $today = Carbon::now()->format('Y-m-d');
         $by = request('show') ?? 'current';
@@ -72,16 +72,17 @@ class PresensiTuDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->setTableId('presensitu-table')
+            ->setTableId('presensi-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             //->dom('Bfrtip')
             ->orderBy(1)
+            ->selectStyleSingle()
             ->buttons([
                 Button::make('excel'),
                 Button::make('csv'),
                 // Button::make('pdf'),
-                Button::make('print'),
+                // Button::make('print'),
                 Button::make('reset'),
                 Button::make('reload')
             ]);
@@ -99,7 +100,7 @@ class PresensiTuDataTable extends DataTable
             Column::make('TglFormulir'),
             Column::make('JAM_DATANG'),
             Column::make('JAM_PULANG'),
-            Column::make('AKTIFITAS'),
+            // Column::make('AKTIFITAS'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)
@@ -113,6 +114,6 @@ class PresensiTuDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'PresensiTu_' . date('YmdHis');
+        return 'Presensi_' . date('YmdHis');
     }
 }

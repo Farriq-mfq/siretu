@@ -17,7 +17,6 @@
                     </label>
                     <input type="date" wire:model="start" class="form-control" name="start"
                         value="{{ $filter['start_date'] }}" />
-
                 </div>
                 <div class="col-md-6">
                     <label class="form-label">
@@ -55,7 +54,7 @@
                 Tampilkan
             </button>
             @if ($filter['personil'] || ($filter['start_date'] && $filter['end_date']))
-                <a href="{{ route('presensi-tu', ['show' => 'filter']) }}" class="btn btn-danger">
+                <a href="{{ route('presensi', ['show' => 'filter']) }}" class="btn btn-danger">
                     Clear
                 </a>
             @endif

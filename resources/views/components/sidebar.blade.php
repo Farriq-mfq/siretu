@@ -69,28 +69,11 @@
                 Report
             </span>
         </li>
-        <li class="menu-item @activeHasChild('presensi-')">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-spreadsheet"></i>
-                <div data-i18n="Layouts">Presensi</div>
+        <li class="menu-item @active('presensi')">
+            <a href="{{ route('presensi') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-book"></i>
+                <div data-i18n="Analytics">Presensi</div>
             </a>
-
-            <ul class="menu-sub">
-                <li class="menu-item @active('presensi-guru')">
-                    <a href="{{ route('presensi-guru') }}" class="menu-link">
-                        <div data-i18n="Without menu">
-                            Presensi Guru
-                        </div>
-                    </a>
-                </li>
-                <li class="menu-item @active('presensi-tu')">
-                    <a href="{{ route('presensi-tu') }}" class="menu-link">
-                        <div data-i18n="Without menu">
-                            Presensi Tata Usaha
-                        </div>
-                    </a>
-                </li>
-            </ul>
         </li>
         <li class="menu-item @activeHasChild('ijin')">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -148,6 +131,25 @@
                 <div data-i18n="Analytics">Personil</div>
             </a>
         </li>
+        <li class="menu-item">
+            <a href="#" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-user"></i>
+                <div data-i18n="Analytics">Siswa</div>
+            </a>
+        </li>
+        {{-- <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">
+                Pengaturan
+            </span>
+        </li>
+        <li class="menu-item">
+            <a href="#" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-cog"></i>
+                <div data-i18n="Analytics">
+                    Pengaturan
+                </div>
+            </a>
+        </li> --}}
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">
                 About

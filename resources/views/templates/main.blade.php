@@ -95,8 +95,8 @@
         </div>
         <div class="layout-overlay layout-menu-toggle"></div>
     </div>
-    @include('includes.basic-script')
     @livewireScripts
+    @include('includes.basic-script')
 </body>
 
 </html>

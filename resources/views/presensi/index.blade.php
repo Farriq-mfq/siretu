@@ -1,6 +1,6 @@
 @extends('templates.main')
 @section('title')
-    Data Presensi Guru
+    Data Presensi
 @endsection
 @section('content')
     <div class="row">
@@ -8,21 +8,21 @@
             <div class="nav-align-top mb-4">
                 <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item">
-                        <a href="{{ route('presensi-guru', ['show' => 'current']) }}"
+                        <a href="{{ route('presensi', ['show' => 'current']) }}"
                             class="nav-link @if ($by === 'current') active @endif"
                             aria-selected="@if ($by === 'current') true @endif">
                             Presensi hari ini
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('presensi-guru', ['show' => 'all']) }}"
+                        <a href="{{ route('presensi', ['show' => 'all']) }}"
                             class="nav-link @if ($by === 'all') active @endif"
                             aria-selected="@if ($by === 'all') active @endif">
                             Semua Presensi
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('presensi-guru', ['show' => 'filter']) }}"
+                        <a href="{{ route('presensi', ['show' => 'filter']) }}"
                             class="nav-link @if ($by === 'filter') active @endif"
                             aria-selected="@if ($by === 'filter') active @endif">
                             Filter
@@ -42,7 +42,7 @@
                     @endif
                     @if ($by === 'filter')
                         <div class="tab-pane fade show active">
-                            <livewire:FilterGuru :filter="$filter" :personil="$personil" />
+                            <livewire:filter-presensi :filter="$filter" :personil="$personil" />
                             @if ($filter['personil'] || ($filter['start_date'] && $filter['end_date']))
                                 <div class="mt-3">
                                     {{ $dataTable->table() }}

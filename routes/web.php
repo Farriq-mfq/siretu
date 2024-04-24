@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IjinController;
 use App\Http\Controllers\JurnalController;
 use App\Http\Controllers\PersonilController;
+use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\ReportPresencesController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,16 +23,19 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::prefix('/presensi-tu')->group(function () {
-        Route::get('/{show?}', [ReportPresencesController::class, 'presensi_tu'])->name('presensi-tu');
-        Route::delete('/{id}/{tgl}', [ReportPresencesController::class, 'resetPresensiTu'])->name('presensi-tu-reset');
-        // Route::get('export/{type}', [ReportPresencesController::class, 'exportPresensiTU'])->name('presensi-tu-export');
-    });
-    Route::prefix('/presensi-guru')->group(function () {
-        Route::get('/{show?}', [ReportPresencesController::class, 'presensi_guru'])->name('presensi-guru');
-        // Route::get('export/{type}', [ReportPresencesController::class, 'exportPresensiGuru'])->name('presensi-guru-export');
-        Route::delete('/{id}/{tgl}', [ReportPresencesController::class, 'resetPresensiGuru'])->name('presensi-guru-reset');
-    });
+    // fitur presensi
+    Route::get('presensi/{show?}', [PresensiController::class, 'index'])->name('presensi');
+
+    // Route::prefix('/presensi-tu')->group(function () {
+    //     Route::get('/{show?}', [ReportPresencesController::class, 'presensi_tu'])->name('presensi-tu');
+    //     Route::delete('/{id}/{tgl}', [ReportPresencesController::class, 'resetPresensiTu'])->name('presensi-tu-reset');
+    //     // Route::get('export/{type}', [ReportPresencesController::class, 'exportPresensiTU'])->name('presensi-tu-export');
+    // });
+    // Route::prefix('/presensi-guru')->group(function () {
+    //     Route::get('/{show?}', [ReportPresencesController::class, 'presensi_guru'])->name('presensi-guru');
+    //     // Route::get('export/{type}', [ReportPresencesController::class, 'exportPresensiGuru'])->name('presensi-guru-export');
+    //     Route::delete('/{id}/{tgl}', [ReportPresencesController::class, 'resetPresensiGuru'])->name('presensi-guru-reset');
+    // });
     Route::prefix('/personil')->group(function () {
         Route::get('/', [PersonilController::class, 'index'])->name('personil');
         // Route::get('/export/{type}', [PersonilController::class, 'exportPersonil'])->name('export-personil');

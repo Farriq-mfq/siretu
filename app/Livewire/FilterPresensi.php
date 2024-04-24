@@ -4,7 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 
-class FilterGuru extends Component
+class FilterPresensi extends Component
 {
     public bool $showFilterTanggal = false;
     public array $filter = [];
@@ -15,6 +15,8 @@ class FilterGuru extends Component
     protected $rules = [
         'end' => 'nullable|after_or_equal:start',
     ];
+
+    protected $listeners = ['redirect'];
     public function showFilterTanggalToggle()
     {
         $this->showFilterTanggal = !$this->showFilterTanggal;
@@ -38,7 +40,9 @@ class FilterGuru extends Component
         } else if ($this->selectedPersonil) {
             $data['personil'] = $this->selectedPersonil;
         }
-        return to_route('presensi-guru', array_merge(['show' => 'filter'], $data));
+
+        $this->dispatch('to_route', route('presensi', array_merge(['show' => 'filter'], $data)));
+        session()->flash('alert', ['message' => 'Selamat datang di Siretu', 'type' => 'primary']);
     }
 
     public function mount(array $filter, $personil)
@@ -52,6 +56,6 @@ class FilterGuru extends Component
     }
     public function render()
     {
-        return view('livewire.filter-guru');
+        return view('livewire.filter-presensi');
     }
 }

@@ -24,6 +24,11 @@ class PersonilController extends Controller
         return $dataTable->render('personil.index');
     }
 
+    public function create()
+    {
+        return view('personil.create');
+    }
+
     public function exportPersonil(Request $request, $type)
     {
         $title = 'DATA PERSONIL';

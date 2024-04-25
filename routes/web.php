@@ -6,7 +6,6 @@ use App\Http\Controllers\IjinController;
 use App\Http\Controllers\JurnalController;
 use App\Http\Controllers\PersonilController;
 use App\Http\Controllers\PresensiController;
-use App\Http\Controllers\ReportPresencesController;
 use App\Http\Controllers\WifiController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +24,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     // fitur presensi
-    Route::get('presensi/{show?}', [PresensiController::class, 'index'])->name('presensi');
+    Route::prefix('presensi')->group(function(){
+        Route::get('/{show?}/{personil?}', [PresensiController::class, 'index'])->name('presensi');
+
+    });
 
     // Route::prefix('/presensi-tu')->group(function () {
     //     Route::get('/{show?}', [ReportPresencesController::class, 'presensi_tu'])->name('presensi-tu');
@@ -39,7 +41,7 @@ Route::middleware('auth')->group(function () {
     // });
     Route::prefix('/personil')->group(function () {
         Route::get('/', [PersonilController::class, 'index'])->name('personil');
-        // Route::get('/export/{type}', [PersonilController::class, 'exportPersonil'])->name('export-personil');
+        Route::get('/create', [PersonilController::class, 'create'])->name('personil-create');
     });
 
     // perijinan

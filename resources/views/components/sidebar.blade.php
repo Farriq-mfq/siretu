@@ -125,7 +125,7 @@
                 Master
             </span>
         </li>
-        <li class="menu-item @active('personil')">
+        <li class="menu-item @activeHasChild('personil')">
             <a href="{{ route('personil') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div data-i18n="Analytics">Personil</div>

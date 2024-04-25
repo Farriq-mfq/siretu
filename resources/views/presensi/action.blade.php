@@ -1,1 +1,1 @@
-@livewire('presensi-action', ['NoFormulir' => $NoFormulir, 'TglFormulir' => $TglFormulir])
+@livewire('presensi-action', ['NoFormulir' => $NoFormulir])

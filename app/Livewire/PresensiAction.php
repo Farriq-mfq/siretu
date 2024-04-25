@@ -10,16 +10,15 @@ class PresensiAction extends Component
     public $NoFormulir;
     public $TglFormulir;
     public Presensi $presensi;
-    public function mount($NoFormulir, $TglFormulir)
+    public function mount($NoFormulir)
     {
         $this->NoFormulir = $NoFormulir;
-        $this->TglFormulir = $TglFormulir;
         $this->presensi = new Presensi();
     }
 
     public function handleReset()
     {
-        $deleted = $this->presensi->where('NoFormulir', $this->NoFormulir)->where('TglFormulir', $this->TglFormulir)->delete();
+        $deleted = $this->presensi->where('NoFormulir', $this->NoFormulir)->delete();
 
         if ($deleted) {
             $this->dispatch('alert', ['message' => "Berhasil reset presensi", 'type' => "success"]);

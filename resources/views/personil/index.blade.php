@@ -5,9 +5,9 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <button type="button" class="btn btn-primary">
-                <span class="tf-icons bx bx-cloud"></span>&nbsp; Sinkronkan dengan dapodik
-            </button>
+            <a href="{{ route('personil-create') }}" type="button" class="btn btn-primary">
+                <span class="tf-icons bx bx-plus"></span>&nbsp; Tambah Personil
+            </a>
         </div>
         <div class="card-body">
             {{ $dataTable->table() }}

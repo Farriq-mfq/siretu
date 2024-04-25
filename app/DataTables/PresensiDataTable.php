@@ -43,10 +43,10 @@ class PresensiDataTable extends DataTable
             return $model
                 ->whereNot('NoFormulir', '-')->newQuery();
         } else if ($by === 'filter') {
-            if (request()->has('personil') && request()->has('start_date') && request()->has('end_date')) {
+            if (request()->segment(3) && request()->has('start_date') && request()->has('end_date')) {
                 return $model
                     ->whereNot('NoFormulir', '-')
-                    ->where('NAMALENGKAP', request()->get('personil'))
+                    ->where('NAMALENGKAP', urldecode(request()->segment(3)))
                     ->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') >= ?", request()->get('start_date'))->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') <= ?", request()->get('end_date'))
                     ->newQuery();
             } else if (request()->has('start_date') && request()->has('end_date')) {
@@ -54,10 +54,10 @@ class PresensiDataTable extends DataTable
                     ->whereNot('NoFormulir', '-')
                     ->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') >= ?", request()->get('start_date'))->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') <= ?", request()->get('end_date'))
                     ->newQuery();
-            } else if (request()->has('personil')) {
+            } else if (request()->segment(3)) {
                 return $model
                     ->whereNot('NoFormulir', '-')
-                    ->where('NAMALENGKAP', request()->get('personil'))
+                    ->where('NAMALENGKAP', urldecode(request()->segment(3)))
                     ->newQuery();
             }
         } else {
@@ -81,7 +81,7 @@ class PresensiDataTable extends DataTable
                 Button::make('excel'),
                 Button::make('csv'),
                 // Button::make('pdf'),
-                // Button::make('print'),
+                Button::make('print'),
                 Button::make('reset'),
                 Button::make('reload')
             ]);

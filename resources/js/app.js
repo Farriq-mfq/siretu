@@ -2,7 +2,8 @@ import 'laravel-datatables-vite';
 import nProgress from 'nprogress';
 import 'nprogress/nprogress.css'
 import Turbolinks from 'turbolinks';
-// import select2 from 'select2'
+import select2 from 'select2';
+import 'select2/dist/css/select2.css';
 import { menu } from './menu'
 import Swal from 'sweetalert2';
 // start turbolinks SPA
@@ -50,7 +51,22 @@ if (Turbolinks.supported) {
         // load menu
         menu()
 
+        select2($);
 
+        function initSelect2() {
+            $(`.select2`).select2({
+                theme: 'bootstrap-5',
+            });
+        }
+
+        initSelect2()
+
+        $('.select2').change(function () {
+            Livewire.dispatch('select2', { val: $(this).val() });
+        })
+        Livewire.on('select2-hydrate', function () {
+            initSelect2()
+        });
     });
 
 

@@ -4,6 +4,7 @@ import 'nprogress/nprogress.css'
 import Turbolinks from 'turbolinks';
 // import select2 from 'select2'
 import { menu } from './menu'
+import Swal from 'sweetalert2';
 // start turbolinks SPA
 Turbolinks.start()
 // configure np progress
@@ -56,6 +57,17 @@ if (Turbolinks.supported) {
     Livewire.on('to_route', url => {
         Turbolinks.visit(url)
     })
+
+    Livewire.on('alert', arg => {
+        const alert = arg[0]
+        Swal.fire({
+            title: "Info",
+            text: alert.message,
+            icon: alert.type,
+            showConfirmButton: false
+        });
+    })
+
 
 
 }

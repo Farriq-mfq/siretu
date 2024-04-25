@@ -7,6 +7,7 @@ use App\Http\Controllers\JurnalController;
 use App\Http\Controllers\PersonilController;
 use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\ReportPresencesController;
+use App\Http\Controllers\WifiController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,6 +50,9 @@ Route::middleware('auth')->group(function () {
     Route::prefix('/jurnal')->group(function () {
         Route::get('/', [JurnalController::class, 'index'])->name('jurnal');
     });
+
+    // wifi
+    Route::get('wifi', [WifiController::class, 'index'])->name('wifi');
     Route::get('/about', function () {
         return view('tentang.index');
     })->name('about');

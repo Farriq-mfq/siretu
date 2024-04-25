@@ -25,4 +25,20 @@ class PresensiController extends Controller
         $personil = $this->personil->whereNot('NOMOR', 0)->get();
         return $dataTable->render('presensi.index', compact('by', 'filter', 'personil'));
     }
+
+    // public function reset()
+    // {
+    //     $deleted = $this->presensi->where('NoFormulir', $id)->where('TglFormulir', $tgl)->delete();
+    //     if ($deleted) {
+    //         return back()->with('message', [
+    //             'message' => "Berhasil reset presensi",
+    //             'type' => 'success'
+    //         ]);
+    //     } else {
+    //         return back()->with('message', [
+    //             'message' => "Gagal reset presensi",
+    //             'type' => 'error'
+    //         ]);
+    //     }
+    // }
 }

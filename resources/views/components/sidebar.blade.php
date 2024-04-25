@@ -137,6 +137,12 @@
                 <div data-i18n="Analytics">Siswa</div>
             </a>
         </li>
+        <li class="menu-item @active('wifi')">
+            <a href="{{ route('wifi') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-wifi"></i>
+                <div data-i18n="Analytics">WIFI</div>
+            </a>
+        </li>
         {{-- <li class="menu-header small text-uppercase">
             <span class="menu-header-text">
                 Pengaturan

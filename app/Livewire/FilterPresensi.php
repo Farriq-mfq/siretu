@@ -42,7 +42,6 @@ class FilterPresensi extends Component
         }
 
         $this->dispatch('to_route', route('presensi', array_merge(['show' => 'filter'], $data)));
-        session()->flash('alert', ['message' => 'Selamat datang di Siretu', 'type' => 'primary']);
     }
 
     public function mount(array $filter, $personil)

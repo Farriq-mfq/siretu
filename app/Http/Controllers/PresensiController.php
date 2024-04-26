@@ -22,7 +22,7 @@ class PresensiController extends Controller
             'end_date' => request('end_date'),
             'personil' => request('personil'),
         ] : [];
-        $personil = $this->personil->whereNot('NOMOR', 0)->get();
+        $personil = $this->personil->get();
         return $dataTable->render('presensi.index', compact('by', 'filter', 'personil'));
     }
 

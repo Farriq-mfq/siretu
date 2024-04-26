@@ -10,6 +10,7 @@
         "barryvdh/laravel-snappy": "^1.0",
         "carlos-meneses/laravel-mpdf": "^2.1",
         "guzzlehttp/guzzle": "^7.2",
+        "jantinnerezo/livewire-alert": "^3.0",
         "jimmyjs/laravel-report-generator": "^2.2",
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.2",

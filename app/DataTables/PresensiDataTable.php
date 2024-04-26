@@ -13,6 +13,21 @@ use Yajra\DataTables\Services\DataTable;
 
 class PresensiDataTable extends DataTable
 {
+
+    protected string|array $exportColumns = [
+        ['data' => 'status', 'title' => 'Status'],
+        ['data' => 'NAMALENGKAP', 'title' => 'Nama'],
+        ['data' => 'TglFormulir', 'title' => 'Tanggal'],
+        ['data' => 'JAM_DATANG', 'title' => 'Jam Datang'],
+        ['data' => 'JAM_PULANG', 'title' => 'Jam Pulang'],
+    ];
+    protected string|array $printColumns = [
+        ['data' => 'status', 'title' => 'Status'],
+        ['data' => 'NAMALENGKAP', 'title' => 'Nama'],
+        ['data' => 'TglFormulir', 'title' => 'Tanggal'],
+        ['data' => 'JAM_DATANG', 'title' => 'Jam Datang'],
+        ['data' => 'JAM_PULANG', 'title' => 'Jam Pulang'],
+    ];
     /**
      * Build the DataTable class.
      *
@@ -77,6 +92,9 @@ class PresensiDataTable extends DataTable
             ->minifiedAjax()
             //->dom('Bfrtip')
             ->orderBy(1)
+            ->parameters([
+                'but'
+            ])
             ->buttons([
                 Button::make('excel'),
                 Button::make('csv'),
@@ -93,7 +111,9 @@ class PresensiDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('NoFormulir'),
+            Column::make('NoFormulir')
+                ->exportable(false)
+                ->printable(false),
             Column::make('status'),
             Column::make('NAMALENGKAP'),
             Column::make('TglFormulir'),

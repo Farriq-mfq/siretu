@@ -12,6 +12,26 @@ use Yajra\DataTables\Services\DataTable;
 
 class PersonilDataTable extends DataTable
 {
+    protected string|array $exportColumns = [
+        'NOMOR',
+        'NOTELP',
+        'KELOMPOKGURU',
+        'NAMASAJA',
+        'JABATAN',
+        'NAMALENGKAP',
+        'KELAMIN',
+        'PANGGILAN',
+        'NAMADISPO',
+        'PANGGILANDISPO',
+        'JABATANDISPO',
+        'STATUS',
+        'INDUKPEGAWAI',
+        'INDUKPEGAWAIDISPO',
+        'MAPEL',
+        'QRCODE1',
+        'FORWARDTO',
+        'EMAIL'
+    ];
     /**
      * Build the DataTable class.
      *
@@ -21,7 +41,7 @@ class PersonilDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', 'personil.action')
-            ->setRowId('NOMOR');
+            ->setRowId('id');
     }
 
     /**
@@ -29,7 +49,7 @@ class PersonilDataTable extends DataTable
      */
     public function query(Personil $model): QueryBuilder
     {
-        return $model->whereNot('NOMOR', 0)->newQuery();
+        return $model->newQuery();
     }
 
     /**
@@ -57,7 +77,7 @@ class PersonilDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('NOMOR'),
+            // Column::make('NOMOR')->printable(false)->exportable(false),
             Column::make('NAMALENGKAP'),
             Column::make("NOTELP"),
             Column::make('KELOMPOKGURU'),

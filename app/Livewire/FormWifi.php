@@ -3,10 +3,12 @@
 namespace App\Livewire;
 
 use App\Models\Wifi;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
 class FormWifi extends Component
 {
+    use LivewireAlert;
     public Wifi $wifi;
     public string $ssid = "";
     public string $password = "";
@@ -28,10 +30,10 @@ class FormWifi extends Component
 
         if ($insert) {
             $this->reset('ssid', 'password');
-            $this->dispatch('alert', ['message' => "Berhasil menambah data wifi", 'type' => "success"]);
+            $this->alert('success', 'Berhasil menambah wifi');
             $this->dispatch('to_route', route('wifi'));
         } else {
-            $this->dispatch('alert', ['message' => "Terjadi kesalahan sistem", 'type' => "error"]);
+            $this->alert('error', 'Terjadi kesalahan sistem');
         }
     }
     public function render()

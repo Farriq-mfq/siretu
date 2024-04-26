@@ -4,9 +4,11 @@ namespace App\Livewire;
 
 use App\Models\Presensi;
 use Livewire\Component;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 
 class PresensiAction extends Component
 {
+    use LivewireAlert;
     public $NoFormulir;
     public $TglFormulir;
     public Presensi $presensi;
@@ -21,10 +23,10 @@ class PresensiAction extends Component
         $deleted = $this->presensi->where('NoFormulir', $this->NoFormulir)->delete();
 
         if ($deleted) {
-            $this->dispatch('alert', ['message' => "Berhasil reset presensi", 'type' => "success"]);
+            $this->alert('success', 'Berhasil reset presensi');
             $this->dispatch('to_route', url()->previous());
         } else {
-            $this->dispatch('alert', ['message' => "Terjadi kesalahan sistem", 'type' => "error"]);
+            $this->alert('error', 'Terjadi kesalahan sistem');
         }
     }
     public function render()

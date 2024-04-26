@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Wifi extends Model
 {
     use HasFactory;
-    protected $table = 'wifi';
     protected $fillable = ['SSID', 'password'];
     public $timestamps = false;
 
 }
+

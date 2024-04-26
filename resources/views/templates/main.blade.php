@@ -95,10 +95,10 @@
         </div>
         <div class="layout-overlay layout-menu-toggle"></div>
     </div>
+    {{-- @routes() --}}
     @livewireScripts
-    <script src="{{ url('assets/vendor/sweetalert2/sweetalert2.min.js') }}"></script>
-    <x-livewire-alert::scripts />
     @include('includes.basic-script')
+    <x-livewire-alert::scripts />
 </body>
 
 </html>

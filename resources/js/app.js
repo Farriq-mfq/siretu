@@ -5,6 +5,7 @@ import Turbolinks from 'turbolinks';
 import select2 from 'select2';
 import 'select2/dist/css/select2.css';
 import { menu } from './menu'
+import './custom-action'
 // start turbolinks SPA
 Turbolinks.start()
 // configure np progress
@@ -14,6 +15,7 @@ nProgress.configure({
 if (Turbolinks.supported) {
 
     document.addEventListener('turbolinks:load', () => {
+
         $(document).ready(function () {
             const form = $("#form-delete-button")
             $(document).on("click", "#delete_confirmation", function () {
@@ -66,10 +68,15 @@ if (Turbolinks.supported) {
         Livewire.on('select2-hydrate', function () {
             initSelect2()
         });
+
     });
 
 
     Livewire.on('to_route', url => {
         Turbolinks.visit(url)
     })
+
+
 }
+
+

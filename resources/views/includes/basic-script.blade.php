@@ -11,5 +11,6 @@
 <script src="{{ url('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js') }}" data-turbolinks-eval="false">
 </script>
 <script src="{{ url('assets/vendor/js/menu.js') }}" data-turbolinks-eval="false"></script>
+<script src="{{ url('assets/vendor/sweetalert2/sweetalert2.min.js') }}" data-turbolinks-eval="false"></script>
 @vite('resources/js/app.js')
 @stack('scripts')

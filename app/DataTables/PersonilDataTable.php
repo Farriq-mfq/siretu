@@ -67,10 +67,10 @@ class PersonilDataTable extends DataTable
                 // Button::make('pdf'),
                 Button::make('print'),
                 Button::make('reset'),
-                Button::make('reload')
+                Button::make('reload'),
+                'addPersonil'
             ]);
     }
-
     /**
      * Get the dataTable columns definition.
      */

@@ -131,6 +131,12 @@
                 <div data-i18n="Analytics">Personil</div>
             </a>
         </li>
+        <li class="menu-item @activeHasChild('kelompok')">
+            <a href="{{ route('kelompok') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-user-pin"></i>
+                <div data-i18n="Analytics">Kelompok</div>
+            </a>
+        </li>
         <li class="menu-item">
             <a href="#" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>

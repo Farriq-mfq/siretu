@@ -12,6 +12,7 @@
     </title>
 
     <meta name="description" content="Siretu application report SMK Negeri 1 Pekalongan" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     @include('includes.basic-style')
     @livewireStyles
 </head>

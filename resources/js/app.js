@@ -12,6 +12,7 @@ Turbolinks.start()
 nProgress.configure({
     showSpinner: false,
 })
+
 if (Turbolinks.supported) {
 
     document.addEventListener('turbolinks:load', () => {
@@ -72,10 +73,19 @@ if (Turbolinks.supported) {
     });
 
 
+
+
+
+    document.addEventListener('turbolinks:visit', () => {
+        $('.dataTables_wrapper').children().remove()
+        $('.dataTables_wrapper').html(`<div class="spinner-border text-primary" role="status">
+       <span class="visually-hidden">Loading...</span>
+     </div>`)
+    })
+
     Livewire.on('to_route', url => {
         Turbolinks.visit(url)
     })
-
 
 }
 

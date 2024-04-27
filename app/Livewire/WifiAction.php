@@ -18,6 +18,12 @@ class WifiAction extends Component
         $this->id = $id;
     }
 
+    public function handleEdit()
+    {
+        $data = $this->wifi->find($this->id);
+        $this->dispatch('edit-wifi', $data);
+    }
+
     public function handleDelete()
     {
         $deleted = $this->wifi->where('id', $this->id)->delete();

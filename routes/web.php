@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IjinController;
 use App\Http\Controllers\JurnalController;
+use App\Http\Controllers\KelompokPegawaiController;
 use App\Http\Controllers\PersonilController;
 use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\WifiController;
@@ -24,24 +25,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     // fitur presensi
-    Route::prefix('presensi')->group(function(){
+    Route::prefix('presensi')->group(function () {
         Route::get('/{show?}/{personil?}', [PresensiController::class, 'index'])->name('presensi');
 
-    });
-
-    // Route::prefix('/presensi-tu')->group(function () {
-    //     Route::get('/{show?}', [ReportPresencesController::class, 'presensi_tu'])->name('presensi-tu');
-    //     Route::delete('/{id}/{tgl}', [ReportPresencesController::class, 'resetPresensiTu'])->name('presensi-tu-reset');
-    //     // Route::get('export/{type}', [ReportPresencesController::class, 'exportPresensiTU'])->name('presensi-tu-export');
-    // });
-    // Route::prefix('/presensi-guru')->group(function () {
-    //     Route::get('/{show?}', [ReportPresencesController::class, 'presensi_guru'])->name('presensi-guru');
-    //     // Route::get('export/{type}', [ReportPresencesController::class, 'exportPresensiGuru'])->name('presensi-guru-export');
-    //     Route::delete('/{id}/{tgl}', [ReportPresencesController::class, 'resetPresensiGuru'])->name('presensi-guru-reset');
-    // });
-    Route::prefix('/personil')->group(function () {
-        Route::get('/', [PersonilController::class, 'index'])->name('personil');
-        Route::get('/create', [PersonilController::class, 'create'])->name('personil-create');
     });
 
     // perijinan
@@ -52,9 +38,20 @@ Route::middleware('auth')->group(function () {
     Route::prefix('/jurnal')->group(function () {
         Route::get('/', [JurnalController::class, 'index'])->name('jurnal');
     });
-
-    // wifi
+    /**
+     * MASTER ROUTES
+     */
+    Route::prefix('/personil')->group(function () {
+        Route::get('/', [PersonilController::class, 'index'])->name('personil');
+        Route::get('/create', [PersonilController::class, 'create'])->name('personil-create');
+    });
     Route::get('wifi', [WifiController::class, 'index'])->name('wifi');
+    Route::prefix('kelompok')->group(function () {
+        Route::get('/', [KelompokPegawaiController::class, 'index'])->name('kelompok');
+    });
+    /**
+     * END MASTER ROUTES
+     */
     Route::get('/about', function () {
         return view('tentang.index');
     })->name('about');

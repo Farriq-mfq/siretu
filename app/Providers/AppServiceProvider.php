@@ -28,6 +28,9 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('activeHasChild', function ($route) {
             return "<?php echo request()->is($route.'*') ? 'active open':'' ?>";
         });
+        Blade::directive('isRequired', function () {
+            return "<?php echo '<span class=text-danger>*</span>' ?>";
+        });
 
         Builder::useVite();
     }

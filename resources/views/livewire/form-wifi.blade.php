@@ -1,4 +1,7 @@
-<form method="POST" wire:submit.prevent="handleSubmit">
+<form method="POST"
+    @if ($updatedId) wire:submit.prevent="handleUpdate"
+    @else
+    wire:submit.prevent="handleSubmit" @endif>
     @csrf
     <div>
         <label for="ssid" class="form-label">
@@ -23,10 +26,20 @@
             </div>
         @enderror
     </div>
-    <div class="mt-3">
-        <button class="btn btn-primary" type="submit">
-            <span wire:loading>Loading...</span>
-            <span wire:loading.remove>Simpan</span>
-        </button>
-    </div>
+    @if ($updatedId)
+        <div class="mt-3">
+            <button class="btn btn-primary" wire:loading.attr="disabled" type="submit">
+                <span wire:loading>Loading...</span>
+                <span wire:loading.remove>Update</span>
+            </button>
+            <button class="btn btn-danger" class="button" wire:click.prevent="handleCancel">Batal</button>
+        </div>
+    @else
+        <div class="mt-3">
+            <button class="btn btn-primary" wire:loading.attr="disabled" type="submit">
+                <span wire:loading>Loading...</span>
+                <span wire:loading.remove>Simpan</span>
+            </button>
+        </div>
+    @endif
 </form>

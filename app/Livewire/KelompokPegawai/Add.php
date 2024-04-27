@@ -21,14 +21,14 @@ class Add extends Component
             'kelompok' => $this->kelompok
         ]);
         if ($create) {
+            $this->dispatch('reload');
             $this->alert('success', 'Berhasil menambah kelompok');
-            $this->reset('kelompok');
-            $this->dispatch('to_route', route('kelompok'));
+            $this->resetExcept('kelompokPegawai');
         } else {
             $this->alert('error', 'Terjadi kesalahan sistem');
         }
     }
-    public function mount()
+    public function boot()
     {
         $this->kelompokPegawai = new KelompokPegawai();
     }

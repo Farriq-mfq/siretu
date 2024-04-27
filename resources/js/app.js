@@ -35,21 +35,7 @@ if (Turbolinks.supported) {
                 nProgress.done();
             });
 
-            // window.select2 = select2
-            // const select2comp = $(document).find("#select2")
-            // $("#select2").select2()
-
         })
-
-        document.addEventListener("DOMContentLoaded", () => {
-            Livewire.hook('message.sent', (message, component) => {
-                nProgress.start();
-            })
-
-            Livewire.hook('message.processed', (message, component) => {
-                nProgress.done();
-            })
-        });
         // load menu
         menu()
 
@@ -69,12 +55,7 @@ if (Turbolinks.supported) {
         Livewire.on('select2-hydrate', function () {
             initSelect2()
         });
-
     });
-
-
-
-
 
     document.addEventListener('turbolinks:visit', () => {
         $('.dataTables_wrapper').children().remove()
@@ -84,7 +65,10 @@ if (Turbolinks.supported) {
     })
 
     Livewire.on('to_route', url => {
-        Turbolinks.visit(url)
+        Turbolinks.visit(url, { action: 'replace' })
+    })
+    Livewire.on('reload', () => {
+        $('.dataTable').DataTable().ajax.reload();
     })
 
 }

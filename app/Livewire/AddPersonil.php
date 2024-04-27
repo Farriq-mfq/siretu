@@ -69,7 +69,7 @@ class AddPersonil extends Component
         }
     }
 
-    public function mount()
+    public function boot()
     {
         $this->personil = new Personil();
     }

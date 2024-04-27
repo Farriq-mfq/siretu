@@ -24,7 +24,7 @@ class PresensiAction extends Component
 
         if ($deleted) {
             $this->alert('success', 'Berhasil reset presensi');
-            $this->dispatch('to_route', url()->previous());
+            $this->dispatch('reload');
         } else {
             $this->alert('error', 'Terjadi kesalahan sistem');
         }

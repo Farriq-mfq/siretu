@@ -1,8 +1,13 @@
 <div>
-    <button type="button" class="btn btn-danger btn-icon" data-bs-toggle="modal" data-bs-target="#btn-remove-kelompok-peg">
+    <button type="button" class="btn btn-danger btn-icon" wire:loading.attr="disabled" wire:click.prevent="handleDelete">
         <i class="bx bx-trash"></i>
+
     </button>
-    <div class="modal fade" id="btn-remove-kelompok-peg" tabindex="-1" aria-hidden="true">
+    {{-- <button type="button" class="btn btn-danger btn-icon" data-bs-toggle="modal" data-bs-target="#btn-remove-kelompok-peg">
+        <i class="bx bx-trash"></i>
+
+    </button> --}}
+    {{-- <div class="modal fade" id="btn-remove-kelompok-peg" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -25,5 +30,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>

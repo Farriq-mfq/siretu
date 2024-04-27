@@ -18,7 +18,7 @@ class FormWifi extends Component
         'ssid' => 'required',
         'password' => 'required'
     ];
-    public function mount()
+    public function boot()
     {
         $this->wifi = new Wifi();
     }
@@ -26,12 +26,11 @@ class FormWifi extends Component
     #[On('edit-wifi')]
     public function catchEdit($data)
     {
-        if ($data) {
+        if (count($data)) {
             $this->updatedId = $data['id'];
             $this->ssid = $data['SSID'];
             $this->password = $data['password'];
         }
-
     }
 
     public function handleCancel()
@@ -50,9 +49,9 @@ class FormWifi extends Component
         ]);
 
         if ($updated) {
-            $this->resetExcept('wifi');
+            $this->reset();
             $this->alert('success', 'Berhasil update wifi');
-            $this->dispatch('to_route', route('wifi'));
+            $this->dispatch('reload');
         } else {
             $this->alert('error', 'Terjadi kesalahan sistem');
         }
@@ -66,9 +65,9 @@ class FormWifi extends Component
         ]);
 
         if ($insert) {
-            $this->resetExcept('wifi');
+            $this->reset();
             $this->alert('success', 'Berhasil menambah wifi');
-            $this->dispatch('to_route', route('wifi'));
+            $this->dispatch('reload');
         } else {
             $this->alert('error', 'Terjadi kesalahan sistem');
         }

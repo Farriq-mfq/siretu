@@ -21,7 +21,9 @@ class WifiAction extends Component
     public function handleEdit()
     {
         $data = $this->wifi->find($this->id);
-        $this->dispatch('edit-wifi', $data);
+        if ($data) {
+            $this->dispatch('edit-wifi', $data);
+        }
     }
 
     public function handleDelete()
@@ -29,7 +31,7 @@ class WifiAction extends Component
         $deleted = $this->wifi->where('id', $this->id)->delete();
         if ($deleted) {
             $this->alert('success', 'Berhasil hapus wifi');
-            $this->dispatch('to_route', route('wifi'));
+            $this->dispatch('reload');
         } else {
             $this->alert('error', 'Terjadi kesalahan sistem');
         }

@@ -16,7 +16,7 @@ class Action extends Component
         $deleted = $this->kelompokPegawai->where('id', $this->id)->delete();
         if ($deleted) {
             $this->alert('success', 'Berhasil hapus kelompok');
-            $this->dispatch('to_route', route('kelompok'));
+            $this->dispatch('reload');
         } else {
             $this->alert('error', 'Terjadi kesalahan sistem');
         }

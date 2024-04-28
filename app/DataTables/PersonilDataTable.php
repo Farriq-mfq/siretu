@@ -63,12 +63,13 @@ class PersonilDataTable extends DataTable
             ->minifiedAjax()
             ->buttons([
                 Button::make('excel'),
-                Button::make('csv'),
+                // Button::make('csv'),
                 // Button::make('pdf'),
                 Button::make('print'),
                 Button::make('reset'),
                 Button::make('reload'),
-                'addPersonil'
+                'importPersonil',
+                'addPersonil',
             ]);
     }
     /**

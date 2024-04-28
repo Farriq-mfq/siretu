@@ -17,7 +17,7 @@
     @livewireStyles
 </head>
 
-<body>
+<body data-no-transition-cache>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">

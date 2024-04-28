@@ -21,7 +21,7 @@ class WifiDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', 'wifi.action')
-            ->setRowId('SSID');
+            ->setRowId('id');
     }
 
     /**

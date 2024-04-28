@@ -44,6 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::prefix('/personil')->group(function () {
         Route::get('/', [PersonilController::class, 'index'])->name('personil');
         Route::get('/create', [PersonilController::class, 'create'])->name('personil-create');
+        Route::get('/import', [PersonilController::class, 'import'])->name('personil-import');
     });
     Route::get('wifi', [WifiController::class, 'index'])->name('wifi');
     Route::prefix('kelompok')->group(function () {

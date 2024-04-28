@@ -69,6 +69,8 @@ if (Turbolinks.supported) {
     })
     Livewire.on('reload', () => {
         $('.dataTable').DataTable().ajax.reload();
+        $('.modal').modal('hide')
+        $('.modal-backdrop').remove()
     })
 
 }

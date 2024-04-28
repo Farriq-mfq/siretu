@@ -28,38 +28,9 @@ class PersonilController extends Controller
     {
         return view('personil.create');
     }
-
-    public function exportPersonil(Request $request, $type)
+    public function import()
     {
-        $title = 'DATA PERSONIL';
-        $meta = [
-            'Di Cetak oleh' => "SMK Negeri 1 Pekalongan",
-            'Tanggal' => Carbon::today()->format("Y/m/d")
-        ];
-
-        $query = $this->personil->whereNot('NOMOR', 0);
-        $today = Carbon::today()->format('Y-m-d');
-
-        $columns = [
-            'NoTelp' => 'NOTELP',
-            'Kelompok' => "KELOMPOKGURU",
-            'Nama Lengkap' => "NAMALENGKAP",
-            'Jabatan' => "JABATAN",
-            'Jenis Kelamin' => "KELAMIN",
-            "Status" => "STATUS",
-            "No Induk" => "INDUKPEGAWAI",
-            "Email" => "EMAIL"
-        ];
-        if ($type === 'pdf') {
-            return PdfReport::of($title, $meta, $query, $columns)
-                ->setOrientation('landscape')
-                ->download('personil-' . $today);
-        } elseif ($type === 'excel') {
-            return ExcelReport::of($title, $meta, $query, $columns)
-                ->download('personil-' . $today);
-        } else {
-            return ExcelReport::of($title, $meta, $query, $columns)
-                ->download('personil-' . $today);
-        }
+        return view('personil.import');
     }
+
 }

@@ -20,6 +20,8 @@ class PresensiDataTable extends DataTable
         ['data' => 'TglFormulir', 'title' => 'Tanggal'],
         ['data' => 'JAM_DATANG', 'title' => 'Jam Datang'],
         ['data' => 'JAM_PULANG', 'title' => 'Jam Pulang'],
+        ['data' => 'JARAK_DATANG', 'title' => 'Jarak datang'],
+        ['data' => 'JARAK_PULANG', 'title' => 'Jarak pulang'],
     ];
     protected string|array $printColumns = [
         ['data' => 'status', 'title' => 'Status'],

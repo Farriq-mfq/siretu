@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Presensi;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -9,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class PresensiTUFactory extends Factory
 {
-    protected $model = 'PresensiTu';
+    protected $model = Presensi::class;
     /**
      * Define the model's default state.
      *
@@ -33,7 +34,7 @@ class PresensiTUFactory extends Factory
             'MAPS_PULANG' => fake()->streetAddress(),
             'JARAK_PULANG' => '0 m (0 km)',
             'JAM_PULANG' => fake()->time(),
-            'AKTIFITAS' => 'ini hanya testing'
+            // 'AKTIFITAS' => 'ini hanya testing'
         ];
     }
 }

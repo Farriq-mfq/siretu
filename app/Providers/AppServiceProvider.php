@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Livewire\Livewire;
 use Yajra\DataTables\Html\Builder;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,6 +25,13 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('active', function ($route) {
             return "<?php echo request()->routeIs($route) ? 'active' : ''; ?>";
         });
+        Blade::directive('activeHasChild', function ($route) {
+            return "<?php echo request()->is($route.'*') ? 'active open':'' ?>";
+        });
+        Blade::directive('isRequired', function () {
+            return "<?php echo '<span class=text-danger>*</span>' ?>";
+        });
+
         Builder::useVite();
     }
 }

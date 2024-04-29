@@ -22,7 +22,7 @@ class AuthController extends Controller
     {
         $credentials = $request->only(['username', 'password']);
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('/');
+            return redirect()->intended('/')->with('alert', ['message' => 'Selamat datang di Siretu', 'type' => 'primary']);
         } else {
             return to_route('login')->with('unauthorized', "Login gagal Periksa Kembali Username dan Password");
         }

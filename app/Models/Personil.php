@@ -8,6 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Personil extends Model
 {
     use HasFactory;
-    protected $table = 'personil';
-    protected $primaryKey = 'NOMOR';
+    protected $fillable = ['NOTELP', 'KELOMPOKGURU', 'NAMASAJA', 'JABATAN', 'NAMALENGKAP', 'KELAMIN', 'PANGGILAN', 'NAMADISPO', 'PANGGILANDISPO', 'JABATANDISPO', 'STATUS', 'INDUKPEGAWAI', 'INDUKPEGAWAIDISPO', 'MAPEL', 'QRCODE1', 'FORWARDTO', 'EMAIL'];
 }

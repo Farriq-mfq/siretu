@@ -1,9 +1,16 @@
-@extends('templates.main')
+@extends('templates.new')
 @section('content')
-<x-base-content title="Data personil">
-    {{ $dataTable->table() }}
-</x-base-content>
+    <div class="card">
+        <div class="card-header">
+            <h2 class="card-title">
+                Halo
+            </h2>
+        </div>
+        <div class="card-body">
+            {{ $dataTable->table() }}
+        </div>
+    </div>
 @endsection
 @push('scripts')
-    {{ $dataTable->scripts() }}
+    {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
 @endpush

@@ -8,12 +8,30 @@ use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class PersonilDataTable extends DataTable
 {
+    protected string|array $exportColumns = [
+        'NOMOR',
+        'NOTELP',
+        'KELOMPOKGURU',
+        'NAMASAJA',
+        'JABATAN',
+        'NAMALENGKAP',
+        'KELAMIN',
+        'PANGGILAN',
+        'NAMADISPO',
+        'PANGGILANDISPO',
+        'JABATANDISPO',
+        'STATUS',
+        'INDUKPEGAWAI',
+        'INDUKPEGAWAIDISPO',
+        'MAPEL',
+        'QRCODE1',
+        'FORWARDTO',
+        'EMAIL'
+    ];
     /**
      * Build the DataTable class.
      *
@@ -22,8 +40,8 @@ class PersonilDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('action', 'datatables.actions.personil', true)
-            ->setRowId('NOMOR');
+            ->addColumn('action', 'personil.action')
+            ->setRowId('id');
     }
 
     /**
@@ -31,7 +49,7 @@ class PersonilDataTable extends DataTable
      */
     public function query(Personil $model): QueryBuilder
     {
-        return $model->whereNot('NOMOR', 0)->newQuery();
+        return $model->newQuery();
     }
 
     /**
@@ -45,30 +63,27 @@ class PersonilDataTable extends DataTable
             ->minifiedAjax()
             ->buttons([
                 Button::make('excel'),
-                Button::make('csv'),
-                Button::make('pdf'),
+                // Button::make('csv'),
+                // Button::make('pdf'),
                 Button::make('print'),
                 Button::make('reset'),
-                Button::make('reload')
+                Button::make('reload'),
+                'importPersonil',
+                'addPersonil',
             ]);
     }
-
     /**
      * Get the dataTable columns definition.
      */
     public function getColumns(): array
     {
         return [
-            Column::make('NOMOR'),
+            // Column::make('NOMOR')->printable(false)->exportable(false),
             Column::make('NAMALENGKAP'),
             Column::make("NOTELP"),
             Column::make('KELOMPOKGURU'),
             Column::make('JABATAN'),
-            Column::make('NAMALENGKAP'),
-            Column::make('KELAMIN'),
-            Column::make('STATUS'),
-            Column::make('INDUKPEGAWAI'),
-            Column::computed('action'),
+            Column::computed('action')->printable(false)->exportable(false),
         ];
     }
 

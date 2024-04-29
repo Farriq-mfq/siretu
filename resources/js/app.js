@@ -65,8 +65,8 @@ nProgress.configure({
 // })
 
 Livewire.on('to_route', url => {
-    Turbolinks.visit(url, { action: 'replace' })
-    // window.location.href = url
+    // Turbolinks.visit(url, { action: 'replace' })
+    window.location.href = url
 })
 Livewire.on('reload', () => {
     $('.dataTable').DataTable().ajax.reload();

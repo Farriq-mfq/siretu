@@ -1,7 +1,5 @@
 @extends('templates.main')
-@section('title')
-    sdfknsdf
-@endsection
+@section('title', 'Under dev')
 @section('content')
     <div class="card">
         <div class="card-body">

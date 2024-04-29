@@ -12,6 +12,41 @@ use Yajra\DataTables\Services\DataTable;
 
 class JurnalDataTable extends DataTable
 {
+
+    protected string|array $exportColumns = [
+        'NoFormulir',
+        'TglFormulir',
+        'NoTelp',
+        'JURNAL',
+        'MAPS_JURNAL',
+        'JARAK_JURNAL',
+        'MULAI',
+        'SELESAI',
+        'NAMALENGKAP',
+        'PANGGILAN',
+        'INDUKPEGAWAI',
+        'ROMBEL_MAPEL',
+        'ROMBEL',
+        'MAPEL',
+        'NAMA_WALAS',
+        'PANGGILAN_WALAS',
+        'NIP_WALAS',
+        'NoTelp_Walas',
+        'NAMA_BK',
+        'PANGGILAN_BK',
+        'NIP_BK',
+        'NoTelp_BK',
+        'FORWARDTO',
+        'URAIAN_KEGIATAN',
+        'KETERANGAN',
+        'IJIN',
+        'SAKIT',
+        'ALPHA',
+        'DISPEN',
+        'FOTO',
+        'QrCode',
+        'PDFFILENAME',
+    ];
     /**
      * Build the DataTable class.
      *
@@ -29,9 +64,32 @@ class JurnalDataTable extends DataTable
      */
     public function query(Jurnal $model): QueryBuilder
     {
-        return $model
-            ->whereNot("NoFormulir", '-')
-            ->newQuery();
+        $by = request('show') ?? 'all';
+        if ($by === 'all') {
+            return $model
+                ->whereNot('NoFormulir', '-')->newQuery();
+        } else if ($by === 'filter') {
+            if (request()->segment(3) && request()->has('start_date') && request()->has('end_date')) {
+                return $model
+                    ->whereNot('NoFormulir', '-')
+                    ->where('NAMALENGKAP', urldecode(request()->segment(3)))
+                    ->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') >= ?", request()->get('start_date'))->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') <= ?", request()->get('end_date'))
+                    ->newQuery();
+            } else if (request()->has('start_date') && request()->has('end_date')) {
+                return $model
+                    ->whereNot('NoFormulir', '-')
+                    ->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') >= ?", request()->get('start_date'))->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') <= ?", request()->get('end_date'))
+                    ->newQuery();
+            } else if (request()->segment(3)) {
+                return $model
+                    ->whereNot('NoFormulir', '-')
+                    ->where('NAMALENGKAP', urldecode(request()->segment(3)))
+                    ->newQuery();
+            }
+        } else {
+            return $model
+                ->whereNot('NoFormulir', '-')->newQuery();
+        }
     }
 
     /**
@@ -45,8 +103,8 @@ class JurnalDataTable extends DataTable
             ->minifiedAjax()
             ->buttons([
                 Button::make('excel'),
-                Button::make('csv'),
-                Button::make('pdf'),
+                // Button::make('csv'),
+                // Button::make('pdf'),
                 Button::make('print'),
                 Button::make('reset'),
                 Button::make('reload')
@@ -65,13 +123,11 @@ class JurnalDataTable extends DataTable
             Column::make('SELESAI'),
             Column::make('NAMALENGKAP'),
             Column::make('ROMBEL_MAPEL'),
-            Column::make('MAPEL'),
-            Column::computed('action')
-                ->exportable(false)
-                ->printable(false)
-                ->width(60)
-                ->addClass('text-center'),
-            // Column::make('add your columns'),
+            // Column::computed('action')
+            //     ->exportable(false)
+            //     ->printable(false)
+            //     ->width(60)
+            //     ->addClass('text-center'),
         ];
     }
 

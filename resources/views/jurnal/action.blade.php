@@ -1,4 +1,4 @@
-<div>
+{{-- <div>
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#basicModal">
         <i class="bx bx-chevron-right"></i>
     </button>
@@ -26,4 +26,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}

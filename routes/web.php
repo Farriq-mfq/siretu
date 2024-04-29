@@ -36,7 +36,7 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::prefix('/jurnal')->group(function () {
-        Route::get('/', [JurnalController::class, 'index'])->name('jurnal');
+        Route::get('/{show?}/{personil?}', [JurnalController::class, 'index'])->name('jurnal');
     });
     /**
      * MASTER ROUTES

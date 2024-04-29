@@ -61,8 +61,7 @@ class AddPersonil extends Component
         ]);
 
         if ($createPersonil) {
-            $this->resetExcept('personil');
-            // $this->reset('notelp', 'kelompok', 'namalengkap', 'namasaja', 'jabatan', 'kelamin', 'panggilan', 'nama_dispo', 'panggilan_dispo', 'jabatan_dispo', 'status', 'no_induk', 'no_induk_dispo', 'mapel', 'email');
+            $this->reset('notelp', 'kelompok', 'namalengkap', 'namasaja', 'jabatan', 'kelamin', 'panggilan', 'nama_dispo', 'panggilan_dispo', 'jabatan_dispo', 'status', 'no_induk', 'no_induk_dispo', 'mapel', 'email');
             $this->alert('success', 'Berhasil menambah personil baru');
         } else {
             $this->alert('error', 'Terjadi kesalahan sistem');

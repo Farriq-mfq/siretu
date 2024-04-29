@@ -49,7 +49,7 @@ class FormWifi extends Component
         ]);
 
         if ($updated) {
-            $this->reset();
+            $this->reset('ssid', 'password', 'updatedId');
             $this->alert('success', 'Berhasil update wifi');
             $this->dispatch('reload');
         } else {
@@ -65,7 +65,7 @@ class FormWifi extends Component
         ]);
 
         if ($insert) {
-            $this->reset();
+            $this->reset('ssid', 'password');
             $this->alert('success', 'Berhasil menambah wifi');
             $this->dispatch('reload');
         } else {

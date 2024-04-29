@@ -1,21 +1,21 @@
-@extends('templates.main')
-@section('title', 'Import personil')
-@section('content')
-    <div class="card">
-        <div class="card-header">
-            <a href="{{ route('personil') }}">Kembali</a>
-        </div>
-        <div class="card-body">
-            <form wire:submit.prevent="handleImport" method="POST" enctype="multipart/form-data">
-                <div>
-                    <input wire:model="file" type="file" class="form-control" accept=".xlsx,.xls">
+<div>
+    <form wire:submit.prevent="handleImport" method="POST" enctype="multipart/form-data">
+        @csrf
+        <div>
+            <input wire:model="file" type="file" class="form-control @error('file') is-invalid @enderror"
+                accept=".xlsx,.xls">
+            @error('file')
+                <div class="invalid-feedback">
+                    {{ $message }}
                 </div>
-                <div class="mt-3">
-                    <button class="btn btn-primary" type="submit">
-                        Import
-                    </button>
-                </div>
-            </form>
+            @enderror
         </div>
-    </div>
-@endsection
+        <div class="mt-3">
+            <button class="btn btn-primary" type="submit" wire:loading.attr="disabled">
+                <span wire:loading.remove>Import</span>
+                <span wire:loading>Tunggu...</span>
+            </button>
+        </div>
+    </form>
+</div>
+</div>

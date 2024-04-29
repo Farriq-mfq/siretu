@@ -23,7 +23,7 @@ class Add extends Component
         if ($create) {
             $this->dispatch('reload');
             $this->alert('success', 'Berhasil menambah kelompok');
-            $this->resetExcept('kelompokPegawai');
+            $this->reset('kelompok');
         } else {
             $this->alert('error', 'Terjadi kesalahan sistem');
         }

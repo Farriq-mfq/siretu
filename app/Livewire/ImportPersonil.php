@@ -2,19 +2,30 @@
 
 namespace App\Livewire;
 
-use Livewire\Attributes\Validate;
+use App\Imports\PersonilImport;
+use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ImportPersonil extends Component
 {
 
-    use WithFileUploads;
-    #[Validate(['file' => 'required|mimes:xlsx,xls'])]
+    use WithFileUploads, LivewireAlert;
     public $file;
+    public $rules = [
+        'file' => 'required|mimes:xlsx, csv, xls'
+    ];
     public function handleImport()
     {
-        dd($this->file);
+        $this->validate();
+        try {
+            Excel::import(new PersonilImport, $this->file);
+            $this->alert('success', 'Berhasil import');
+            $this->reset('file');
+        } catch (\Exception $e) {
+            $this->alert('error', 'Terjadi kesalahan sistem');
+        }
     }
     public function render()
     {

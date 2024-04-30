@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 use Yajra\DataTables\Html\Builder;
@@ -33,5 +34,8 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Builder::useVite();
+        Vite::useScriptTagAttributes([
+            'defer' => true,
+        ]);
     }
 }

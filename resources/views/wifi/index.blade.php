@@ -11,7 +11,5 @@
             {{ $dataTable->table() }}
         </div>
     </div>
-@endsection
-@push('scripts')
     {{ $dataTable->scripts() }}
-@endpush
+@endsection

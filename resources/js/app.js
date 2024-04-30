@@ -7,74 +7,80 @@ import 'select2/dist/css/select2.css';
 import { menu } from './menu'
 import './custom-action'
 // start turbolinks SPA
-// Turbolinks.start()
+Turbolinks.SnapshotRenderer.prototype.assignNewBody = function () {
+    var newBody = this.newBody;
+    var currentBody = document.body;
+    // console.log(newBody, currentBody)
+    $('.layout-wrapper').children().hide().remove()
+    $(".layout-wrapper ").html(newBody.children[0])
+    console.log(newBody.children[0])
+};
+Turbolinks.start()
 // configure np progress
 nProgress.configure({
     showSpinner: false,
 })
 
-// if (Turbolinks.supported) {
+if (Turbolinks.supported) {
 
-// document.addEventListener('turbolinks:load', () => {
+    document.addEventListener('turbolinks:load', () => {
 
-    $(document).ready(function () {
-        const form = $("#form-delete-button")
-        $(document).on("click", "#delete_confirmation", function () {
-            const dataUrl = $(this).data('action')
-            $("#modal-delete-confirmation").modal("show")
-            form.attr('action', dataUrl)
+        $(document).ready(function () {
+            const form = $("#form-delete-button")
+            $(document).on("click", "#delete_confirmation", function () {
+                const dataUrl = $(this).data('action')
+                $("#modal-delete-confirmation").modal("show")
+                form.attr('action', dataUrl)
+            })
+            $('#modal-delete-confirmation').on('hidden.bs.modal', function (e) {
+                form.removeAttr('action')
+            })
+            $(document).ajaxStart(function () {
+                nProgress.start();
+            });
+
+            $(document).ajaxStop(function () {
+                nProgress.done();
+            });
+
         })
-        $('#modal-delete-confirmation').on('hidden.bs.modal', function (e) {
-            form.removeAttr('action')
-        })
-        $(document).ajaxStart(function () {
-            nProgress.start();
-        });
+        // load menu
+        menu()
 
-        $(document).ajaxStop(function () {
-            nProgress.done();
-        });
+        select2($);
 
-    })
-    // load menu
-    menu()
+        function initSelect2() {
+            $(`.select2`).select2({
+                theme: 'bootstrap-5',
+            });
+        }
 
-    select2($);
-
-    function initSelect2() {
-        $(`.select2`).select2({
-            theme: 'bootstrap-5',
-        });
-    }
-
-    initSelect2()
-
-    $('.select2').change(function () {
-        Livewire.dispatch('select2', { val: $(this).val() });
-    })
-    Livewire.on('select2-hydrate', function () {
         initSelect2()
+
+        $('.select2').change(function () {
+            Livewire.dispatch('select2', { val: $(this).val() });
+        })
+        Livewire.on('select2-hydrate', function () {
+            initSelect2()
+        });
     });
-// });
 
-// document.addEventListener('turbolinks:visit', () => {
-//     $('.dataTables_wrapper').children().remove()
-//     $('.dataTables_wrapper').html(`<div class="spinner-border text-primary" role="status">
-//        <span class="visually-hidden">Loading...</span>
-//      </div>`)
-// })
+    // document.addEventListener('turbolinks:visit', () => {
+    //     $('.dataTables_wrapper').children().remove()
+    //     $('.dataTables_wrapper').html(`<div class="spinner-border text-primary" role="status">
+    //    <span class="visually-hidden">Loading...</span>
+    //  </div>`)
+    // })
 
-Livewire.on('to_route', url => {
-    // Turbolinks.visit(url, { action: 'replace' })
-    window.location.href = url
-})
-Livewire.on('reload', () => {
-    $('.dataTable').DataTable().ajax.reload();
-    $('.modal').modal('hide')
-    $('.modal-backdrop').remove()
-})
-
-
-// }
+    Livewire.on('to_route', url => {
+        // Turbolinks.visit(url, { action: 'replace' })
+        window.location.href = url
+    })
+    Livewire.on('reload', () => {
+        $('.dataTable').DataTable().ajax.reload();
+        $('.modal').modal('hide')
+        $('.modal-backdrop').remove()
+    })
 
 
+}

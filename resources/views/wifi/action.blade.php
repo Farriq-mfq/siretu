@@ -1,1 +1,1 @@
-@livewire('wifi-action', ['id' => $id])
+@livewire('wifi.action', ['id' => $id])

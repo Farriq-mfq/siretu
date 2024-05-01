@@ -1,6 +1,5 @@
 <div>
     <form wire:submit.prevent="handleImport" method="POST" enctype="multipart/form-data">
-        @csrf
         <div>
             <input wire:model="file" type="file" class="form-control @error('file') is-invalid @enderror"
                 accept=".xlsx,.xls">
@@ -11,10 +10,15 @@
             @enderror
         </div>
         <div class="mt-3">
-            <button class="btn btn-primary" type="submit" wire:loading.attr="disabled">
-                <span wire:loading.remove>Import</span>
-                <span wire:loading>Tunggu...</span>
-            </button>
+            @if ($file)
+                <button class="btn btn-primary" type="submit" wire:loading.attr="disabled">
+                    <span>Import</span>
+                </button>
+            @else
+                <div class="spinner-border text-primary" role="status" wire:loading>
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            @endif
         </div>
     </form>
 </div>

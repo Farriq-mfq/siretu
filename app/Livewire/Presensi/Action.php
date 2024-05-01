@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Presensi;
 
 use App\Models\Presensi;
-use Livewire\Component;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Component;
 
-class PresensiAction extends Component
+class Action extends Component
 {
     use LivewireAlert;
     public $NoFormulir;
@@ -29,8 +29,9 @@ class PresensiAction extends Component
             $this->alert('error', 'Terjadi kesalahan sistem');
         }
     }
+
     public function render()
     {
-        return view('livewire.presensi-action');
+        return view('livewire.presensi.action');
     }
 }

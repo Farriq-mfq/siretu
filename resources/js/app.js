@@ -5,17 +5,8 @@ import Turbolinks from 'turbolinks';
 import select2 from 'select2';
 import 'select2/dist/css/select2.css';
 import { menu } from './menu'
-import './custom-action'
-// start turbolinks SPA
-Turbolinks.SnapshotRenderer.prototype.assignNewBody = function () {
-    var newBody = this.newBody;
-    var currentBody = document.body;
-    // console.log(newBody, currentBody)
-    $('.layout-wrapper').children().hide().remove()
-    $(".layout-wrapper ").html(newBody.children[0])
-    console.log(newBody.children[0])
-};
-Turbolinks.start()
+import './actions'
+import './spa'
 // configure np progress
 nProgress.configure({
     showSpinner: false,
@@ -65,16 +56,9 @@ if (Turbolinks.supported) {
         });
     });
 
-    // document.addEventListener('turbolinks:visit', () => {
-    //     $('.dataTables_wrapper').children().remove()
-    //     $('.dataTables_wrapper').html(`<div class="spinner-border text-primary" role="status">
-    //    <span class="visually-hidden">Loading...</span>
-    //  </div>`)
-    // })
-
     Livewire.on('to_route', url => {
-        // Turbolinks.visit(url, { action: 'replace' })
-        window.location.href = url
+        Turbolinks.visit(url, { action: 'replace' })
+        // window.location.href = url
     })
     Livewire.on('reload', () => {
         $('.dataTable').DataTable().ajax.reload();

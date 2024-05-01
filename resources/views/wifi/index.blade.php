@@ -5,7 +5,7 @@
 @section('content')
     <div class="card">
         <div class="card-header">
-            <livewire:form-wifi />
+            <livewire:wifi.form />
         </div>
         <div class="card-body">
             {{ $dataTable->table() }}

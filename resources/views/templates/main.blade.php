@@ -98,8 +98,8 @@
         <div class="layout-overlay layout-menu-toggle"></div>
     </div>
     {{-- @routes() --}}
-    @livewire('livewire-ui-modal')
     @livewireScripts
+    @livewire('wire-elements-modal')
     @include('includes.basic-script')
     <x-livewire-alert::scripts />
 </body>

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Presensi;
 
 use App\Traits\Select2;
 use Livewire\Component;
 
-class FilterPresensi extends Component
+class Filter extends Component
 {
     use Select2;
     public bool $showFilterTanggal = false;
@@ -58,6 +58,6 @@ class FilterPresensi extends Component
     }
     public function render()
     {
-        return view('livewire.filter-presensi');
+        return view('livewire.presensi.filter');
     }
 }

@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Wifi;
 
 use App\Models\Wifi;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
-class FormWifi extends Component
+class Form extends Component
 {
     use LivewireAlert;
     public Wifi $wifi;
@@ -31,6 +31,11 @@ class FormWifi extends Component
             $this->ssid = $data['SSID'];
             $this->password = $data['password'];
         }
+    }
+    #[On('deleted-wifi')]
+    public function catchDeleted()
+    {
+        $this->reset();
     }
 
     public function handleCancel()
@@ -72,8 +77,9 @@ class FormWifi extends Component
             $this->alert('error', 'Terjadi kesalahan sistem');
         }
     }
+
     public function render()
     {
-        return view('livewire.form-wifi');
+        return view('livewire.wifi.form');
     }
 }

@@ -8,8 +8,9 @@
             {{ $dataTable->table() }}
         </div>
     </div>
+    {{ $dataTable->scripts() }}
 @endsection
 
-@push('scripts')
+{{-- @push('scripts')
     {{ $dataTable->scripts() }}
-@endpush
+@endpush --}}

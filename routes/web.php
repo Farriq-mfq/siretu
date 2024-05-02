@@ -7,6 +7,7 @@ use App\Http\Controllers\JurnalController;
 use App\Http\Controllers\KelompokPegawaiController;
 use App\Http\Controllers\PersonilController;
 use App\Http\Controllers\PresensiController;
+use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\WifiController;
 use Illuminate\Support\Facades\Route;
 
@@ -49,6 +50,10 @@ Route::middleware('auth')->group(function () {
     Route::get('wifi', [WifiController::class, 'index'])->name('wifi');
     Route::prefix('kelompok')->group(function () {
         Route::get('/', [KelompokPegawaiController::class, 'index'])->name('kelompok');
+    });
+
+    Route::prefix('siswa')->group(function () {
+        Route::get('/', [SiswaController::class, 'index'])->name('siswa');
     });
     /**
      * END MASTER ROUTES

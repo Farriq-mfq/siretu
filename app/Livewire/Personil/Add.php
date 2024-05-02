@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Personil;
 
 use App\Models\KelompokPegawai;
 use App\Models\Personil;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
-class AddPersonil extends Component
+class Add extends Component
 {
     use LivewireAlert;
     public Personil $personil;
@@ -75,6 +75,6 @@ class AddPersonil extends Component
     public function render()
     {
         $kelompoks = KelompokPegawai::all();
-        return view('livewire.add-personil', compact('kelompoks'));
+        return view('livewire.personil.add', compact('kelompoks'));
     }
 }

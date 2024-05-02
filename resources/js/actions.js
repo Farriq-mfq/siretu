@@ -9,8 +9,8 @@ DataTable.ext.buttons.addPersonil = {
     },
 
     action: function (e, dt, button, config) {
-        // Turbolinks.visit(route('personil-create', undefined, undefined, Ziggy))
-        window.location.href = route('personil-create', undefined, undefined, Ziggy)
+        Turbolinks.visit(route('personil-create', undefined, undefined, Ziggy))
+        // window.location.href = route('personil-create', undefined, undefined, Ziggy)
     }
 };
 DataTable.ext.buttons.importPersonil = {
@@ -20,7 +20,7 @@ DataTable.ext.buttons.importPersonil = {
     },
 
     action: function (e, dt, button, config) {
-        // Turbolinks.visit(route('personil-import', undefined, undefined, Ziggy))
-        window.location.href = route('personil-import', undefined, undefined, Ziggy)
+        Turbolinks.visit(route('personil-import', undefined, undefined, Ziggy))
+        // window.location.href = route('personil-import', undefined, undefined, Ziggy)
     }
 };

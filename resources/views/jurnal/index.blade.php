@@ -35,7 +35,7 @@
                     @endif
                     @if ($by === 'filter')
                         <div class="tab-pane fade show active">
-                            <livewire:filter-jurnal :filter="$filter" :personil="$personil" />
+                            @livewire('jurnal.filter', ['filter' => $filter, 'personil' => $personil])
                             @if ($filter['personil'] || ($filter['start_date'] && $filter['end_date']))
                                 <div class="mt-3">
                                     {{ $dataTable->table() }}
@@ -47,8 +47,5 @@
             </div>
         </div>
     </div>
-@endsection
-
-@push('scripts')
     {{ $dataTable->scripts() }}
-@endpush
+@endsection

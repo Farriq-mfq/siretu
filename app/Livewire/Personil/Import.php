@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Personil;
 
 use App\Imports\PersonilImport;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -8,9 +8,8 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Maatwebsite\Excel\Facades\Excel;
 
-class ImportPersonil extends Component
+class Import extends Component
 {
-
     use WithFileUploads, LivewireAlert;
     public $file;
     public $rules = [
@@ -29,6 +28,6 @@ class ImportPersonil extends Component
     }
     public function render()
     {
-        return view('livewire.import-personil');
+        return view('livewire.personil.import');
     }
 }

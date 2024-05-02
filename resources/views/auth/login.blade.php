@@ -3,5 +3,5 @@
     Login
 @endsection
 @section('content')
-    <livewire:auth-component />
+    @livewire('auth.login')
 @endsection

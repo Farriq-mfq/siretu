@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Jurnal;
 
 use App\Traits\Select2;
 use Livewire\Component;
 
-class FilterJurnal extends Component
+class Filter extends Component
 {
     use Select2;
     public bool $showFilterTanggal = false;
@@ -58,6 +58,6 @@ class FilterJurnal extends Component
     }
     public function render()
     {
-        return view('livewire.filter-jurnal');
+        return view('livewire.jurnal.filter');
     }
 }

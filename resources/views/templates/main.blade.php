@@ -13,6 +13,7 @@
 
     <meta name="description" content="Siretu application report SMK Negeri 1 Pekalongan" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="turbolinks-cache-control" content="no-cache">
     @include('includes.basic-style')
     @livewireStyles
 </head>
@@ -98,6 +99,7 @@
     </div>
     {{-- @routes() --}}
     @livewireScripts
+    @livewire('wire-elements-modal')
     @include('includes.basic-script')
     <x-livewire-alert::scripts />
 </body>

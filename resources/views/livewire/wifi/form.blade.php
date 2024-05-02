@@ -2,7 +2,6 @@
     @if ($updatedId) wire:submit.prevent="handleUpdate"
     @else
     wire:submit.prevent="handleSubmit" @endif>
-    @csrf
     <div>
         <label for="ssid" class="form-label">
             SSID
@@ -32,12 +31,13 @@
                 <span wire:loading>Loading...</span>
                 <span wire:loading.remove>Update</span>
             </button>
-            <button class="btn btn-danger" class="button" wire:click.prevent="handleCancel">Batal</button>
+            <button class="btn btn-danger" wire:loading.remove class="button"
+                wire:click.prevent="handleCancel">Batal</button>
         </div>
     @else
         <div class="mt-3">
             <button class="btn btn-primary" wire:loading.attr="disabled" type="submit">
-                <span wire:loading>Loading...</span>
+                <span wire:loading>Tunggu...</span>
                 <span wire:loading.remove>Simpan</span>
             </button>
         </div>

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Wifi;
 
 use App\Models\Wifi;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
-class WifiAction extends Component
+class Action extends Component
 {
     use LivewireAlert;
     public Wifi $wifi;
@@ -32,12 +32,13 @@ class WifiAction extends Component
         if ($deleted) {
             $this->alert('success', 'Berhasil hapus wifi');
             $this->dispatch('reload');
+            $this->dispatch('deleted-wifi');
         } else {
             $this->alert('error', 'Terjadi kesalahan sistem');
         }
     }
     public function render()
     {
-        return view('livewire.wifi-action');
+        return view('livewire.wifi.action');
     }
 }

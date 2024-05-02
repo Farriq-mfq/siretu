@@ -6,7 +6,7 @@
             <a href="{{ route('personil') }}">Kembali</a>
         </div>
         <div class="card-body">
-            @livewire('add-personil')
+            @livewire('personil.add')
         </div>
     </div>
 @endsection

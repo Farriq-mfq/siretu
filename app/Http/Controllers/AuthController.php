@@ -32,6 +32,7 @@ class AuthController extends Controller
     public function logout()
     {
         Auth::logout();
+        session()->remove('user');
         return to_route('login');
     }
 }

@@ -12,5 +12,8 @@
 </script>
 <script src="{{ url('assets/vendor/js/menu.js') }}" data-turbolinks-eval="false"></script>
 <script src="{{ url('assets/vendor/sweetalert2/sweetalert2.min.js') }}" data-turbolinks-eval="false"></script>
+<script type="text/javascript">
+    var APP_URL = " {!! env('APP_URL') !!}";
+</script>
 @vite('resources/js/app.js')
 @stack('scripts')

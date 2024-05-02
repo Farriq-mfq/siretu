@@ -48,7 +48,8 @@ class SiswaDataTable extends DataTable
                         Button::make('excel'),
                         Button::make('print'),
                         Button::make('reset'),
-                        Button::make('reload')
+                        Button::make('reload'),
+                        'importSiswa'
                     ]);
     }
 

@@ -11,4 +11,8 @@ class SiswaController extends Controller
     {
         return $dataTable->render('siswa.index');
     }
+    public function import()
+    {
+        return view('siswa.import');
+    }
 }

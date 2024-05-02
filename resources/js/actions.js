@@ -24,3 +24,15 @@ DataTable.ext.buttons.importPersonil = {
         // window.location.href = route('personil-import', undefined, undefined, Ziggy)
     }
 };
+
+DataTable.ext.buttons.importSiswa = {
+    className: 'btn btn-primary',
+    text: function (dt) {
+        return '<i class="bi bi-upload"></i> ';
+    },
+
+    action: function (e, dt, button, config) {
+        Turbolinks.visit(route('siswa-import', undefined, undefined, Ziggy))
+        // window.location.href = route('personil-import', undefined, undefined, Ziggy)
+    }
+};

@@ -122,11 +122,11 @@ class PresensiDataTable extends DataTable
             Column::make('JAM_DATANG'),
             Column::make('JAM_PULANG'),
             // Column::make('AKTIFITAS'),
-            Column::computed('action')
-                ->exportable(false)
-                ->printable(false)
-                ->width(60)
-                ->addClass('text-center'),
+            // Column::computed('action')
+            //     ->exportable(false)
+            //     ->printable(false)
+            //     ->width(60)
+            //     ->addClass('text-center'),
         ];
     }
 

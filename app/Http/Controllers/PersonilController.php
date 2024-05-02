@@ -33,4 +33,8 @@ class PersonilController extends Controller
         return view('personil.import');
     }
 
+    public function downloadFormat()
+    {
+        return response()->download(storage_path('/app/public/personil-template.xlsx'));
+    }
 }

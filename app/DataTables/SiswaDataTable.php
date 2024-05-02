@@ -41,9 +41,6 @@ class SiswaDataTable extends DataTable
                     ->setTableId('siswa-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
-                    //->dom('Bfrtip')
-                    ->orderBy(1)
-                    ->selectStyleSingle()
                     ->buttons([
                         Button::make('excel'),
                         Button::make('print'),
@@ -59,7 +56,7 @@ class SiswaDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('id'),
+            Column::make('notelp'),
             Column::make('nama'),
             Column::make('nisn'),
             Column::make('nipd'),

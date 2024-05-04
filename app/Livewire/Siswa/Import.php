@@ -29,7 +29,7 @@ class Import extends Component
             $collection = (new FastExcel)->import($this->file->getPathname());
             foreach ($collection as $siswa) {
                 $this->siswa->create([
-                    'nama' => $siswa["Nama"],
+                    'nama' => strtoupper($siswa["Nama"]),
                     'nipd' => $siswa["NIPD"],
                     'jenis_kelamin' => $siswa["JK"],
                     'nisn' => $siswa["NISN"],

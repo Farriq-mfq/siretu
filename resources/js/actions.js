@@ -1,4 +1,3 @@
-import { Ziggy } from './ziggy.js';
 import { route } from 'ziggy-js'
 
 // custom actions add personil
@@ -33,6 +32,29 @@ DataTable.ext.buttons.importSiswa = {
 
     action: function (e, dt, button, config) {
         Turbolinks.visit(route('siswa-import', undefined, undefined, Ziggy))
+        // window.location.href = route('personil-import', undefined, undefined, Ziggy)
+    }
+};
+
+DataTable.ext.buttons.addSiswa = {
+    className: 'btn btn-primary',
+    text: function (dt) {
+        return '<i class="bi bi-plus"></i> ';
+    },
+
+    action: function (e, dt, button, config) {
+        Turbolinks.visit(route('siswa-reset', undefined, undefined, Ziggy))
+        // window.location.href = route('personil-import', undefined, undefined, Ziggy)
+    }
+};
+DataTable.ext.buttons.risetSiswa = {
+    className: 'btn btn-danger',
+    text: function (dt) {
+        return '<i class="bi bi-screwdriver"></i> ';
+    },
+
+    action: function (e, dt, button, config) {
+        Turbolinks.visit(route('siswa-reset', undefined, undefined, Ziggy))
         // window.location.href = route('personil-import', undefined, undefined, Ziggy)
     }
 };

@@ -65,7 +65,7 @@
         </div>
         <div class="layout-overlay layout-menu-toggle"></div>
     </div>
-    {{-- @routes() --}}
+    @routes()
     @livewireScripts
     @livewire('wire-elements-modal')
     @include('includes.basic-script')

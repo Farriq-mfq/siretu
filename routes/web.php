@@ -56,6 +56,8 @@ Route::middleware('auth')->group(function () {
     Route::prefix('siswa')->group(function () {
         Route::get('/', [SiswaController::class, 'index'])->name('siswa');
         Route::get('/import', [SiswaController::class, 'import'])->name('siswa-import');
+        Route::get('/reset', [SiswaController::class, 'reset'])->name('siswa-reset');
+        Route::get('/download', [SiswaController::class, 'downloadFormat'])->name('siswa-format-download');
     });
     /**
      * END MASTER ROUTES

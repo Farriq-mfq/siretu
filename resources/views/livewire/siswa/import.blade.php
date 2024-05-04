@@ -12,8 +12,8 @@
         <div class="mt-3">
             @if ($file)
                 <button class="btn btn-primary" type="submit" wire:loading.attr="disabled">
-                    <span wire:loading.remove>Import</span>
-                    <span wire:loading>Loading...</span>
+                    <span wire:loading.remove wire:targe="handleImport">Import</span>
+                    <span wire:loading wire:targe="handleImport">Loading...</span>
                 </button>
             @else
                 <div class="spinner-border text-primary" role="status" wire:loading>

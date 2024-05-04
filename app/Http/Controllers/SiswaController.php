@@ -15,4 +15,12 @@ class SiswaController extends Controller
     {
         return view('siswa.import');
     }
+    public function reset()
+    {
+        return view('siswa.reset');
+    }
+    public function downloadFormat()
+    {
+        return response()->download(storage_path('/app/public/siswa-template.xlsx'));
+    }
 }

@@ -38,18 +38,18 @@ class SiswaDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('siswa-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    //->dom('Bfrtip')
-                    ->orderBy(1)
-                    ->selectStyleSingle()
-                    ->buttons([
-                        Button::make('excel'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    ]);
+            ->setTableId('siswa-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            ->buttons([
+                Button::make('excel'),
+                Button::make('print'),
+                Button::make('reset'),
+                Button::make('reload'),
+                'importSiswa',
+                'addSiswa',
+                'risetSiswa',
+            ]);
     }
 
     /**
@@ -58,16 +58,16 @@ class SiswaDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('id'),
+            Column::make('notelp'),
             Column::make('nama'),
             Column::make('nisn'),
             Column::make('nipd'),
             Column::make('rombel'),
             Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
+                ->exportable(false)
+                ->printable(false)
+                ->width(60)
+                ->addClass('text-center'),
         ];
     }
 

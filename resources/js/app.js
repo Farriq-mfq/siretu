@@ -7,6 +7,7 @@ import 'select2/dist/css/select2.css';
 import { menu } from './menu'
 import './actions'
 import './spa'
+import Swal from 'sweetalert2';
 // configure np progress
 nProgress.configure({
     showSpinner: false,
@@ -64,7 +65,31 @@ if (Turbolinks.supported) {
         $('.dataTable').DataTable().ajax.reload();
         $('.modal').modal('hide')
         $('.modal-backdrop').remove()
+        Livewire.dispatch('$refresh')
     })
 
+
+    Livewire.on('confirmation', (data) => {
+        Swal.fire({
+            title: data[0].title ?? "Konfirmasi",
+            text: data[0].text ?? "Yakin ingin melakukan aksi ini ?",
+            customClass: {
+                confirmButton: "btn btn-danger",
+                cancelButton: "btn btn-secondary ms-1"
+            },
+            buttonsStyling: false,
+            showCancelButton: true,
+            confirmButtonText: data[0].confirmButtonText ?? "Yakin",
+            cancelButtonText: data[0].confirmButtonText ?? "Batalkan"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                if (data[0].data) {
+                    Livewire.dispatch(data[0].event, data[0].data)
+                } else {
+                    Livewire.dispatch(data[0].event)
+                }
+            }
+        });
+    })
 
 }

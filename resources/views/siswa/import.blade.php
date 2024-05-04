@@ -1,14 +1,14 @@
 @extends('templates.main')
-@section('title', 'Import personil')
+@section('title', 'Import Siswa')
 @section('content')
     <div class="card">
         <div class="card-header">
-            <a href="{{ route('personil') }}">Kembali</a>
-            <a download href="{{ route('personil-format-download') }}" class="btn btn-primary btn-sm d-block mt-2"
+            <a href="{{ route('siswa') }}">Kembali</a>
+            <a download href="{{ route('siswa-format-download') }}" class="btn btn-primary btn-sm d-block mt-2"
                 style="width: fit-content">Download format</a>
         </div>
         <div class="card-body">
-            @livewire('personil.import')
+            @livewire('siswa.import')
         </div>
     </div>
 @endsection

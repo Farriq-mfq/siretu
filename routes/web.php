@@ -46,6 +46,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [PersonilController::class, 'index'])->name('personil');
         Route::get('/create', [PersonilController::class, 'create'])->name('personil-create');
         Route::get('/import', [PersonilController::class, 'import'])->name('personil-import');
+        Route::get('/download', [PersonilController::class, 'downloadFormat'])->name('personil-format-download');
     });
     Route::get('wifi', [WifiController::class, 'index'])->name('wifi');
     Route::prefix('kelompok')->group(function () {
@@ -54,6 +55,9 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('siswa')->group(function () {
         Route::get('/', [SiswaController::class, 'index'])->name('siswa');
+        Route::get('/import', [SiswaController::class, 'import'])->name('siswa-import');
+        Route::get('/reset', [SiswaController::class, 'reset'])->name('siswa-reset');
+        Route::get('/download', [SiswaController::class, 'downloadFormat'])->name('siswa-format-download');
     });
     /**
      * END MASTER ROUTES

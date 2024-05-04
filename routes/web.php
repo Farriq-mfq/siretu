@@ -26,8 +26,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     // fitur presensi
-    Route::prefix('presensi')->group(function () {
-        Route::get('/{show?}/{personil?}', [PresensiController::class, 'index'])->name('presensi');
+    Route::prefix('presensi')->group(function () {        Route::get('/{show?}/{personil?}', [PresensiController::class, 'index'])->name('presensi');
 
     });
 

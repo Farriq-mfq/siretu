@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\DataTables\PresensiDataTable;
 use App\Models\Personil;
-use Illuminate\Http\Request;
 
 class PresensiController extends Controller
 {

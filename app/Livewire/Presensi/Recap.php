@@ -2,10 +2,12 @@
 
 namespace App\Livewire\Presensi;
 
+use App\Exports\PresensiRecap;
 use App\Models\Presensi;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use Maatwebsite\Excel\Facades\Excel;
 
 class Recap extends Component
 {
@@ -19,20 +21,7 @@ class Recap extends Component
     {
         $this->validate();
         $presensiModel = new Presensi();
-        $months = [
-            1 => "Januari",
-            2 => "Februari",
-            3 => "Maret",
-            4 => "April",
-            5 => "Mei",
-            6 => "Juni",
-            7 => "Juli",
-            8 => "Agustus",
-            9 => "September",
-            10 => "Oktober",
-            11 => "November",
-            12 => "Desember"
-        ];
+        $months = getMonths();
         if ($this->month) {
             $presensi = $presensiModel
                 ->whereNot('NoFormulir', '-')
@@ -53,18 +42,19 @@ class Recap extends Component
                 });
 
                 $numberOfDays = collect(range(1, $getDays));
+                $results = array_map(function ($filterPerday) use ($numberOfDays) {
+                    $r = [];
+                    for ($i = 1; $i <= $numberOfDays->count(); $i++) {
+                        $r[$i] = current(array_filter($filterPerday, function ($val) use ($i) {
+                            return $val['day'] === $i;
+                        }));
+                    }
+                    return $r;
+                }, $permonth->groupBy('NAMALENGKAP')->toArray());
                 $permonths[] = [
                     $month => [
                         'total_days' => $getDays,
-                        'data' => array_map(function ($filterPerday) use ($numberOfDays) {
-                            $r = [];
-                            for ($i = 1; $i <= $numberOfDays->count(); $i++) {
-                                $r[$i] = current(array_filter($filterPerday, function ($val) use ($i) {
-                                    return $val['day'] === $i;
-                                }));
-                            }
-                            return $r;
-                        }, $permonth->groupBy('NAMALENGKAP')->toArray())
+                        'data' => $results,
                     ]
                 ];
 
@@ -75,6 +65,11 @@ class Recap extends Component
 
     }
 
+    public function exportRecap()
+    {
+        return Excel::download(new PresensiRecap($this->recap), Carbon::now()->format('Y-m-dH-i-s') . '_presensi.xlsx');
+    }
+
     public function render()
     {
         $years = Presensi::whereNot('NoFormulir', '-')
@@ -82,20 +77,7 @@ class Recap extends Component
             ->groupBy('year')
             ->orderBy('year')
             ->get();
-        $months = [
-            1 => "Januari",
-            2 => "Februari",
-            3 => "Maret",
-            4 => "April",
-            5 => "Mei",
-            6 => "Juni",
-            7 => "Juli",
-            8 => "Agustus",
-            9 => "September",
-            10 => "Oktober",
-            11 => "November",
-            12 => "Desember"
-        ];
+        $months = getMonths();
         return view('livewire.presensi.recap', compact('years', 'months'));
     }
 }

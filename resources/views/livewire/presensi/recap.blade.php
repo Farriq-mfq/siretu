@@ -42,93 +42,94 @@
         {{-- @if ($year && $month)
             <p>lro</p>
         @else --}}
-            <div class="d-grid gap-5 mt-5">
-                @foreach ($recap as $r)
-                    @if (current($r)['data'])
-                        <h1>
-                            {{ array_keys($r)[0] }}
-                        </h1>
-                        <table class="table-recap">
-                            <thead>
-                                <tr>
-                                    <td rowspan="2" style="width: 50px;text-align: center">NO</td>
-                                    <td rowspan="2" style="padding-left: 3px">NAMA</td>
-                                    <td colspan="{{ current($r)['total_days'] }}" class="text-center">Tanggal</td>
-                                    <th colspan="3" style="text-align: center;border:1px solid #000">Total</th>
-                                </tr>
-                                <tr>
-                                    @for ($i = 1; $i <= current($r)['total_days']; $i++)
-                                        <th style="text-align:center">{{ $i }}</th>
-                                    @endfor
-                                    <th
-                                        style="text-align: center;width: 50px;border:1px solid #000;background:green;color:white">
-                                    </th>
-                                    <th style="text-align: center;width: 50px;border:1px solid #000;;background:yellow">
-                                    </th>
-                                    <th style="text-align: center;width: 50px;border:1px solid #000">
-                                    </th>
-                                </tr>
+        <div class="d-grid gap-5 mt-5">
+            @foreach ($recap as $r)
+                @if (current($r)['data'])
+                    <h1>
+                        {{ array_keys($r)[0] }}
+                    </h1>
+                    <table style="width: 100%;border: 1px solid #000">
+                        <thead>
+                            <tr>
+                                <td rowspan="2" style="width: 50px;text-align: center;border:1px solid #000">NO</td>
+                                <td rowspan="2" style="padding-left: 3px;border:1px solid #000">NAMA</td>
+                                <td colspan="{{ current($r)['total_days'] }}"
+                                    style="text-align:center;border:1px solid #000">Tanggal</td>
+                                <th colspan="3" style="text-align: center;border:1px solid #000">Total</th>
+                            </tr>
+                            <tr>
+                                @for ($i = 1; $i <= current($r)['total_days']; $i++)
+                                    <th style="text-align:center">{{ $i }}</th>
+                                @endfor
+                                <th
+                                    style="text-align: center;width: 50px;border:1px solid #000;background:green;color:white">
+                                </th>
+                                <th style="text-align: center;width: 50px;border:1px solid #000;;background:yellow">
+                                </th>
+                                <th style="text-align: center;width: 50px;border:1px solid #000">
+                                </th>
+                            </tr>
 
-                            </thead>
-                            <tbody>
-                                @foreach (current($r)['data'] as $name => $item)
-                                    <tr>
-                                        <td style="text-align: center">{{ $loop->iteration }}</td>
-                                        <td style="width: 300px;padding-left: 3px">
-                                            {{ $name }}
-                                        </td>
-                                        @foreach ($item as $c)
-                                            @if ($c)
-                                                @if ($c['DATANG'] && $c['PULANG'])
-                                                    <td style="background: green;width: 50px;height: 50px">
-                                                    </td>
-                                                @else
-                                                    <td style="background: yellow;width: 50px;height: 50px">
-                                                    </td>
-                                                @endif
+                        </thead>
+                        <tbody>
+                            @foreach (current($r)['data'] as $name => $item)
+                                <tr>
+                                    <td style="text-align: center;border:1px solid #000">{{ $loop->iteration }}</td>
+                                    <td style="width: 300px;padding-left: 3px;border:1px solid #000">
+                                        {{ $name }}
+                                    </td>
+                                    @foreach ($item as $c)
+                                        @if ($c)
+                                            @if ($c['DATANG'] && $c['PULANG'])
+                                                <td
+                                                    style="background: green;width: 50px;height: 50px;border:1px solid #000">
+                                                </td>
                                             @else
-                                                <td style="width: 50px;height: 50px">
+                                                <td
+                                                    style="background: yellow;width: 50px;height: 50px;border:1px solid #000">
                                                 </td>
                                             @endif
-                                        @endforeach
-                                        @php
-                                            $total_lengkap = count(
-                                                array_filter($item, function ($val) {
-                                                    return $val
-                                                        ? $val['DATANG'] != null && $val['PULANG'] != null
-                                                        : false;
-                                                }),
-                                            );
-                                            $tidak_lengkap = count(
-                                                array_filter($item, function ($val) {
-                                                    return $val
-                                                        ? $val['DATANG'] === null || $val['PULANG'] === null
-                                                        : false;
-                                                }),
-                                            );
+                                        @else
+                                            <td style="width: 50px;height: 50px;border:1px solid #000">
+                                            </td>
+                                        @endif
+                                    @endforeach
+                                    @php
+                                        $total_lengkap = count(
+                                            array_filter($item, function ($val) {
+                                                return $val ? $val['DATANG'] != null && $val['PULANG'] != null : false;
+                                            }),
+                                        );
+                                        $tidak_lengkap = count(
+                                            array_filter($item, function ($val) {
+                                                return $val
+                                                    ? $val['DATANG'] === null || $val['PULANG'] === null
+                                                    : false;
+                                            }),
+                                        );
 
-                                            $kosong = count(
-                                                array_filter($item, function ($val) {
-                                                    return $val === false;
-                                                }),
-                                            );
-                                        @endphp
-                                        <td style="text-align: center;border:1px solid #000">
-                                            {{ $total_lengkap }}
-                                        </td>
-                                        <td style="text-align: center;border:1px solid #000">
-                                            {{ $tidak_lengkap }}
-                                        </td>
-                                        <td style="text-align: center;border:1px solid #000">
-                                            {{ $kosong }}
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    @endif
-                @endforeach
-            </div>
+                                        $kosong = count(
+                                            array_filter($item, function ($val) {
+                                                return $val === false;
+                                            }),
+                                        );
+                                    @endphp
+                                    <td style="text-align: center;border:1px solid #000">
+                                        {{ $total_lengkap }}
+                                    </td>
+                                    <td style="text-align: center;border:1px solid #000">
+                                        {{ $tidak_lengkap }}
+                                    </td>
+                                    <td style="text-align: center;border:1px solid #000">
+                                        {{ $kosong }}
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                @endif
+            @endforeach
+        </div>
         {{-- @endif --}}
     @endif
 </div>

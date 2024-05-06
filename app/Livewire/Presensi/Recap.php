@@ -24,7 +24,7 @@ class Recap extends Component
         $months = getMonths();
         if ($this->month) {
             $presensi = $presensiModel
-                ->whereNot('NoFormulir', '-')
+                ->whereNotNull('NoFormulir')
                 ->whereRaw("MONTH(DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d'))=?", $this->month)
                 ->whereRaw("YEAR(DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d'))=?", $this->year)
                 ->select("*", DB::raw("MONTH(DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d')) as month"), DB::raw("DAY(DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d')) as day"))
@@ -50,7 +50,7 @@ class Recap extends Component
             $this->recap = $permonths;
         } else {
             $presensi = $presensiModel
-                ->whereNot('NoFormulir', '-')
+                ->whereNotNull('NoFormulir')
                 ->whereRaw("YEAR(DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d'))=?", $this->year)
                 ->select("*", DB::raw("MONTH(DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d')) as month"), DB::raw("DAY(DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d')) as day"))
                 ->get();
@@ -91,7 +91,7 @@ class Recap extends Component
 
     public function render()
     {
-        $years = Presensi::whereNot('NoFormulir', '-')
+        $years = Presensi::whereNotNull('NoFormulir')
             ->select(DB::raw("YEAR(DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d')) as year"))
             ->groupBy('year')
             ->orderBy('year')

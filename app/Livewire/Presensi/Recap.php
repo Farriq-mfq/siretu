@@ -27,7 +27,27 @@ class Recap extends Component
                 ->whereNot('NoFormulir', '-')
                 ->whereRaw("MONTH(DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d'))=?", $this->month)
                 ->whereRaw("YEAR(DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d'))=?", $this->year)
+                ->select("*", DB::raw("MONTH(DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d')) as month"), DB::raw("DAY(DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d')) as day"))
                 ->get();
+            $getDays = Carbon::createFromDate(null, $this->month, null)->daysInMonth;
+
+            $numberOfDays = collect(range(1, $getDays));
+            $results = array_map(function ($filterPerday) use ($numberOfDays) {
+                $r = [];
+                for ($i = 1; $i <= $numberOfDays->count(); $i++) {
+                    $r[$i] = current(array_filter($filterPerday, function ($val) use ($i) {
+                        return $val['day'] === $i;
+                    }));
+                }
+                return $r;
+            }, $presensi->groupBy('NAMALENGKAP')->toArray());
+            $permonths[] = [
+                $months[$this->month] => [
+                    'total_days' => $getDays,
+                    'data' => $results,
+                ]
+            ];
+            $this->recap = $permonths;
         } else {
             $presensi = $presensiModel
                 ->whereNot('NoFormulir', '-')
@@ -59,9 +79,8 @@ class Recap extends Component
                 ];
 
             }
+            $this->recap = $permonths;
         }
-
-        $this->recap = $permonths;
 
     }
 

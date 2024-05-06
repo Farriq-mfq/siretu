@@ -15,7 +15,7 @@
                 </div>
             @enderror
         </div>
-        {{-- <div class="mt-3">
+        <div class="mt-3">
             <select wire:model="month" class="form-control">
                 <option value="">--PILIH Bulan--</option>
                 @foreach ($months as $key => $month)
@@ -24,7 +24,7 @@
                     </option>
                 @endforeach
             </select>
-        </div> --}}
+        </div>
         <div class="mt-3">
             <button class="btn btn-primary">
                 <span wire:loading.remove wire:target="getAllPresensi">Lihat Rekap</span>

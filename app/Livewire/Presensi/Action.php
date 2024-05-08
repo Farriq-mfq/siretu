@@ -4,6 +4,7 @@ namespace App\Livewire\Presensi;
 
 use App\Models\Presensi;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Action extends Component
@@ -15,19 +16,28 @@ class Action extends Component
     public function mount($NoFormulir)
     {
         $this->NoFormulir = $NoFormulir;
+    }
+
+    public function boot()
+    {
+
         $this->presensi = new Presensi();
     }
 
-    public function handleReset()
+    #[On('reset-presensi')]
+    public function onReset($NoFormulir)
     {
-        $deleted = $this->presensi->where('NoFormulir', $this->NoFormulir)->delete();
+        $deleted = $this->presensi->where('NoFormulir', $NoFormulir)->delete();
 
         if ($deleted) {
             $this->alert('success', 'Berhasil reset presensi');
             $this->dispatch('reload');
-        } else {
-            $this->alert('error', 'Terjadi kesalahan sistem');
         }
+    }
+
+    public function handleReset()
+    {
+        $this->dispatch('confirmation', ['event' => 'reset-presensi', 'text' => 'Yakin ingin mereset data ini ?', 'data' => ['NoFormulir' => $this->NoFormulir]]);
     }
 
     public function render()

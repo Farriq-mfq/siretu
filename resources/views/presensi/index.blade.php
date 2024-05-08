@@ -28,6 +28,13 @@
                             Filter
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('presensi', ['show' => 'recap']) }}"
+                            class="nav-link @if ($by === 'recap') active @endif"
+                            aria-selected="@if ($by === 'recap') active @endif">
+                            Rekap
+                        </a>
+                    </li>
                 </ul>
                 <div class="tab-content">
                     @if ($by === 'current')
@@ -48,6 +55,11 @@
                                     {{ $dataTable->table() }}
                                 </div>
                             @endif
+                        </div>
+                    @endif
+                    @if ($by === 'recap')
+                        <div class="tab-pane fade show active">
+                            @livewire('presensi.recap')
                         </div>
                     @endif
                 </div>

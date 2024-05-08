@@ -28,11 +28,10 @@ class PresensiFactory extends Factory
             'MAPS_DATANG' => fake()->streetName(),
             'JARAK_DATANG' => '0 m (0 km)',
             'JAM_DATANG' => fake()->time(),
-            // 'PULANG' => fake()->streetName(),
+            'PULANG' => fake()->streetName(),
             'MAPS_PULANG' => fake()->streetAddress(),
             'JARAK_PULANG' => '0 m (0 km)',
             'JAM_PULANG' => fake()->time(),
-            // 'AKTIFITAS' => 'ini hanya testing'
         ];
     }
 }

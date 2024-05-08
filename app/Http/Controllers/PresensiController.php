@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\DataTables\PresensiDataTable;
 use App\Models\Personil;
-use Illuminate\Http\Request;
 
 class PresensiController extends Controller
 {
@@ -15,7 +14,7 @@ class PresensiController extends Controller
     }
     public function index(PresensiDataTable $dataTable)
     {
-        $showAvailable = ['all', 'current', 'filter'];
+        $showAvailable = ['all', 'current', 'filter', 'recap'];
         $by = request('show') ? in_array(request('show'), $showAvailable) ? request('show') : 'current' : "current";
         $filter = request('show') === 'filter' ? [
             'start_date' => request('start_date'),

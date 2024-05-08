@@ -5,6 +5,7 @@ namespace App\DataTables;
 use App\Models\Presensi;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
 use Yajra\DataTables\Html\Button;
@@ -54,32 +55,57 @@ class PresensiDataTable extends DataTable
         $by = request('show') ?? 'current';
         if ($by === 'current') {
             return $model
-                ->whereNot('NoFormulir', '-')
+                ->fromSub(function ($q) use ($model) {
+                    $q->select('*', DB::raw('@row_num := @row_num + 1 as row_num'))
+                        ->from($model->getTable())
+                        ->crossJoin(DB::raw('(SELECT @row_num := 0) as vars'));
+                }, 'row_number')->where('row_num', '>', 1)
                 ->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') = ?", [$today])->orderBy('NoFormulir', 'ASC')->newQuery();
         } else if ($by === 'all') {
-            return $model
-                ->whereNot('NoFormulir', '-')->newQuery();
+            return $model->fromSub(function ($q) use ($model) {
+                $q->select('*', DB::raw('@row_num := @row_num + 1 as row_num'))
+                    ->from($model->getTable())
+                    ->crossJoin(DB::raw('(SELECT @row_num := 0) as vars'));
+            }, 'row_number')->where('row_num', '>', 1)
+                ->newQuery();
         } else if ($by === 'filter') {
             if (request()->segment(3) && request()->has('start_date') && request()->has('end_date')) {
                 return $model
-                    ->whereNot('NoFormulir', '-')
+                    ->fromSub(function ($q) use ($model) {
+                        $q->select('*', DB::raw('@row_num := @row_num + 1 as row_num'))
+                            ->from($model->getTable())
+                            ->crossJoin(DB::raw('(SELECT @row_num := 0) as vars'));
+                    }, 'row_number')->where('row_num', '>', 1)
                     ->where('NAMALENGKAP', urldecode(request()->segment(3)))
                     ->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') >= ?", request()->get('start_date'))->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') <= ?", request()->get('end_date'))
                     ->newQuery();
             } else if (request()->has('start_date') && request()->has('end_date')) {
                 return $model
-                    ->whereNot('NoFormulir', '-')
+                    ->fromSub(function ($q) use ($model) {
+                        $q->select('*', DB::raw('@row_num := @row_num + 1 as row_num'))
+                            ->from($model->getTable())
+                            ->crossJoin(DB::raw('(SELECT @row_num := 0) as vars'));
+                    }, 'row_number')->where('row_num', '>', 1)
                     ->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') >= ?", request()->get('start_date'))->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') <= ?", request()->get('end_date'))
                     ->newQuery();
             } else if (request()->segment(3)) {
                 return $model
-                    ->whereNot('NoFormulir', '-')
+                    ->fromSub(function ($q) use ($model) {
+                        $q->select('*', DB::raw('@row_num := @row_num + 1 as row_num'))
+                            ->from($model->getTable())
+                            ->crossJoin(DB::raw('(SELECT @row_num := 0) as vars'));
+                    }, 'row_number')->where('row_num', '>', 1)
                     ->where('NAMALENGKAP', urldecode(request()->segment(3)))
                     ->newQuery();
             }
         } else {
             return $model
-                ->whereNot('NoFormulir', '-')->newQuery();
+                ->fromSub(function ($q) use ($model) {
+                    $q->select('*', DB::raw('@row_num := @row_num + 1 as row_num'))
+                        ->from($model->getTable())
+                        ->crossJoin(DB::raw('(SELECT @row_num := 0) as vars'));
+                }, 'row_number')->where('row_num', '>', 1)
+                ->newQuery();
         }
     }
 
@@ -122,11 +148,11 @@ class PresensiDataTable extends DataTable
             Column::make('JAM_DATANG'),
             Column::make('JAM_PULANG'),
             // Column::make('AKTIFITAS'),
-            Column::computed('action')
-                ->exportable(false)
-                ->printable(false)
-                ->width(60)
-                ->addClass('text-center'),
+            // Column::computed('action')
+            //     ->exportable(false)
+            //     ->printable(false)
+            //     ->width(60)
+            //     ->addClass('text-center'),
         ];
     }
 

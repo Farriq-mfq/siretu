@@ -56,19 +56,25 @@ class PresensiDataTable extends DataTable
         if ($by === 'current') {
             return $model
                 ->fromSub(function ($q) use ($model) {
-                    $q->select("*", DB::raw('(ROW_NUMBER() OVER (ORDER BY NoFormulir)) as row_num'))->from($model->getTable());
+                    $q->select('*', DB::raw('@row_num := @row_num + 1 as row_num'))
+                        ->from($model->getTable())
+                        ->crossJoin(DB::raw('(SELECT @row_num := 0) as vars'));
                 }, 'row_number')->where('row_num', '>', 1)
                 ->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') = ?", [$today])->orderBy('NoFormulir', 'ASC')->newQuery();
         } else if ($by === 'all') {
             return $model->fromSub(function ($q) use ($model) {
-                $q->select("*", DB::raw('(ROW_NUMBER() OVER (ORDER BY NoFormulir)) as row_num'))->from($model->getTable());
+                $q->select('*', DB::raw('@row_num := @row_num + 1 as row_num'))
+                    ->from($model->getTable())
+                    ->crossJoin(DB::raw('(SELECT @row_num := 0) as vars'));
             }, 'row_number')->where('row_num', '>', 1)
                 ->newQuery();
         } else if ($by === 'filter') {
             if (request()->segment(3) && request()->has('start_date') && request()->has('end_date')) {
                 return $model
                     ->fromSub(function ($q) use ($model) {
-                        $q->select("*", DB::raw('(ROW_NUMBER() OVER (ORDER BY NoFormulir)) as row_num'))->from($model->getTable());
+                        $q->select('*', DB::raw('@row_num := @row_num + 1 as row_num'))
+                            ->from($model->getTable())
+                            ->crossJoin(DB::raw('(SELECT @row_num := 0) as vars'));
                     }, 'row_number')->where('row_num', '>', 1)
                     ->where('NAMALENGKAP', urldecode(request()->segment(3)))
                     ->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') >= ?", request()->get('start_date'))->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') <= ?", request()->get('end_date'))
@@ -76,14 +82,18 @@ class PresensiDataTable extends DataTable
             } else if (request()->has('start_date') && request()->has('end_date')) {
                 return $model
                     ->fromSub(function ($q) use ($model) {
-                        $q->select("*", DB::raw('(ROW_NUMBER() OVER (ORDER BY NoFormulir)) as row_num'))->from($model->getTable());
+                        $q->select('*', DB::raw('@row_num := @row_num + 1 as row_num'))
+                            ->from($model->getTable())
+                            ->crossJoin(DB::raw('(SELECT @row_num := 0) as vars'));
                     }, 'row_number')->where('row_num', '>', 1)
                     ->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') >= ?", request()->get('start_date'))->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') <= ?", request()->get('end_date'))
                     ->newQuery();
             } else if (request()->segment(3)) {
                 return $model
                     ->fromSub(function ($q) use ($model) {
-                        $q->select("*", DB::raw('(ROW_NUMBER() OVER (ORDER BY NoFormulir)) as row_num'))->from($model->getTable());
+                        $q->select('*', DB::raw('@row_num := @row_num + 1 as row_num'))
+                            ->from($model->getTable())
+                            ->crossJoin(DB::raw('(SELECT @row_num := 0) as vars'));
                     }, 'row_number')->where('row_num', '>', 1)
                     ->where('NAMALENGKAP', urldecode(request()->segment(3)))
                     ->newQuery();
@@ -91,7 +101,9 @@ class PresensiDataTable extends DataTable
         } else {
             return $model
                 ->fromSub(function ($q) use ($model) {
-                    $q->select("*", DB::raw('(ROW_NUMBER() OVER (ORDER BY NoFormulir)) as row_num'))->from($model->getTable());
+                    $q->select('*', DB::raw('@row_num := @row_num + 1 as row_num'))
+                        ->from($model->getTable())
+                        ->crossJoin(DB::raw('(SELECT @row_num := 0) as vars'));
                 }, 'row_number')->where('row_num', '>', 1)
                 ->newQuery();
         }

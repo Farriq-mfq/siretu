@@ -25,7 +25,9 @@ class Recap extends Component
         if ($this->month) {
             $presensi = $presensiModel
                 ->fromSub(function ($q) use ($presensiModel) {
-                    $q->select("*", DB::raw('(ROW_NUMBER() OVER (ORDER BY NoFormulir)) as row_num'))->from($presensiModel->getTable());
+                    $q->select('*', DB::raw('@row_num := @row_num + 1 as row_num'))
+                    ->from($presensiModel->getTable())
+                    ->crossJoin(DB::raw('(SELECT @row_num := 0) as vars'));
                 }, 'row_number')->where('row_num', '>', 1)
                 ->whereRaw("MONTH(DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d'))=?", $this->month)
                 ->whereRaw("YEAR(DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d'))=?", $this->year)
@@ -53,7 +55,9 @@ class Recap extends Component
         } else {
             $presensi = $presensiModel
                 ->fromSub(function ($q) use ($presensiModel) {
-                    $q->select("*", DB::raw('(ROW_NUMBER() OVER (ORDER BY NoFormulir)) as row_num'))->from($presensiModel->getTable());
+                    $q->select('*', DB::raw('@row_num := @row_num + 1 as row_num'))
+                    ->from($presensiModel->getTable())
+                    ->crossJoin(DB::raw('(SELECT @row_num := 0) as vars'));
                 }, 'row_number')->where('row_num', '>', 1)
                 ->whereRaw("YEAR(DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d'))=?", $this->year)
                 ->select("*", DB::raw("MONTH(DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d')) as month"), DB::raw("DAY(DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d')) as day"))
@@ -97,7 +101,9 @@ class Recap extends Component
     {
         $model = new Presensi();
         $years = $model->fromSub(function ($q) use ($model) {
-            $q->select("*", DB::raw('(ROW_NUMBER() OVER (ORDER BY NoFormulir)) as row_num'))->from($model->getTable());
+            $q->select('*', DB::raw('@row_num := @row_num + 1 as row_num'))
+            ->from($model->getTable())
+            ->crossJoin(DB::raw('(SELECT @row_num := 0) as vars'));
         }, 'row_number')->where('row_num', '>', 1)
             ->select(DB::raw("YEAR(DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d')) as year"))
             ->groupBy('year')

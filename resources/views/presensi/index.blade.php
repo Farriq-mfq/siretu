@@ -49,7 +49,7 @@
                     @endif
                     @if ($by === 'filter')
                         <div class="tab-pane fade show active">
-                            @livewire('presensi.filter', ['filter' => $filter, 'personil' => $personil])
+                            @livewire('presensi.filter', ['filter' => $filter])
                             @if ($filter['personil'] || ($filter['start_date'] && $filter['end_date']))
                                 <div class="mt-3">
                                     {{ $dataTable->table() }}

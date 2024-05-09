@@ -22,7 +22,6 @@ class JurnalController extends Controller
             'end_date' => request('end_date'),
             'personil' => request('personil'),
         ] : [];
-        $personil = $this->personil->get();
-        return $dataTable->render('jurnal.index', compact('by', 'filter', 'personil'));
+        return $dataTable->render('jurnal.index', compact('by', 'filter'));
     }
 }

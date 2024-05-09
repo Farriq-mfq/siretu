@@ -7,11 +7,6 @@ use App\Models\Personil;
 
 class PresensiController extends Controller
 {
-    public function __construct(
-        private readonly Personil $personil
-    ) {
-
-    }
     public function index(PresensiDataTable $dataTable)
     {
         $showAvailable = ['all', 'current', 'filter', 'recap'];
@@ -21,7 +16,6 @@ class PresensiController extends Controller
             'end_date' => request('end_date'),
             'personil' => request('personil'),
         ] : [];
-        $personil = $this->personil->get();
-        return $dataTable->render('presensi.index', compact('by', 'filter', 'personil'));
+        return $dataTable->render('presensi.index', compact('by', 'filter'));
     }
 }

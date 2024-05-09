@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Wifi;
 
+use App\Events\NotifWa;
 use App\Models\Wifi;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Attributes\On;
@@ -73,6 +74,8 @@ class Form extends Component
             $this->reset('ssid', 'password');
             $this->alert('success', 'Berhasil menambah wifi');
             $this->dispatch('reload');
+            // send notif ke wa
+            \event(new NotifWa("Berhasil menambah data wifi"));
         } else {
             $this->alert('error', 'Terjadi kesalahan sistem');
         }

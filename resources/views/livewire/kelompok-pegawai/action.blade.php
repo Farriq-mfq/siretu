@@ -1,7 +1,6 @@
 <div>
     <button type="button" class="btn btn-danger btn-icon" wire:loading.attr="disabled" wire:click.prevent="handleDelete">
         <i class="bx bx-trash"></i>
-
     </button>
     {{-- <button type="button" class="btn btn-danger btn-icon" data-bs-toggle="modal" data-bs-target="#btn-remove-kelompok-peg">
         <i class="bx bx-trash"></i>

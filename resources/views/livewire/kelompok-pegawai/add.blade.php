@@ -12,7 +12,10 @@
             @enderror
         </div>
         <div class="mt-4">
-            <button class="btn btn-primary">Tambah kelompok</button>
+            <button class="btn btn-primary">
+                <span wire:loading target="onSubmit">Loading...</span>
+                <span wire:loading.remove target="onSubmit">Tambah kelompok</span>
+            </button>
         </div>
     </form>
 </div>

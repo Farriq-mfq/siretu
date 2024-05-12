@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Jurnal;
 
+use App\Models\Personil;
 use App\Traits\Select2;
 use Livewire\Component;
 
@@ -47,14 +48,14 @@ class Filter extends Component
         $this->dispatch('to_route', route('jurnal', array_merge(['show' => 'filter'], $data)));
     }
 
-    public function mount(array $filter, $personil)
+    public function mount(array $filter)
     {
         $this->showFilterTanggal = request('show') === 'filter' && request()->has('start_date') && request()->has('end_date') ? true : false;
         $this->selectedPersonil = request('show') === 'filter' && request()->segment(3) ? urldecode(request()->segment(3)) : null;
         $this->start = request('show') === 'filter' && request()->has('start_date') ? request()->get('start_date') : null;
         $this->end = request('show') === 'filter' && request()->has('end_date') ? request()->get('end_date') : null;
         $this->filter = $filter;
-        $this->personil = $personil;
+        $this->personil = Personil::all();
     }
     public function render()
     {

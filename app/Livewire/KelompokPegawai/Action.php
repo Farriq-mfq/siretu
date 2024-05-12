@@ -4,6 +4,7 @@ namespace App\Livewire\KelompokPegawai;
 
 use App\Models\KelompokPegawai;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Action extends Component
@@ -13,12 +14,16 @@ class Action extends Component
     public $id;
     public function handleDelete()
     {
-        $deleted = $this->kelompokPegawai->where('id', $this->id)->delete();
+        $this->dispatch('confirmation', ['event' => 'delete-kelompok', 'text' => 'Yakin ingin menghapus kelompok ini ?', 'data' => ['id' => $this->id]]);
+    }
+
+    #[On('delete-kelompok')]
+    public function onDeleteKelompok($id)
+    {
+        $deleted = $this->kelompokPegawai->where('id', $id)->delete();
         if ($deleted) {
             $this->alert('success', 'Berhasil hapus kelompok');
             $this->dispatch('reload');
-        } else {
-            $this->alert('error', 'Terjadi kesalahan sistem');
         }
     }
     public function mount($id)

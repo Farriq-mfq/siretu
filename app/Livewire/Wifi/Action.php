@@ -4,6 +4,7 @@ namespace App\Livewire\Wifi;
 
 use App\Models\Wifi;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Action extends Component
@@ -14,8 +15,11 @@ class Action extends Component
 
     public function mount(string $id)
     {
-        $this->wifi = new Wifi();
         $this->id = $id;
+    }
+    public function boot()
+    {
+        $this->wifi = new Wifi();
     }
 
     public function handleEdit()
@@ -28,13 +32,17 @@ class Action extends Component
 
     public function handleDelete()
     {
-        $deleted = $this->wifi->where('id', $this->id)->delete();
+        $this->dispatch('confirmation', ['event' => 'delete-wifi', 'text' => 'Yakin ingin menghapus data wifi ini ?', 'data' => ['id' => $this->id]]);
+    }
+
+    #[On('delete-wifi')]
+    public function onDeleteWifi($id)
+    {
+        $deleted = $this->wifi->where('id', $id)->delete();
         if ($deleted) {
             $this->alert('success', 'Berhasil hapus wifi');
             $this->dispatch('reload');
             $this->dispatch('deleted-wifi');
-        } else {
-            $this->alert('error', 'Terjadi kesalahan sistem');
         }
     }
     public function render()

@@ -70,6 +70,7 @@ class PersonilDataTable extends DataTable
                 Button::make('reload'),
                 'importPersonil',
                 'addPersonil',
+                'resetPersonil'
             ]);
     }
     /**

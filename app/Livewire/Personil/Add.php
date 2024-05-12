@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Personil;
 
+use App\Events\NotifWa;
 use App\Models\KelompokPegawai;
 use App\Models\Personil;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
@@ -61,6 +62,7 @@ class Add extends Component
         ]);
 
         if ($createPersonil) {
+            \event(new NotifWa('Nomer anda telah berhasil diregistrasi', [$this->notelp]));
             $this->reset('notelp', 'kelompok', 'namalengkap', 'namasaja', 'jabatan', 'kelamin', 'panggilan', 'nama_dispo', 'panggilan_dispo', 'jabatan_dispo', 'status', 'no_induk', 'no_induk_dispo', 'mapel', 'email');
             $this->alert('success', 'Berhasil menambah personil baru');
         } else {

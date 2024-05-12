@@ -58,3 +58,14 @@ DataTable.ext.buttons.risetSiswa = {
         // window.location.href = route('personil-import', undefined, undefined, Ziggy)
     }
 };
+DataTable.ext.buttons.resetPersonil = {
+    className: 'btn btn-danger',
+    text: function (dt) {
+        return '<i class="bi bi-screwdriver"></i> ';
+    },
+
+    action: function (e, dt, button, config) {
+        Turbolinks.visit(route('personil-reset', undefined, undefined, Ziggy))
+        // window.location.href = route('personil-import', undefined, undefined, Ziggy)
+    }
+};

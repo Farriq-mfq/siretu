@@ -10,7 +10,3 @@
     </div>
     {{ $dataTable->scripts() }}
 @endsection
-
-{{-- @push('scripts')
-    {{ $dataTable->scripts() }}
-@endpush --}}

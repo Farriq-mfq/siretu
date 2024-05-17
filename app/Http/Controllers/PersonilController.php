@@ -18,9 +18,6 @@ class PersonilController extends Controller
     }
     public function index(PersonilDataTable $dataTable)
     {
-        // $search = $request->search;
-        // $personils = $this->personil->where('NAMALENGKAP', 'LIKE', '%' . $search . '%')->whereNot('NOMOR', 0)->paginate();
-        // return view('personil.index', compact('personils', 'search'));
         return $dataTable->render('personil.index');
     }
 
@@ -36,5 +33,14 @@ class PersonilController extends Controller
     public function downloadFormat()
     {
         return response()->download(storage_path('/app/public/personil-template.xlsx'));
+    }
+    public function reset()
+    {
+        return view('personil.reset');
+    }
+    public function edit(string $id)
+    {
+        $personil = $this->personil->findOrFail($id);
+        return view('personil.edit', compact('personil'));
     }
 }

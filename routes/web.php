@@ -47,6 +47,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/create', [PersonilController::class, 'create'])->name('personil-create');
         Route::get('/import', [PersonilController::class, 'import'])->name('personil-import');
         Route::get('/download', [PersonilController::class, 'downloadFormat'])->name('personil-format-download');
+        Route::get('/reset', [PersonilController::class, 'reset'])->name('personil-reset');
+        Route::get('/{personil}/edit', [PersonilController::class, 'edit'])->name('personil.edit');
     });
     Route::get('wifi', [WifiController::class, 'index'])->name('wifi');
     Route::prefix('kelompok')->group(function () {

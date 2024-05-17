@@ -2,13 +2,12 @@
 
 namespace App\Livewire\Personil;
 
-use App\Events\NotifWa;
 use App\Models\KelompokPegawai;
 use App\Models\Personil;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
-class Add extends Component
+class Edit extends Component
 {
     use LivewireAlert;
     public Personil $personil;
@@ -27,6 +26,7 @@ class Add extends Component
     public $no_induk;
     public $no_induk_dispo;
     public $mapel;
+    public $id;
     public $rules = [
         'notelp' => [
             'required',
@@ -38,10 +38,35 @@ class Add extends Component
         'kelompok' => 'required',
         'kelamin' => 'required',
     ];
+    public function mount(Personil $personil)
+    {
+        $this->notelp = $personil->NOTELP;
+        $this->namalengkap = $personil->NAMALENGKAP;
+        $this->email = $personil->EMAIL;
+        $this->jabatan = $personil->JABATAN;
+        $this->kelompok = $personil->KELOMPOKGURU;
+        $this->namasaja = $personil->NAMASAJA;
+        $this->kelamin = $personil->KELAMIN;
+        $this->panggilan = $personil->PANGGILAN;
+        $this->nama_dispo = $personil->NAMADISPO;
+        $this->panggilan_dispo = $personil->PANGGILANDISPO;
+        $this->jabatan_dispo = $personil->JABATANDISPO;
+        $this->status = $personil->STATUS;
+        $this->no_induk = $personil->INDUKPEGAWAI;
+        $this->no_induk_dispo = $personil->INDUKPEGAWAIDISPO;
+        $this->mapel = $personil->MAPEL;
+        $this->id = $personil->id;
+    }
+
+    public function boot()
+    {
+        $this->personil = new Personil();
+    }
+
     public function onSubmit()
     {
-        $this->validate();
-        $createPersonil = $this->personil->create([
+        $personil = $this->personil->findOrFail($this->id);
+        $update = $personil->update([
             'NOTELP' => $this->notelp,
             'KELOMPOKGURU' => $this->kelompok,
             'NAMASAJA' => $this->namasaja ?? $this->namalengkap,
@@ -61,22 +86,16 @@ class Add extends Component
             'EMAIL' => $this->email
         ]);
 
-        if ($createPersonil) {
-            \event(new NotifWa('Nomer anda telah berhasil diregistrasi', [$this->notelp]));
-            $this->reset('notelp', 'kelompok', 'namalengkap', 'namasaja', 'jabatan', 'kelamin', 'panggilan', 'nama_dispo', 'panggilan_dispo', 'jabatan_dispo', 'status', 'no_induk', 'no_induk_dispo', 'mapel', 'email');
-            $this->alert('success', 'Berhasil menambah personil baru');
+        if ($update) {
+            $this->alert('success', 'Berhasil update personil');
         } else {
             $this->alert('error', 'Terjadi kesalahan sistem');
         }
     }
 
-    public function boot()
-    {
-        $this->personil = new Personil();
-    }
     public function render()
     {
         $kelompoks = KelompokPegawai::all();
-        return view('livewire.personil.add', compact('kelompoks'));
+        return view('livewire.personil.edit', compact('kelompoks'));
     }
 }

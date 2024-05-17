@@ -2,12 +2,10 @@
 
 namespace App\Livewire\Siswa;
 
-use App\Imports\SiswaImport;
 use App\Models\Siswa;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 use Livewire\WithFileUploads;
-use Maatwebsite\Excel\Facades\Excel;
 use Rap2hpoutre\FastExcel\FastExcel;
 
 class Import extends Component

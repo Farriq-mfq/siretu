@@ -9,7 +9,7 @@
         </div> --}}
         <div class="card-body">
             <p>
-                &copy; TIM IT SMK Negeri 1 Pekalongan
+                &copy;Farriqmfq
                 Versi aplikasi {{ env('APP_VERSION') }}
             </p>
         </div>

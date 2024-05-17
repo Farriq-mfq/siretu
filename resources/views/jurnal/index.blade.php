@@ -16,7 +16,7 @@
                         <a href="{{ route('jurnal', ['show' => 'all']) }}"
                             class="nav-link @if ($by === 'all') active @endif"
                             aria-selected="@if ($by === 'all') active @endif">
-                            Semua Presensi
+                            Semua Jurnal
                         </a>
                     </li>
                     <li class="nav-item">

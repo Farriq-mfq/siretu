@@ -4,14 +4,13 @@
 @endsection
 @section('content')
     <div class="card">
-        {{-- <div class="card-header">
-
-        </div> --}}
         <div class="card-body">
             <p>
-                &copy;Farriqmfq
-                Versi aplikasi {{ env('APP_VERSION') }}
+                &copy; Made with 😊 by Farriqmfq
             </p>
+        </div>
+        <div class="card-footer">
+            Versi aplikasi {{ env('APP_VERSION') }}
         </div>
     </div>
 @endsection

@@ -27,6 +27,7 @@ class Add extends Component
     public $no_induk;
     public $no_induk_dispo;
     public $mapel;
+    public $forwardto;
     public $rules = [
         'notelp' => [
             'required',
@@ -57,7 +58,7 @@ class Add extends Component
             'INDUKPEGAWAIDISPO' => $this->no_induk_dispo ?? $this->no_induk,
             'MAPEL' => $this->mapel,
             'QRCODE1' => 'https://wa.me/' . $this->notelp,
-            'FORWARDTO' => $this->notelp,
+            'FORWARDTO' => $this->forwardto,
             'EMAIL' => $this->email
         ]);
 

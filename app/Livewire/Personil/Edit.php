@@ -26,6 +26,7 @@ class Edit extends Component
     public $no_induk;
     public $no_induk_dispo;
     public $mapel;
+    public $forwardto;
     public $id;
     public $rules = [
         'notelp' => [
@@ -56,6 +57,7 @@ class Edit extends Component
         $this->no_induk_dispo = $personil->INDUKPEGAWAIDISPO;
         $this->mapel = $personil->MAPEL;
         $this->id = $personil->id;
+        $this->forwardto = $personil->FORWARDTO;
     }
 
     public function boot()
@@ -82,7 +84,7 @@ class Edit extends Component
             'INDUKPEGAWAIDISPO' => $this->no_induk_dispo ?? $this->no_induk,
             'MAPEL' => $this->mapel,
             'QRCODE1' => 'https://wa.me/' . $this->notelp,
-            'FORWARDTO' => $this->notelp,
+            'FORWARDTO' => $this->forwardto,
             'EMAIL' => $this->email
         ]);
 

@@ -114,7 +114,7 @@
                 <label class="form-label">
                     Panggilan dispo (optional)
                 </label>
-                <input wire:model="panggilan_dispo type="text" class="form-control">
+                <input wire:model="panggilan_dispo" type="text" class="form-control">
             </div>
         </div>
         <div class="row">
@@ -149,7 +149,14 @@
             <label class="form-label">
                 Mapel (optional)
             </label>
-            <input type="text" class="form-control" placeholder="Contoh : Pendidikan Pancasila">
+            <input type="text" wire:model="mapel" class="form-control" placeholder="Contoh : Pendidikan Pancasila">
+        </div>
+        <div>
+            <label class="form-label">
+                FORWARDTO (optional)
+            </label>
+            <input type="text" wire:model="forwardto" class="form-control"
+                placeholder="Contoh : 62896xxxxx">
         </div>
 
         <div class="mt-4">

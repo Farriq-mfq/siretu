@@ -4,79 +4,134 @@
              <h1>
                  {{ array_keys($r)[0] }}
              </h1>
+             @if (count(current($r)['day_off']) > 1)
+                 <table style="width: 50%;border: 1px solid #000">
+                     <tr>
+                         <th style="text-align: center;border:1px solid #000">Tanggal</th>
+                         <th style="text-align: center;border:1px solid #000">Keterangan</th>
+                         <th style="text-align: center;border:1px solid #000">Cuti</th>
+                     </tr>
+                     @foreach (current($r)['day_off'] as $dayoff)
+                         <tr>
+                             <td style="text-align: center;border:1px solid #000">
+                                 {{ \Carbon\Carbon::parse($dayoff->tanggal)->day }}
+                             </td>
+                             <td style="text-align: center;border:1px solid #000">
+                                 {{ $dayoff->keterangan }}
+                             </td>
+                             <td
+                                 style="text-align: center;border:1px solid #000;background:@if ($dayoff->is_cuti) red @else orange @endif">
+
+                             </td>
+                         </tr>
+                     @endforeach
+                 </table>
+             @endif
              <table style="width: 100%;border: 1px solid #000">
                  <thead>
-                     <tr style="border: 1px solid #000">
-                         <th rowspan="2" style="width: 50px;text-align: center;border:1px solid #000">NO</th>
-                         <th rowspan="2" style="padding-left: 3px;border:1px solid #000">NAMA</th>
-                         <th colspan="{{ current($r)['total_days'] }}" style="text-align: center;border:1px solid #000">
-                             <strong>
-                                 Tanggal
-                             </strong>
-                         </th>
+                     <tr>
+                         <td rowspan="2" style="width: 50px;text-align: center;border:1px solid #000">NO</td>
+                         <td rowspan="2" style="padding-left: 3px;border:1px solid #000">NAMA</td>
+                         <td colspan="{{ current($r)['total_days'] }}" style="text-align:center;border:1px solid #000">
+                             Tanggal</td>
                          <th colspan="3" style="text-align: center;border:1px solid #000">Total</th>
                      </tr>
-                     <tr style="border: 1px solid #000">
+                     <tr>
                          @for ($i = 1; $i <= current($r)['total_days']; $i++)
-                             <th style="text-align:center;border:1px solid #000;background:#eb9834">{{ $i }}
+                             @php
+                                 $dayoff = array_filter(current($r)['day_off'], function ($item) use ($i) {
+                                     return $i === \Carbon\Carbon::parse($item->tanggal)->day;
+                                 });
+                                 $filterDayOff = (array) current($dayoff);
+                             @endphp
+                             <th
+                                 style="text-align:center;position:relative;
+                            @if (count($filterDayOff) === 3 && $filterDayOff['is_cuti'] === true) color:red
+                            @elseif (count($filterDayOff) === 3 && $filterDayOff['is_cuti'] === false) color:orange @endif
+                            ">
+                                 {{ $i }}
+
                              </th>
                          @endfor
-                         <th style="text-align: center;width: 100px;border:1px solid #000;background:green;color:white">
-                             Lengkap
+
+                         <th style="text-align: center;width: 50px;border:1px solid #000;background:green;color:white">
                          </th>
-                         <th style="text-align: center;width: 100px;border:1px solid #000;;background:yellow">
-                             Tidak Lengkap
+                         <th style="text-align: center;width: 50px;border:1px solid #000;;background:orange">
                          </th>
-                         <th style="text-align: center;width: 100px;border:1px solid #000">
-                             Kosong
+                         <th style="text-align: center;width: 50px;border:1px solid #000">
                          </th>
                      </tr>
+
                  </thead>
                  <tbody>
                      @foreach (current($r)['data'] as $name => $item)
-                         <tr style="border: 1px solid #000">
-                             <td style="text-align: center;border:1px solid #000">{{ $loop->iteration }}</td>
-                             <td style="width: 300px;padding-left: 3px;border:1px solid #000">
+                         <tr>
+                             <td style="text-align: center;border:1px solid #000;min-width: 50px;">
+                                 {{ $loop->iteration }}</td>
+                             <td
+                                 style="width: 300px;padding-left: 3px;border:1px solid #000;min-width: 100px;white-space:nowrap">
                                  {{ $name }}
                              </td>
-                             @foreach ($item as $c)
+                             @foreach ($item as $tgl => $c)
+                                 @php
+                                     $dayoff = array_filter(current($r)['day_off'], function ($item) use ($tgl) {
+                                         return $tgl === \Carbon\Carbon::parse($item->tanggal)->day;
+                                     });
+                                     $filterDayOff = (array) current($dayoff);
+                                 @endphp
                                  @if ($c)
-                                     @if ($c['DATANG'] && $c['PULANG'])
-                                         <td style="background: green;width: 40px;height: 40px;border:1px solid #000">
+                                     @if ($c['JAM_DATANG'] && $c['JAM_PULANG'])
+                                         <td
+                                             style="background: green;height: 40px;border:1px solid #000;text-align:center;color:black;min-width: 100px;">
+                                             <p style="color:white">
+                                                 {{ $c['JAM_DATANG'] }}
+                                             </p>
+                                             <p style="color: red">{{ $c['JAM_PULANG'] }}</p>
                                          </td>
                                      @else
-                                         <td style="background: yellow;width: 40px;height: 40px;border:1px solid #000">
+                                         <td
+                                             style="background: orange;height: 40px;border:1px solid #000;text-align:center;min-width: 100px;">
+                                             <p style="color:white">
+                                                 {{ $c['JAM_DATANG'] }}
+                                             </p>
+                                             <p style="color: red">{{ $c['JAM_PULANG'] }}</p>
                                          </td>
                                      @endif
                                  @else
-                                     <td style="width: 40px;height: 40px;border:1px solid #000">
+                                     <td style="height: 40px;border:1px solid #000;min-width: 100px;">
+                                         @if (count($filterDayOff) === 3 && $filterDayOff['is_cuti'] === true)
+                                             <i style="margin: 0 10px;">OFF</i>
+                                         @endif
                                      </td>
                                  @endif
                              @endforeach
                              @php
                                  $total_lengkap = count(
                                      array_filter($item, function ($val) {
-                                         return $val ? $val['DATANG'] != null && $val['PULANG'] != null : false;
+                                         return $val ? $val['JAM_DATANG'] != null && $val['JAM_PULANG'] != null : false;
                                      }),
                                  );
                                  $tidak_lengkap = count(
                                      array_filter($item, function ($val) {
-                                         return $val ? $val['DATANG'] === null || $val['PULANG'] === null : false;
+                                         return $val
+                                             ? $val['JAM_DATANG'] === null || $val['JAM_PULANG'] === null
+                                             : false;
                                      }),
                                  );
+
                                  $kosong = count(
                                      array_filter($item, function ($val) {
                                          return $val === false;
                                      }),
                                  );
                              @endphp
-                             <td style="text-align: center;border:1px solid #000">
+                             <td style="text-align: center;border:1px solid #000;min-width: 100px;">
                                  {{ $total_lengkap }}
                              </td>
-                             <td style="text-align: center;border:1px solid #000">
+                             <td style="text-align: center;border:1px solid #000;min-width: 100px;">
                                  {{ $tidak_lengkap }}
                              </td>
-                             <td style="text-align: center;border:1px solid #000">
+                             <td style="text-align: center;border:1px solid #000;min-width: 100px;">
                                  {{ $kosong }}
                              </td>
                          </tr>

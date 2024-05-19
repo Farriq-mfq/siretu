@@ -14,4 +14,5 @@ class PresensiRecap implements FromView
     {
         return view('presensi.report.recap', ['recap' => $this->recap]);
     }
+
 }

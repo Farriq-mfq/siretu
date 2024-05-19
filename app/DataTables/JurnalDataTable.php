@@ -48,6 +48,10 @@ class JurnalDataTable extends DataTable
         'QrCode',
         'PDFFILENAME',
     ];
+
+    protected string $printPreview = 'jurnal.print';
+    protected bool $fastExcel = true;
+
     /**
      * Build the DataTable class.
      *
@@ -57,7 +61,7 @@ class JurnalDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', 'jurnal.action')
-            ->setRowId('id');
+            ->setRowId('NoFormulir');
     }
 
     /**

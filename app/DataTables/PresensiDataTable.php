@@ -43,7 +43,7 @@ class PresensiDataTable extends DataTable
             ->addColumn('status', function ($row) {
                 return view('presensi.status', compact('row'));
             })
-            ->setRowId('NoFormulir');
+            ->setRowId('*');
     }
 
     /**

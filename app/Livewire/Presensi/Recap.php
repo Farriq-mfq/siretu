@@ -4,6 +4,7 @@ namespace App\Livewire\Presensi;
 
 use App\Exports\PresensiRecap;
 use App\Models\Presensi;
+use App\Services\DayOff\DayOff;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -21,13 +22,14 @@ class Recap extends Component
     {
         $this->validate();
         $presensiModel = new Presensi();
+        $dayOff = new DayOff();
         $months = getMonths();
         if ($this->month) {
             $presensi = $presensiModel
                 ->fromSub(function ($q) use ($presensiModel) {
                     $q->select('*', DB::raw('@row_num := @row_num + 1 as row_num'))
-                    ->from($presensiModel->getTable())
-                    ->crossJoin(DB::raw('(SELECT @row_num := 0) as vars'));
+                        ->from($presensiModel->getTable())
+                        ->crossJoin(DB::raw('(SELECT @row_num := 0) as vars'));
                 }, 'row_number')->where('row_num', '>', 1)
                 ->whereRaw("MONTH(DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d'))=?", $this->month)
                 ->whereRaw("YEAR(DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d'))=?", $this->year)
@@ -48,6 +50,7 @@ class Recap extends Component
             $permonths[] = [
                 $months[$this->month] => [
                     'total_days' => $getDays,
+                    'day_off' => $dayOff->withMonth($this->month)->withYear($this->year)->getDayOff(),
                     'data' => $results,
                 ]
             ];
@@ -56,8 +59,8 @@ class Recap extends Component
             $presensi = $presensiModel
                 ->fromSub(function ($q) use ($presensiModel) {
                     $q->select('*', DB::raw('@row_num := @row_num + 1 as row_num'))
-                    ->from($presensiModel->getTable())
-                    ->crossJoin(DB::raw('(SELECT @row_num := 0) as vars'));
+                        ->from($presensiModel->getTable())
+                        ->crossJoin(DB::raw('(SELECT @row_num := 0) as vars'));
                 }, 'row_number')->where('row_num', '>', 1)
                 ->whereRaw("YEAR(DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d'))=?", $this->year)
                 ->select("*", DB::raw("MONTH(DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d')) as month"), DB::raw("DAY(DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d')) as day"))
@@ -82,13 +85,16 @@ class Recap extends Component
                 $permonths[] = [
                     $month => [
                         'total_days' => $getDays,
+                        'day_off' => $dayOff->withMonth($key)->withYear($this->year)->getDayOff(),
                         'data' => $results,
                     ]
                 ];
 
             }
+
             $this->recap = $permonths;
         }
+
 
     }
 
@@ -102,8 +108,8 @@ class Recap extends Component
         $model = new Presensi();
         $years = $model->fromSub(function ($q) use ($model) {
             $q->select('*', DB::raw('@row_num := @row_num + 1 as row_num'))
-            ->from($model->getTable())
-            ->crossJoin(DB::raw('(SELECT @row_num := 0) as vars'));
+                ->from($model->getTable())
+                ->crossJoin(DB::raw('(SELECT @row_num := 0) as vars'));
         }, 'row_number')->where('row_num', '>', 1)
             ->select(DB::raw("YEAR(DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d')) as year"))
             ->groupBy('year')

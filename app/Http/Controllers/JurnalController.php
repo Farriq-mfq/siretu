@@ -15,7 +15,7 @@ class JurnalController extends Controller
     }
     public function index(JurnalDataTable $dataTable)
     {
-        $showAvailable = ['all', 'filter'];
+        $showAvailable = ['all', 'filter', 'recap'];
         $by = request('show') ? in_array(request('show'), $showAvailable) ? request('show') : 'all' : "all";
         $filter = request('show') === 'filter' ? [
             'start_date' => request('start_date'),

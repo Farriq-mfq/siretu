@@ -9,7 +9,7 @@ class PresensiController extends Controller
 {
     public function index(PresensiDataTable $dataTable)
     {
-        $showAvailable = ['all', 'current', 'filter', 'recap'];
+        $showAvailable = ['all', 'current', 'filter', 'recap', 'stats'];
         $by = request('show') ? in_array(request('show'), $showAvailable) ? request('show') : 'current' : "current";
         $filter = request('show') === 'filter' ? [
             'start_date' => request('start_date'),

@@ -19,3 +19,26 @@ if (!function_exists('getMonths')) {
         ];
     }
 }
+
+
+if (!function_exists('compareTime')) {
+    function compareTime($start): bool
+    {
+        try {
+            $parsedTime = \Carbon\Carbon::createFromFormat(
+                'H:i:s',
+                $start,
+            );
+            $comparisonTime = \Carbon\Carbon::createFromTime(6, 35, 0); // 6:35:0
+            return $parsedTime->lessThanOrEqualTo($comparisonTime);
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+}
+if (!function_exists('formatRupiah')) {
+    function formatRupiah(int $value): string
+    {
+        return 'Rp.' . number_format($value, 2, ',', '.');
+    }
+}

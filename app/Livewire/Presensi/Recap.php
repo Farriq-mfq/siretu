@@ -110,7 +110,7 @@ class Recap extends Component
             $q->select('*', DB::raw('@row_num := @row_num + 1 as row_num'))
                 ->from($model->getTable())
                 ->crossJoin(DB::raw('(SELECT @row_num := 0) as vars'));
-        }, 'row_number')->where('row_num', '>', 1)
+        }, 'presensi')->where('row_num', '>', 1)
             ->select(DB::raw("YEAR(DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d')) as year"))
             ->groupBy('year')
             ->orderBy('year')

@@ -32,3 +32,7 @@
 
 
 
+
+
+const incomeChart = new ApexCharts(incomeChartEl, incomeChartConfig);
+incomeChart.render();

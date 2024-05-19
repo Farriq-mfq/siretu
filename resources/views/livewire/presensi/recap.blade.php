@@ -78,7 +78,7 @@
                                 <td rowspan="2" style="padding-left: 3px;border:1px solid #000">NAMA</td>
                                 <td colspan="{{ current($r)['total_days'] }}"
                                     style="text-align:center;border:1px solid #000">Tanggal</td>
-                                <th colspan="3" style="text-align: center;border:1px solid #000">Total</th>
+                                <th colspan="4" style="text-align: center;border:1px solid #000">Total</th>
                             </tr>
                             <tr>
                                 @for ($i = 1; $i <= current($r)['total_days']; $i++)
@@ -105,6 +105,9 @@
                                 </th>
                                 <th style="text-align: center;width: 50px;border:1px solid #000">
                                 </th>
+                                <th style="text-align: center;width: 50px;border:1px solid #000">
+                                    Uang makan
+                                </th>
                             </tr>
 
                         </thead>
@@ -117,6 +120,9 @@
                                         style="width: 300px;padding-left: 3px;border:1px solid #000;min-width: 100px;white-space:nowrap">
                                         {{ $name }}
                                     </td>
+                                    @php
+                                        $totalUangMakan = 0;
+                                    @endphp
                                     @foreach ($item as $tgl => $c)
                                         @php
                                             $dayoff = array_filter(current($r)['day_off'], function ($item) use ($tgl) {
@@ -130,6 +136,12 @@
                                                     style="background: green;height: 40px;border:1px solid #000;text-align:center;color:black;min-width: 100px;">
                                                     <p style="color:white">
                                                         {{ $c['JAM_DATANG'] }}
+                                                        @if (compareTime($c['JAM_DATANG']))
+                                                            ⭐
+                                                            @php
+                                                                $totalUangMakan++;
+                                                            @endphp
+                                                        @endif
                                                     </p>
                                                     <p style="color: red">{{ $c['JAM_PULANG'] }}</p>
                                                 </td>
@@ -180,6 +192,14 @@
                                     </td>
                                     <td style="text-align: center;border:1px solid #000;min-width: 100px;">
                                         {{ $kosong }}
+                                    </td>
+                                    <td style="text-align: center;border:1px solid #000;min-width: 100px;">
+                                        @if ($totalUangMakan > 0)
+                                            {{ $totalUangMakan }} * 6500 =
+                                            {{ formatRupiah($totalUangMakan * 6500) }}
+                                            @else
+                                            -
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

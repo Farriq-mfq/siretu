@@ -126,6 +126,7 @@ class JurnalDataTable extends DataTable
             ->setTableId('jurnal-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
+            ->orderBy(1)
             ->buttons([
                 Button::make('excel'),
                 // Button::make('csv'),

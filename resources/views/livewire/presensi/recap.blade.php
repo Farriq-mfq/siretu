@@ -105,8 +105,11 @@
                                 </th>
                                 <th style="text-align: center;width: 50px;border:1px solid #000">
                                 </th>
-                                <th style="text-align: center;width: 50px;border:1px solid #000">
+                                <th style="text-align: center;width: 500px;border:1px solid #000">
                                     Uang makan
+                                </th>
+                                <th style="text-align: center;width: 500px;border:1px solid #000">
+                                    Uang Transport
                                 </th>
                             </tr>
 
@@ -122,6 +125,7 @@
                                     </td>
                                     @php
                                         $totalUangMakan = 0;
+                                        $totalUangTransport = 0;
                                     @endphp
                                     @foreach ($item as $tgl => $c)
                                         @php
@@ -136,10 +140,22 @@
                                                     style="background: green;height: 40px;border:1px solid #000;text-align:center;color:black;min-width: 100px;">
                                                     <p style="color:white">
                                                         {{ $c['JAM_DATANG'] }}
-                                                        @if (compareTime($c['JAM_DATANG']))
+                                                        {{-- @if (compareTimeLess($c['JAM_DATANG'], 6, 35, 0))
                                                             ⭐
                                                             @php
                                                                 $totalUangMakan++;
+                                                            @endphp
+                                                        @endif --}}
+                                                        @if (compareTimeLess($c['JAM_DATANG'], 6, 46, 0))
+                                                            ⭐
+                                                            @php
+                                                                $totalUangMakan++;
+                                                            @endphp
+                                                        @endif
+                                                        @if (compareTimeLess($c['JAM_DATANG'], 7, 00, 0) && compareTimegreater($c['JAM_DATANG'], 6, 46, 0))
+                                                            🚓
+                                                            @php
+                                                                $totalUangTransport++;
                                                             @endphp
                                                         @endif
                                                     </p>
@@ -193,11 +209,27 @@
                                     <td style="text-align: center;border:1px solid #000;min-width: 100px;">
                                         {{ $kosong }}
                                     </td>
-                                    <td style="text-align: center;border:1px solid #000;min-width: 100px;">
+                                    {{-- <td style="text-align: center;border:1px solid #000;min-width: 200px;">
                                         @if ($totalUangMakan > 0)
                                             {{ $totalUangMakan }} * 6500 =
-                                            {{ formatRupiah($totalUangMakan * 6500) }}
-                                            @else
+                                            {{ formatRupiah($totalUangMakan * 13000) }}
+                                        @else
+                                            -
+                                        @endif
+                                    </td> --}}
+                                    <td style="text-align: center;border:1px solid #000;width: 500px !important">
+                                        @if ($totalUangMakan > 0)
+                                            {{ $totalUangMakan }} * 13000 =
+                                            {{ formatRupiah($totalUangMakan * 13000) }}
+                                        @else
+                                            -
+                                        @endif
+                                    </td>
+                                    <td style="text-align: center;border:1px solid #000;width: 500px !important">
+                                        @if ($totalUangTransport > 0)
+                                            {{ $totalUangTransport }} * 6500 =
+                                            {{ formatRupiah($totalUangTransport * 6500) }}
+                                        @else
                                             -
                                         @endif
                                     </td>

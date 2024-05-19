@@ -21,16 +21,50 @@ if (!function_exists('getMonths')) {
 }
 
 
-if (!function_exists('compareTime')) {
-    function compareTime($start): bool
+if (!function_exists('compareTimeLess')) {
+    function compareTimeLess($start, int $h, int $m, int $s): bool
     {
         try {
-            $parsedTime = \Carbon\Carbon::createFromFormat(
-                'H:i:s',
-                $start,
-            );
-            $comparisonTime = \Carbon\Carbon::createFromTime(6, 35, 0); // 6:35:0
+            if (strlen($start) == 5) {
+                $parsedTime = \Carbon\Carbon::createFromFormat(
+                    'H:i',
+                    $start,
+                );
+            } else if (strlen($start) == 8) {
+                $parsedTime = \Carbon\Carbon::createFromFormat(
+                    'H:i:s',
+                    $start,
+                );
+            } else {
+                return false;
+            }
+            $comparisonTime = \Carbon\Carbon::createFromTime($h, $m, $s); // 6:35:0
             return $parsedTime->lessThanOrEqualTo($comparisonTime);
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+}
+if (!function_exists('compareTimegreater')) {
+    function compareTimegreater($start, int $h, int $m, int $s): bool
+    {
+        try {
+            if (strlen($start) == 5) {
+                $parsedTime = \Carbon\Carbon::createFromFormat(
+                    'H:i',
+                    $start,
+                );
+            } else if (strlen($start) == 8) {
+                $parsedTime = \Carbon\Carbon::createFromFormat(
+                    'H:i:s',
+                    $start,
+                );
+            } else {
+                return false;
+            }
+
+            $comparisonTime = \Carbon\Carbon::createFromTime($h, $m, $s); // 6:35:0
+            return $parsedTime->greaterThanOrEqualTo($comparisonTime);
         } catch (\Exception $e) {
             return false;
         }

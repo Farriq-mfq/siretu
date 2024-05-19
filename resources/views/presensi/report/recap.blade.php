@@ -34,7 +34,7 @@
                          <td rowspan="2" style="padding-left: 3px;border:1px solid #000">NAMA</td>
                          <td colspan="{{ current($r)['total_days'] }}" style="text-align:center;border:1px solid #000">
                              Tanggal</td>
-                         <th colspan="4" style="text-align: center;border:1px solid #000">Total</th>
+                         <th colspan="5" style="text-align: center;border:1px solid #000">Total</th>
                      </tr>
                      <tr>
                          @for ($i = 1; $i <= current($r)['total_days']; $i++)
@@ -60,8 +60,11 @@
                          </th>
                          <th style="text-align: center;width: 50px;border:1px solid #000">
                          </th>
-                         <th style="text-align: center;width: 50px;border:1px solid #000">
+                         <th style="text-align: center;width: 250px;border:1px solid #000">
                              Uang makan
+                         </th>
+                         <th style="text-align: center;width: 250px;border:1px solid #000">
+                             Uang Transport
                          </th>
                      </tr>
 
@@ -77,6 +80,7 @@
                              </td>
                              @php
                                  $totalUangMakan = 0;
+                                 $totalUangTransport = 0;
                              @endphp
                              @foreach ($item as $tgl => $c)
                                  @php
@@ -88,13 +92,19 @@
                                  @if ($c)
                                      @if ($c['JAM_DATANG'] && $c['JAM_PULANG'])
                                          <td
-                                             style="background: green;height: 40px;border:1px solid #000;text-align:center;color:black;min-width: 100px;">
+                                             style="background: green;height: 100px;border:1px solid #000;text-align:center;color:black;min-width: 100px;">
                                              <p style="color:white">
                                                  {{ $c['JAM_DATANG'] }}
-                                                 @if (compareTime($c['JAM_DATANG']))
+                                                 @if (compareTimeLess($c['JAM_DATANG'], 6, 46, 0))
                                                      ⭐
                                                      @php
                                                          $totalUangMakan++;
+                                                     @endphp
+                                                 @endif
+                                                 @if (compareTimeLess($c['JAM_DATANG'], 7, 00, 0) && compareTimegreater($c['JAM_DATANG'], 6, 46, 0))
+                                                     🚓
+                                                     @php
+                                                         $totalUangTransport++;
                                                      @endphp
                                                  @endif
                                              </p>
@@ -102,7 +112,7 @@
                                          </td>
                                      @else
                                          <td
-                                             style="background: orange;height: 40px;border:1px solid #000;text-align:center;min-width: 100px;">
+                                             style="background: orange;height: 100px;border:1px solid #000;text-align:center;min-width: 100px;">
                                              <p style="color:white">
                                                  {{ $c['JAM_DATANG'] }}
                                              </p>
@@ -110,7 +120,7 @@
                                          </td>
                                      @endif
                                  @else
-                                     <td style="height: 40px;border:1px solid #000;min-width: 100px;">
+                                     <td style="height: 100px;border:1px solid #000;min-width: 100px;">
                                          @if (count($filterDayOff) === 3 && $filterDayOff['is_cuti'] === true)
                                              <i style="margin: 0 10px;">OFF</i>
                                          @endif
@@ -148,8 +158,16 @@
                              </td>
                              <td style="text-align: center;border:1px solid #000;min-width: 100px;">
                                  @if ($totalUangMakan > 0)
-                                     {{ $totalUangMakan }} * 6500 =
-                                     {{ formatRupiah($totalUangMakan * 6500) }}
+                                     {{ $totalUangMakan }} * 13000 =
+                                     {{ formatRupiah($totalUangMakan * 13000) }}
+                                 @else
+                                     -
+                                 @endif
+                             </td>
+                             <td style="text-align: center;border:1px solid #000;min-width: 100px;">
+                                 @if ($totalUangTransport > 0)
+                                     {{ $totalUangTransport }} * 6500 =
+                                     {{ formatRupiah($totalUangTransport * 6500) }}
                                  @else
                                      -
                                  @endif

@@ -6,6 +6,7 @@ use App\DataTables\JurnalDataTable;
 use App\Models\Jurnal;
 use App\Models\Personil;
 use Illuminate\Http\Request;
+use Mccarlosen\LaravelMpdf\Facades\LaravelMpdf;
 
 class JurnalController extends Controller
 {
@@ -35,5 +36,11 @@ class JurnalController extends Controller
         if (!$jurnal)
             abort(404);
         return view('jurnal.detail', compact('jurnal'));
+    }
+
+    public function generateJurnal()
+    {
+        $pdf = LaravelMpdf::loadView('jurnal.pdf.generate',[]);
+        return $pdf->stream();
     }
 }

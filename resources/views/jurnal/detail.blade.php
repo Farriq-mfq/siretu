@@ -85,9 +85,10 @@
             </table>
         </div>
         <div class="card-footer">
-            <button class="btn btn-primary">
+            <a href="{{ route('jurnal.download', ['personil' => $jurnal->NoTelp, 'tanggal' => urlencode($jurnal->TglFormulir)]) }}"
+                class="btn btn-primary">
                 Download Jurnal
-            </button>
+            </a>
         </div>
     </div>
 @endsection

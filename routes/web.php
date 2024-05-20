@@ -38,6 +38,7 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('/jurnal')->group(function () {
         Route::get('/detail/{personil}/{tanggal}', [JurnalController::class, 'detail'])->name('jurnal.detail');
+        Route::get('/download/{personil}/{tanggal}', [JurnalController::class, 'generateJurnal'])->name('jurnal.download');
         Route::get('/{show?}/{personil?}', [JurnalController::class, 'index'])->name('jurnal');
     });
     /**

@@ -13,6 +13,8 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('index');
+        $tab = ['statisik', 'grafik'];
+        $currentTab = request('tab') && in_array(request('tab'), $tab) ? request('tab') : 'statistik';
+        return view('index', compact('currentTab'));
     }
 }

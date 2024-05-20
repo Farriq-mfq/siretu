@@ -3,9 +3,13 @@
     Dashboard
 @endsection
 @section('content')
-    <div class="card">
-        <div class="card-body">
-            <x-under-dev></x-under-dev>
+    <div class="row">
+        <div class="col-md-12">
+            @livewire('dashboard.stats')
+        </div>
+        <hr>
+        <div class="col-md-12">
+            @livewire('dashboard.current')
         </div>
     </div>
 @endsection

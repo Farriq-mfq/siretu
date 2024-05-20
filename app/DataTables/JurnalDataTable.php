@@ -51,6 +51,14 @@ class JurnalDataTable extends DataTable
 
     protected string $printPreview = 'jurnal.print';
     protected bool $fastExcel = true;
+    protected string|array $printColumns = [
+        ['data' => 'TglFormulir', 'title' => 'Tanggal'],
+        ['data' => 'MULAI', 'title' => 'Mulai'],
+        ['data' => 'SELESAI', 'title' => 'Selesai'],
+        ['data' => 'ROMBEL_MAPEL', 'title' => 'Kelas'],
+        ['data' => 'URAIAN_KEGIATAN', 'title' => 'Urian Kegiatan'],
+        ['data' => 'KETERANGAN', 'title' => 'Keterangan'],
+    ];
 
     /**
      * Build the DataTable class.
@@ -136,7 +144,7 @@ class JurnalDataTable extends DataTable
             ->orderBy(1)
             ->buttons([
                 Button::make('excel'),
-                // Button::make('csv'),
+                Button::make('csv'),
                 // Button::make('pdf'),
                 Button::make('print'),
                 Button::make('reset'),

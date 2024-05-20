@@ -13,13 +13,53 @@
         body {
             margin: 20px
         }
+
+        @page {
+            size: auto;
+            margin: 0;
+        }
+
+        .table-borderless>tbody>tr>td,
+        .table-borderless>tbody>tr>th,
+        .table-borderless>tfoot>tr>td,
+        .table-borderless>tfoot>tr>th,
+        .table-borderless>thead>tr>td,
+        .table-borderless>thead>tr>th {
+            border: none;
+        }
     </style>
 </head>
 
 <body>
-    <p>
-        DI CETAK PADA TANGGAL : {{ \Carbon\Carbon::now()->format('Y-m-d') }}
-    </p>
+    @php
+        $personil = \App\Models\Personil::where('NOTELP', request('personil'))->first();
+        if (!$personil) {
+            abort(404);
+        }
+    @endphp
+    <div class="text-center">
+        <h1 class="h1">Jurnal Kegiatan Belajar Mengajar</h1>
+        <br><br>
+        <div style="width:400px">
+            <table class="table table-borderless">
+                <tr>
+                    <th>Nama </th>
+                    <td>:</td>
+                    <td class="text-left">&nbsp;{{ $personil->NAMALENGKAP }}</td>
+                </tr>
+                <tr>
+                    <th>Mapel</th>
+                    <td>:</td>
+                    <td class="text-left">&nbsp;{{ $personil->MAPEL }}</td>
+                </tr>
+                <tr>
+                    <th>Tanggal Cetak</th>
+                    <td>:</td>
+                    <td class="text-left">&nbsp;{{ \Carbon\Carbon::now()->format('d F Y') }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
     <table class="table table-bordered table-condensed table-striped">
         @foreach ($data as $row)
             @if ($loop->first)

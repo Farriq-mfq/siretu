@@ -39,7 +39,7 @@
             <select name="personil" wire:model="selectedPersonil" class="form-control select2">
                 <option value="" selected>--Pilih Personil--</option>
                 @foreach ($personil as $p)
-                    <option value="{{ $p->NAMALENGKAP }}">
+                    <option value="{{ $p->NOTELP }}">
                         {{ $p->NAMALENGKAP }}
                     </option>
                 @endforeach

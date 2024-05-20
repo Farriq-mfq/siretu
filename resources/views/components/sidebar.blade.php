@@ -46,7 +46,7 @@
                 </svg>
             </span> --}}
             <span class="app-brand-text demo menu-text fw-bolder ms-2 text-uppercase">
-                {{ config('app.name') }} <sub class="fs-6 text-muted">{{ env('APP_VERSION') }}</sub>
+                {{ config('app.name') }} <sub class="fs-6 text-muted">{{ $version }}</sub>
             </span>
         </a>
 

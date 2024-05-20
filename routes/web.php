@@ -10,6 +10,7 @@ use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\WifiController;
 use Illuminate\Support\Facades\Route;
+use App\Services\Github\GitHubService;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,7 +68,9 @@ Route::middleware('auth')->group(function () {
      * END MASTER ROUTES
      */
     Route::get('/about', function () {
-        return view('tentang.index');
+        $githubService = new GitHubService();
+        $version = $githubService->getLatestReleaseTag();
+        return view('tentang.index', compact('version'));
     })->name('about');
     Route::delete('logout', [AuthController::class, 'logout'])->name('logout');
 });

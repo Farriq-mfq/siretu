@@ -10,7 +10,7 @@
             </p>
         </div>
         <div class="card-footer">
-            Versi aplikasi {{ env('APP_VERSION') }}
+            Versi aplikasi {{ $version }}
         </div>
     </div>
 @endsection

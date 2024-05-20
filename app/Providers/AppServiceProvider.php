@@ -37,5 +37,8 @@ class AppServiceProvider extends ServiceProvider
         Vite::useScriptTagAttributes([
             'defer' => true,
         ]);
+
+        config(['app.locale' => 'id']);
+        Carbon::setLocale('id');
     }
 }

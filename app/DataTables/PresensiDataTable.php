@@ -31,6 +31,10 @@ class PresensiDataTable extends DataTable
         ['data' => 'JAM_DATANG', 'title' => 'Jam Datang'],
         ['data' => 'JAM_PULANG', 'title' => 'Jam Pulang'],
     ];
+    protected string $printPreview = 'presensi.print';
+    protected bool $fastExcel = true;
+
+
     /**
      * Build the DataTable class.
      *
@@ -76,7 +80,7 @@ class PresensiDataTable extends DataTable
                             ->from($model->getTable())
                             ->crossJoin(DB::raw('(SELECT @row_num := 0) as vars'));
                     }, 'presensi')->where('row_num', '>', 1)
-                    ->where('NAMALENGKAP', urldecode(request()->segment(3)))
+                    ->where('NoTelp', urldecode(request()->segment(3)))
                     ->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') >= ?", request()->get('start_date'))->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') <= ?", request()->get('end_date'))
                     ->newQuery();
             } else if (request()->has('start_date') && request()->has('end_date')) {
@@ -95,7 +99,7 @@ class PresensiDataTable extends DataTable
                             ->from($model->getTable())
                             ->crossJoin(DB::raw('(SELECT @row_num := 0) as vars'));
                     }, 'presensi')->where('row_num', '>', 1)
-                    ->where('NAMALENGKAP', urldecode(request()->segment(3)))
+                    ->where('NoTelp', urldecode(request()->segment(3)))
                     ->newQuery();
             }
         } else {

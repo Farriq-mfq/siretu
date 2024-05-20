@@ -1,4 +1,4 @@
-@if ($row->DATANG && $row->PULANG)
+@if ($row->JAM_DATANG && $row->JAM_PULANG)
     <span class="badge bg-success">
         Lengkap
     </span>

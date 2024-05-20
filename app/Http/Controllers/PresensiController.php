@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataTables\NotyetDataTable;
 use App\DataTables\PresensiDataTable;
 use App\Models\Personil;
 
@@ -17,5 +18,10 @@ class PresensiController extends Controller
             'personil' => request('personil'),
         ] : [];
         return $dataTable->render('presensi.index', compact('by', 'filter'));
+    }
+
+    public function notYet(NotyetDataTable $notyetDataTable)
+    {
+        return $notyetDataTable->render('presensi.notyet');
     }
 }

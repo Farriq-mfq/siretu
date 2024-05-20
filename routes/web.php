@@ -28,6 +28,7 @@ Route::middleware('auth')->group(function () {
 
     // fitur presensi
     Route::prefix('presensi')->group(function () {
+        Route::get('/notyet', [PresensiController::class, 'notYet'])->name('presensi.notyet');
         Route::get('/report-recap', [PresensiController::class, 'reportOfRecap'])->name('presensi.report.re');
         Route::get('/{show?}/{personil?}', [PresensiController::class, 'index'])->name('presensi');
     });

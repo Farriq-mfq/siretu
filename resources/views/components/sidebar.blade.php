@@ -66,10 +66,10 @@
         </li>
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">
-                Report
+                Report & Fitur
             </span>
         </li>
-        <li class="menu-item @active('presensi')">
+        <li class="menu-item @activeHasChild('presensi')">
             <a href="{{ route('presensi') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-book"></i>
                 <div data-i18n="Analytics">Presensi</div>
@@ -97,6 +97,12 @@
                 <div data-i18n="Analytics">Jurnal</div>
             </a>
         </li>
+        {{-- <li class="menu-item">
+            <a href="{{ route('jurnal') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-cog"></i>
+                <div data-i18n="Analytics">Settings</div>
+            </a>
+        </li> --}}
         {{-- <li class="menu-header small text-uppercase">
             <span class="menu-header-text">
                 Surat

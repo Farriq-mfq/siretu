@@ -76,7 +76,9 @@ class JurnalDataTable extends DataTable
                     $q->select('*', DB::raw('@row_num := @row_num + 1 as row_num'))
                         ->from($model->getTable())
                         ->crossJoin(DB::raw('(SELECT @row_num := 0) as vars'));
-                }, 'jurnal')->where('row_num', '>', 1)->newQuery();
+                }, 'jurnal')
+                ->orderByDesc('NoFormulir')
+                ->where('row_num', '>', 1)->newQuery();
         } else if ($by === 'filter') {
             if (request()->segment(3) && request()->has('start_date') && request()->has('end_date')) {
                 return $model
@@ -86,6 +88,7 @@ class JurnalDataTable extends DataTable
                             ->crossJoin(DB::raw('(SELECT @row_num := 0) as vars'));
                     }, 'jurnal')->where('row_num', '>', 1)
                     ->where('NAMALENGKAP', urldecode(request()->segment(3)))
+                    ->orderByDesc('NoFormulir')
                     ->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') >= ?", request()->get('start_date'))->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') <= ?", request()->get('end_date'))
                     ->newQuery();
             } else if (request()->has('start_date') && request()->has('end_date')) {
@@ -95,6 +98,7 @@ class JurnalDataTable extends DataTable
                             ->from($model->getTable())
                             ->crossJoin(DB::raw('(SELECT @row_num := 0) as vars'));
                     }, 'jurnal')->where('row_num', '>', 1)
+                    ->orderByDesc('NoFormulir')
                     ->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') >= ?", request()->get('start_date'))->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') <= ?", request()->get('end_date'))
                     ->newQuery();
             } else if (request()->segment(3)) {
@@ -104,6 +108,7 @@ class JurnalDataTable extends DataTable
                             ->from($model->getTable())
                             ->crossJoin(DB::raw('(SELECT @row_num := 0) as vars'));
                     }, 'jurnal')->where('row_num', '>', 1)
+                    ->orderByDesc('NoFormulir')
                     ->where('NAMALENGKAP', urldecode(request()->segment(3)))
                     ->newQuery();
             }
@@ -113,7 +118,9 @@ class JurnalDataTable extends DataTable
                     $q->select('*', DB::raw('@row_num := @row_num + 1 as row_num'))
                         ->from($model->getTable())
                         ->crossJoin(DB::raw('(SELECT @row_num := 0) as vars'));
-                }, 'jurnal')->where('row_num', '>', 1)->newQuery();
+                }, 'jurnal')
+                ->orderByDesc('NoFormulir')
+                ->where('row_num', '>', 1)->newQuery();
         }
     }
 

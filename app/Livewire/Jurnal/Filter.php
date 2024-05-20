@@ -35,14 +35,14 @@ class Filter extends Component
         $this->validate();
         $data = [];
         if ($this->selectedPersonil && $this->start && $this->end) {
-            $data['personil'] = urlencode($this->selectedPersonil);
+            $data['personil'] = $this->selectedPersonil;
             $data['start_date'] = $this->start;
             $data['end_date'] = $this->end;
         } else if ($this->start && $this->end) {
             $data['start_date'] = $this->start;
             $data['end_date'] = $this->end;
         } else if ($this->selectedPersonil) {
-            $data['personil'] = urlencode($this->selectedPersonil);
+            $data['personil'] = $this->selectedPersonil;
         }
 
         $this->dispatch('to_route', route('jurnal', array_merge(['show' => 'filter'], $data)));
@@ -51,7 +51,7 @@ class Filter extends Component
     public function mount(array $filter)
     {
         $this->showFilterTanggal = request('show') === 'filter' && request()->has('start_date') && request()->has('end_date') ? true : false;
-        $this->selectedPersonil = request('show') === 'filter' && request()->segment(3) ? urldecode(request()->segment(3)) : null;
+        $this->selectedPersonil = request('show') === 'filter' && request()->segment(3) ? request()->segment(3) : null;
         $this->start = request('show') === 'filter' && request()->has('start_date') ? request()->get('start_date') : null;
         $this->end = request('show') === 'filter' && request()->has('end_date') ? request()->get('end_date') : null;
         $this->filter = $filter;

@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\JurnalDataTable;
+use App\Models\Jurnal;
 use App\Models\Personil;
 use Illuminate\Http\Request;
 
 class JurnalController extends Controller
 {
     public function __construct(
-        private readonly Personil $personil
+        private readonly Personil $personil,
+        private readonly Jurnal $jurnal,
     ) {
 
     }
@@ -23,5 +25,15 @@ class JurnalController extends Controller
             'personil' => request('personil'),
         ] : [];
         return $dataTable->render('jurnal.index', compact('by', 'filter'));
+    }
+
+    public function detail(
+        $noTelp,
+        $tanggal
+    ) {
+        $jurnal = $this->jurnal->where('NoTelp', $noTelp)->where('TglFormulir', urldecode($tanggal))->first();
+        if (!$jurnal)
+            abort(404);
+        return view('jurnal.detail', compact('jurnal'));
     }
 }

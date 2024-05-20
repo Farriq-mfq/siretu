@@ -45,6 +45,9 @@
                             @livewire('jurnal.filter', ['filter' => $filter])
                             @if ($filter['personil'] || ($filter['start_date'] && $filter['end_date']))
                                 <div class="mt-3">
+                                    <a href="#" class="btn btn-primary my-2">
+                                        <i class="bx bx-download"></i> Download Jurnal
+                                    </a>
                                     {{ $dataTable->table() }}
                                 </div>
                             @endif

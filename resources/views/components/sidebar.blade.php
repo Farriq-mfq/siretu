@@ -91,7 +91,7 @@
                 </li>
             </ul>
         </li>
-        <li class="menu-item @active('jurnal')">
+        <li class="menu-item @activeHasChild('jurnal')">
             <a href="{{ route('jurnal') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-pencil"></i>
                 <div data-i18n="Analytics">Jurnal</div>

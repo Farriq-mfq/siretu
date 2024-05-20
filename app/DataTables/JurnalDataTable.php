@@ -87,7 +87,7 @@ class JurnalDataTable extends DataTable
                             ->from($model->getTable())
                             ->crossJoin(DB::raw('(SELECT @row_num := 0) as vars'));
                     }, 'jurnal')->where('row_num', '>', 1)
-                    ->where('NAMALENGKAP', urldecode(request()->segment(3)))
+                    ->where('NoTelp', urldecode(request()->segment(3)))
                     ->orderByDesc('NoFormulir')
                     ->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') >= ?", request()->get('start_date'))->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') <= ?", request()->get('end_date'))
                     ->newQuery();
@@ -109,7 +109,7 @@ class JurnalDataTable extends DataTable
                             ->crossJoin(DB::raw('(SELECT @row_num := 0) as vars'));
                     }, 'jurnal')->where('row_num', '>', 1)
                     ->orderByDesc('NoFormulir')
-                    ->where('NAMALENGKAP', urldecode(request()->segment(3)))
+                    ->where('NoTelp', urldecode(request()->segment(3)))
                     ->newQuery();
             }
         } else {
@@ -156,11 +156,11 @@ class JurnalDataTable extends DataTable
             Column::make('SELESAI'),
             Column::make('NAMALENGKAP'),
             Column::make('ROMBEL_MAPEL'),
-            // Column::computed('action')
-            //     ->exportable(false)
-            //     ->printable(false)
-            //     ->width(60)
-            //     ->addClass('text-center'),
+            Column::computed('action')
+                ->exportable(false)
+                ->printable(false)
+                ->width(60)
+                ->addClass('text-center'),
         ];
     }
 

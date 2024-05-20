@@ -28,7 +28,7 @@ class Action extends Component
     {
         $deleted = Personil::where('id', $id)->delete();
         if ($deleted) {
-            $this->alert('success', 'Berhasil hapus wifi');
+            $this->alert('success', 'Berhasil hapus personil');
             $this->dispatch('reload');
             $this->dispatch('deleted-wifi');
         }

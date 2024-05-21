@@ -92,21 +92,21 @@
                                  @if ($c)
                                      @if ($c['JAM_DATANG'] && $c['JAM_PULANG'])
                                          <td
-                                             style="background: green;height: 100px;border:1px solid #000;text-align:center;color:black;min-width: 100px;">
+                                             style="background: green;height: fit;border:1px solid #000;text-align:center;color:black;min-width: 100px;">
+                                             @if (compareTimeLess($c['JAM_DATANG'], 6, 46, 0))
+                                                 ⭐
+                                                 @php
+                                                     $totalUangMakan++;
+                                                 @endphp
+                                             @endif
+                                             @if (compareTimeLess($c['JAM_DATANG'], 7, 00, 0) && compareTimegreater($c['JAM_DATANG'], 6, 46, 0))
+                                                 🚓
+                                                 @php
+                                                     $totalUangTransport++;
+                                                 @endphp
+                                             @endif
                                              <p style="color:white">
                                                  {{ $c['JAM_DATANG'] }}
-                                                 @if (compareTimeLess($c['JAM_DATANG'], 6, 46, 0))
-                                                     ⭐
-                                                     @php
-                                                         $totalUangMakan++;
-                                                     @endphp
-                                                 @endif
-                                                 @if (compareTimeLess($c['JAM_DATANG'], 7, 00, 0) && compareTimegreater($c['JAM_DATANG'], 6, 46, 0))
-                                                     🚓
-                                                     @php
-                                                         $totalUangTransport++;
-                                                     @endphp
-                                                 @endif
                                              </p>
                                              <p style="color: red">{{ $c['JAM_PULANG'] }}</p>
                                          </td>

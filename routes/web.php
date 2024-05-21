@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\IjinController;
 use App\Http\Controllers\JurnalController;
+use App\Http\Controllers\KelasController;
 use App\Http\Controllers\KelompokPegawaiController;
 use App\Http\Controllers\PersonilController;
 use App\Http\Controllers\PresensiController;
@@ -59,9 +60,19 @@ Route::middleware('auth')->group(function () {
         Route::get('/reset', [PersonilController::class, 'reset'])->name('personil-reset');
         Route::get('/{personil}/edit', [PersonilController::class, 'edit'])->name('personil.edit');
     });
+
     Route::get('wifi', [WifiController::class, 'index'])->name('wifi');
     Route::prefix('kelompok')->group(function () {
         Route::get('/', [KelompokPegawaiController::class, 'index'])->name('kelompok');
+    });
+
+    Route::prefix('kelas')->group(function () {
+        Route::get('/', [KelasController::class, 'index'])->name('kelas');
+        Route::get('/import', [KelasController::class, 'import'])->name('kelas-import');
+        Route::get('/create', [KelasController::class, 'create'])->name('kelas-create');
+        Route::get('/reset', [KelasController::class, 'reset'])->name('kelas-reset');
+        Route::get('/download', [KelasController::class, 'downloadFormat'])->name('kelas-format-download');
+
     });
 
     Route::prefix('siswa')->group(function () {

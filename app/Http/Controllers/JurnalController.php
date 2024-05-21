@@ -38,9 +38,12 @@ class JurnalController extends Controller
         return view('jurnal.detail', compact('jurnal'));
     }
 
-    public function generateJurnal()
+    public function generateJurnal($personil, $tanggal)
     {
-        $pdf = LaravelMpdf::loadView('jurnal.pdf.generate',[]);
-        return $pdf->stream();
+        $jurnal = $this->jurnal->where('NoTelp', $personil)->where('TglFormulir', urldecode($tanggal))->first();
+        if (!$jurnal)
+            abort(404);
+        $pdf = LaravelMpdf::loadView('jurnal.pdf.generate', compact('jurnal'));
+        return $pdf->download();
     }
 }

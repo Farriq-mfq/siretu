@@ -10,12 +10,13 @@ use Livewire\Component;
 class Action extends Component
 {
     use LivewireAlert;
-    public $NoFormulir;
+    public $NoTelp;
     public $TglFormulir;
     public Presensi $presensi;
-    public function mount($NoFormulir)
+    public function mount($NoTelp, $TglFormulir)
     {
-        $this->NoFormulir = $NoFormulir;
+        $this->NoTelp = $NoTelp;
+        $this->TglFormulir = $TglFormulir;
     }
 
     public function boot()
@@ -25,9 +26,9 @@ class Action extends Component
     }
 
     #[On('reset-presensi')]
-    public function onReset($NoFormulir)
+    public function onReset($NoTelp, $TglFormulir)
     {
-        $deleted = $this->presensi->where('NoFormulir', $NoFormulir)->delete();
+        $deleted = $this->presensi->where('NoTelp', $NoTelp)->where('TglFormulir', $TglFormulir)->delete();
 
         if ($deleted) {
             $this->alert('success', 'Berhasil reset presensi');
@@ -37,7 +38,7 @@ class Action extends Component
 
     public function handleReset()
     {
-        $this->dispatch('confirmation', ['event' => 'reset-presensi', 'text' => 'Yakin ingin mereset data ini ?', 'data' => ['NoFormulir' => $this->NoFormulir]]);
+        $this->dispatch('confirmation', ['event' => 'reset-presensi', 'text' => 'Yakin ingin mereset data ini ?', 'data' => ['NoTelp' => $this->NoTelp, 'TglFormulir' => $this->TglFormulir]]);
     }
 
     public function render()

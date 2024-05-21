@@ -64,7 +64,7 @@ class PresensiDataTable extends DataTable
                         ->from($model->getTable())
                         ->crossJoin(DB::raw('(SELECT @row_num := 0) as vars'));
                 }, 'presensi')->where('row_num', '>', 1)
-                ->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') = ?", [$today])->orderBy('NoFormulir', 'ASC')->newQuery();
+                ->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y'), '%Y-%m-%d') = ?", [$today])->orderBy('NoFormulir', 'ASC')->newQuery();
         } else if ($by === 'all') {
             return $model->fromSub(function ($q) use ($model) {
                 $q->select('*', DB::raw('@row_num := @row_num + 1 as row_num'))
@@ -151,12 +151,11 @@ class PresensiDataTable extends DataTable
             Column::make('TglFormulir'),
             Column::make('JAM_DATANG'),
             Column::make('JAM_PULANG'),
-            // Column::make('AKTIFITAS'),
-            // Column::computed('action')
-            //     ->exportable(false)
-            //     ->printable(false)
-            //     ->width(60)
-            //     ->addClass('text-center'),
+            Column::computed('action')
+                ->exportable(false)
+                ->printable(false)
+                ->width(60)
+                ->addClass('text-center'),
         ];
     }
 

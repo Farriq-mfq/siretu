@@ -12,17 +12,19 @@ return new class extends Migration {
     {
         Schema::create('kelas', function (Blueprint $table) {
             $table->id();
-            $table->string('NAMALENGKAP');
-            $table->string('GURUMAPEL');
-            $table->string('NAMASAJA');
-            $table->string('ROMBEL_MAPEL');
-            $table->string('NoTelp_Walas');
-            $table->string('NAMA_WALAS');
-            $table->string('PANGGILAN_WALAS');
-            $table->string('NoTelp_BK');
-            $table->string('NAMA_BK');
-            $table->string('PANGGILAN_BK');
-            $table->string('FORWARDTO');
+            $table->string('NAMALENGKAP')->nullable();
+            $table->string('GURUMAPEL')->nullable();
+            $table->string('NAMASAJA')->nullable();
+            $table->string('ROMBEL_MAPEL')->nullable();
+            $table->string('ROMBEL')->nullable();
+            $table->string('MAPEL')->nullable();
+            $table->string('NoTelp_Walas')->nullable();
+            $table->string('NAMA_WALAS')->nullable();
+            $table->string('PANGGILAN_WALAS')->nullable();
+            $table->string('NoTelp_BK')->nullable();
+            $table->string('NAMA_BK')->nullable();
+            $table->string('PANGGILAN_BK')->nullable();
+            $table->string('FORWARDTO')->nullable();
             $table->timestamps();
         });
     }

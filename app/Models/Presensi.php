@@ -10,7 +10,7 @@ class Presensi extends Model
     use HasFactory;
     use HasFactory;
     protected $table = "presensi";
-    protected $primaryKey = 'NoFormulir';
+    protected $primaryKey = null;
     protected $keyType = 'string';
     protected $cast = ['TglFormulir' => 'datetime'];
     public $timestamps = false;

@@ -69,3 +69,37 @@ DataTable.ext.buttons.resetPersonil = {
         // window.location.href = route('personil-import', undefined, undefined, Ziggy)
     }
 };
+DataTable.ext.buttons.resetKelas = {
+    className: 'btn btn-danger',
+    text: function (dt) {
+        return '<i class="bi bi-screwdriver"></i> ';
+    },
+
+    action: function (e, dt, button, config) {
+        Turbolinks.visit(route('kelas-reset', undefined, undefined, Ziggy))
+        // window.location.href = route('personil-import', undefined, undefined, Ziggy)
+    }
+};
+
+DataTable.ext.buttons.importKelas = {
+    className: 'btn btn-primary',
+    text: function (dt) {
+        return '<i class="bi bi-upload"></i> ';
+    },
+
+    action: function (e, dt, button, config) {
+        Turbolinks.visit(route('kelas-import', undefined, undefined, Ziggy))
+        // window.location.href = route('personil-import', undefined, undefined, Ziggy)
+    }
+};
+DataTable.ext.buttons.addKelas = {
+    className: 'btn btn-primary',
+    text: function (dt) {
+        return '<i class="bi bi-plus"></i> ' + "Tambah personil";
+    },
+
+    action: function (e, dt, button, config) {
+        Turbolinks.visit(route('kelas-create', undefined, undefined, Ziggy))
+        // window.location.href = route('personil-create', undefined, undefined, Ziggy)
+    }
+};

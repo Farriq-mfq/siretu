@@ -66,6 +66,7 @@
     </div>
     @routes()
     @livewireScripts
+    @livewireChartsScripts
     @livewire('wire-elements-modal')
     @include('includes.basic-script')
     <x-livewire-alert::scripts />

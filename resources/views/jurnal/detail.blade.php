@@ -85,10 +85,7 @@
             </table>
         </div>
         <div class="card-footer">
-            <a href="{{ route('jurnal.download', ['personil' => $jurnal->NoTelp, 'tanggal' => urlencode($jurnal->TglFormulir)]) }}"
-                class="btn btn-primary">
-                Download Jurnal
-            </a>
+            @livewire('jurnal.button-print', ['personil' => $jurnal->NoTelp, 'tanggal' => $jurnal->TglFormulir])
         </div>
     </div>
 @endsection

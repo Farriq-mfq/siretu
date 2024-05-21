@@ -149,6 +149,12 @@
                 <div data-i18n="Analytics">Siswa</div>
             </a>
         </li>
+        <li class="menu-item @activeHasChild('kelas')">
+            <a href="{{ route('kelas') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-list-ul"></i>
+                <div data-i18n="Analytics">Kelas</div>
+            </a>
+        </li>
         <li class="menu-item @active('wifi')">
             <a href="{{ route('wifi') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-wifi"></i>

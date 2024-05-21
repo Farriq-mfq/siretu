@@ -38,7 +38,7 @@ class AppServiceProvider extends ServiceProvider
             'defer' => true,
         ]);
 
-        config(['app.locale' => 'id']);
-        Carbon::setLocale('id');
+        // config(['app.locale' => 'id']);
+        // Carbon::setLocale('id');
     }
 }

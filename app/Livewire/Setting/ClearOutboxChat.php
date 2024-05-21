@@ -11,7 +11,7 @@ class ClearOutboxChat extends Component
     use LivewireAlert;
     public function handleReset()
     {
-        Artisan::call('chatSession:clear');
+        Artisan::call('outbox:clear');
         $this->alert('success', 'berhasil reset outbox pesan');
     }
     public function render()

@@ -31,7 +31,7 @@ class Edit extends Component
     public $rules = [
         'notelp' => [
             'required',
-            'regex:/^(62)8[1-9][0-9]{6,9}$/'
+            // 'regex:/^(62)8[1-9][0-9]{6,9}$/'
         ],
         'namalengkap' => 'required',
         'jabatan' => 'required',

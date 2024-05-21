@@ -31,6 +31,8 @@
 </head>
 
 <body>
+    <h1 class="h1 text-center">Jurnal Kegiatan Belajar Mengajar</h1>
+    <br><br>
     @if (request('show') === 'filter')
         @php
             $personil = \App\Models\Personil::where('NOTELP', request('personil'))->first();
@@ -38,28 +40,24 @@
                 abort(404);
             }
         @endphp
-        <div class="text-center">
-            <h1 class="h1">Jurnal Kegiatan Belajar Mengajar</h1>
-            <br><br>
-            <div style="width:400px">
-                <table class="table table-borderless">
-                    <tr>
-                        <th>Nama </th>
-                        <td>:</td>
-                        <td class="text-left">&nbsp;{{ $personil->NAMALENGKAP }}</td>
-                    </tr>
-                    <tr>
-                        <th>Mapel</th>
-                        <td>:</td>
-                        <td class="text-left">&nbsp;{{ $personil->MAPEL }}</td>
-                    </tr>
-                    <tr>
-                        <th>Tanggal Cetak</th>
-                        <td>:</td>
-                        <td class="text-left">&nbsp;{{ \Carbon\Carbon::now()->format('d F Y') }}</td>
-                    </tr>
-                </table>
-            </div>
+        <div style="width:400px">
+            <table class="table table-borderless">
+                <tr>
+                    <th>Nama </th>
+                    <td>:</td>
+                    <td class="text-left">&nbsp;{{ $personil->NAMALENGKAP }}</td>
+                </tr>
+                <tr>
+                    <th>Mapel</th>
+                    <td>:</td>
+                    <td class="text-left">&nbsp;{{ $personil->MAPEL }}</td>
+                </tr>
+                <tr>
+                    <th>Tanggal Cetak</th>
+                    <td>:</td>
+                    <td class="text-left">&nbsp;{{ \Carbon\Carbon::now()->format('d F Y') }}</td>
+                </tr>
+            </table>
         </div>
     @endif
     <table class="table table-bordered table-condensed table-striped">

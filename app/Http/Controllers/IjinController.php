@@ -1,13 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\DataTables\IjinGuruDataTable;
 
-use Illuminate\Http\Request;
 
 class IjinController extends Controller
 {
-    public function ijin_guru()
+    public function ijin_guru(IjinGuruDataTable $datatable)
     {
-        return view('perijinan.guru.index');
+        return $datatable->render('perijinan.guru.index');
     }
 }

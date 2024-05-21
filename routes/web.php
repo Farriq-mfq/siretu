@@ -7,6 +7,7 @@ use App\Http\Controllers\JurnalController;
 use App\Http\Controllers\KelompokPegawaiController;
 use App\Http\Controllers\PersonilController;
 use App\Http\Controllers\PresensiController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\WifiController;
 use Illuminate\Support\Facades\Route;
@@ -43,6 +44,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/download/{personil}/{tanggal}', [JurnalController::class, 'generateJurnal'])->name('jurnal.download');
         Route::get('/{show?}/{personil?}', [JurnalController::class, 'index'])->name('jurnal');
     });
+    Route::prefix('/setting')->group(function () {
+        Route::get('/', [SettingController::class, 'index'])->name('setting');
+    });
+
     /**
      * MASTER ROUTES
      */

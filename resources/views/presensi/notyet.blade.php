@@ -32,15 +32,11 @@
                             Rekap
                         </a>
                     </li>
-                    {{-- <li class="nav-item">
-                        <a href="{{ route('presensi', ['show' => 'stats']) }}"
-                            class="nav-link @if ($by === 'stats') active @endif"
-                            aria-selected="@if ($by === 'stats') active @endif">
-                            Statistik
-                        </a>
-                    </li> --}}
                 </ul>
-                <div class="tab-content">
+                <div class="tab-content active">
+                    <div class="mb-4">
+                        @livewire('presensi.form-warn')
+                    </div>
                     {{ $dataTable->table() }}
                 </div>
             </div>

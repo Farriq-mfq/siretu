@@ -97,12 +97,12 @@
                 <div data-i18n="Analytics">Jurnal</div>
             </a>
         </li>
-        {{-- <li class="menu-item">
-            <a href="{{ route('jurnal') }}" class="menu-link">
+        <li class="menu-item @active('setting')">
+            <a href="{{ route('setting') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-cog"></i>
                 <div data-i18n="Analytics">Settings</div>
             </a>
-        </li> --}}
+        </li>
         {{-- <li class="menu-header small text-uppercase">
             <span class="menu-header-text">
                 Surat

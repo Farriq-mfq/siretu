@@ -1,9 +1,10 @@
 @extends('templates.main')
-@section('title', 'Under dev')
+@section('title', 'Ijin guru')
 @section('content')
     <div class="card">
         <div class="card-body">
-            <x-under-dev></x-under-dev>
+            {{ $dataTable->table() }}
         </div>
     </div>
+    {{ $dataTable->scripts() }}
 @endsection

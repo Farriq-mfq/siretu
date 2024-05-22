@@ -28,6 +28,7 @@ class Import extends Component
                 if ($guru && $walas && $bk) {
                     Kelas::create([
                         'NAMALENGKAP' => $guru['NAMALENGKAP'],
+                        'NoTelp' => $guru['NOTELP'],
                         'GURUMAPEL' => $guru['MAPEL'],
                         'NAMASAJA' => $guru['NAMASAJA'],
                         'ROMBEL' => $kelas['ROMBEL'],

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\KelasDataTable;
+use App\Models\Kelas;
 use Illuminate\Http\Request;
 
 class KelasController extends Controller
@@ -30,10 +31,9 @@ class KelasController extends Controller
     {
         return view('kelas.create');
     }
-    public function edit()
+    public function edit($kelas)
     {
-        return 'edit';
-        // $kelas = $
-        // return view('kelas.edit');
+        $findKelas = Kelas::findOrFail($kelas);
+        return view('kelas.edit', compact('findKelas'));
     }
 }

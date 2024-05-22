@@ -8,9 +8,10 @@ use App\Models\Siswa;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
 
-class Create extends Component
+class Edit extends Component
 {
     use LivewireAlert;
+    public $kelas;
     public $guru;
     public $walas;
     public $bk;
@@ -30,7 +31,7 @@ class Create extends Component
         $walas = Personil::where('NOTELP', $this->walas)->first();
         $bk = Personil::where('NOTELP', $this->bk)->first();
         if ($guru && $walas && $bk) {
-            $create = Kelas::create([
+            $create = Kelas::where('id', $this->kelas->id)->update([
                 'NAMALENGKAP' => $guru->NAMALENGKAP,
                 'NoTelp' => $guru['NOTELP'],
                 'GURUMAPEL' => $guru->MAPEL,
@@ -48,18 +49,25 @@ class Create extends Component
             ]);
 
             if ($create) {
-                $this->alert('success', 'berhasil menambah kelas');
-                $this->reset();
+                $this->alert('success', 'berhasil update kelas');
             } else {
-                $this->alert('error', 'error menambah kelas');
+                $this->alert('error', 'error update kelas');
             }
         }
+    }
+    public function mount()
+    {
+        $this->guru = $this->kelas->NoTelp;
+        $this->walas = $this->kelas->NoTelp_Walas;
+        $this->bk = $this->kelas->NoTelp_BK;
+        $this->rombel = $this->kelas->ROMBEL;
+        $this->mapel = $this->kelas->MAPEL;
     }
     public function render()
     {
         $siswaModel = new Siswa();
         $personil = Personil::all();
         $rombels = $siswaModel->select('ROMBEL')->groupBy('ROMBEL')->get();
-        return view('livewire.kelas.create', compact('personil', 'rombels'));
+        return view('livewire.kelas.edit', compact('personil', 'rombels'));
     }
 }

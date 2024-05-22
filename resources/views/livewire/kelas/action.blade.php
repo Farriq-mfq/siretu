@@ -1,5 +1,5 @@
 <div class="d-flex gap-2 align-items-center">
-    <a wire:loading.attr="disabled" href="{{ route('personil.edit', ['personil' => $id]) }}"
+    <a wire:loading.attr="disabled" href="{{ route('kelas.edit', ['kelas' => $id]) }}"
         class="btn btn-primary btn-icon">
         <i class="tf-icons bx bx-pencil"></i>
     </a>

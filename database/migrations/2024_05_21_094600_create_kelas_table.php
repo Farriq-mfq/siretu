@@ -13,6 +13,7 @@ return new class extends Migration {
         Schema::create('kelas', function (Blueprint $table) {
             $table->id();
             $table->string('NAMALENGKAP')->nullable();
+            $table->string('NoTelp')->nullable();
             $table->string('GURUMAPEL')->nullable();
             $table->string('NAMASAJA')->nullable();
             $table->string('ROMBEL_MAPEL')->nullable();

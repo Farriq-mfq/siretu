@@ -95,7 +95,7 @@ DataTable.ext.buttons.importKelas = {
 DataTable.ext.buttons.addKelas = {
     className: 'btn btn-primary',
     text: function (dt) {
-        return '<i class="bi bi-plus"></i> ' + "Tambah personil";
+        return '<i class="bi bi-plus"></i> ';
     },
 
     action: function (e, dt, button, config) {

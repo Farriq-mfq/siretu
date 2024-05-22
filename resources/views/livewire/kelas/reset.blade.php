@@ -8,7 +8,7 @@
     <div class="card-body">
         <button wire:click.prevent="handleReset" class="btn btn-outline-danger" type="button" wire:loading.attr="disabled">
             <span wire:loading.remove>
-                Reset personil
+                Reset kelas
             </span>
             <span wire:loading>
                 Reseting...

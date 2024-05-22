@@ -51,6 +51,7 @@ class KelasDataTable extends DataTable
                 Button::make('reset'),
                 Button::make('reload'),
                 'importKelas',
+                'addKelas',
                 'resetKelas',
             ]);
     }
@@ -63,11 +64,11 @@ class KelasDataTable extends DataTable
         return [
             Column::make('NAMALENGKAP'),
             Column::make('ROMBEL_MAPEL'),
-            // Column::computed('action')
-            //     ->exportable(false)
-            //     ->printable(false)
-            //     ->width(60)
-            //     ->addClass('text-center'),
+            Column::computed('action')
+                ->exportable(false)
+                ->printable(false)
+                ->width(60)
+                ->addClass('text-center'),
         ];
     }
 

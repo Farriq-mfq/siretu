@@ -25,4 +25,15 @@ class KelasController extends Controller
     {
         return view('kelas.import');
     }
+
+    public function create()
+    {
+        return view('kelas.create');
+    }
+    public function edit()
+    {
+        return 'edit';
+        // $kelas = $
+        // return view('kelas.edit');
+    }
 }

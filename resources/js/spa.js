@@ -9,6 +9,4 @@ Turbolinks.SnapshotRenderer.prototype.assignNewBody = function () {
     $(".layout-container ").html(newBody.querySelector('.layout-container'))
 };
 
-
-
 Turbolinks.start()

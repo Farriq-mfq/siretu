@@ -30,7 +30,6 @@ class Action extends Component
         if ($deleted) {
             $this->alert('success', 'Berhasil hapus personil');
             $this->dispatch('reload');
-            $this->dispatch('deleted-wifi');
         }
     }
 

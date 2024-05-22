@@ -72,7 +72,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/create', [KelasController::class, 'create'])->name('kelas-create');
         Route::get('/reset', [KelasController::class, 'reset'])->name('kelas-reset');
         Route::get('/download', [KelasController::class, 'downloadFormat'])->name('kelas-format-download');
-
+        Route::get('/{personil}/edit', [KelasController::class, 'edit'])->name('kelas.edit');
     });
 
     Route::prefix('siswa')->group(function () {

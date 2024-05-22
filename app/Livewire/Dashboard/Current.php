@@ -23,7 +23,7 @@ class Current extends Component
                     ->from($modelPresensi->getTable())
                     ->crossJoin(DB::raw('(SELECT @row_num := 0) as vars'));
             }, 'presensi')->where('row_num', '>', 1)
-            ->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') = ?", [$today])->orderBy('NoFormulir', 'ASC')
+            ->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y'), '%Y-%m-%d') = ?", [$today])->orderBy('NoFormulir', 'ASC')
             ->limit(5)
             ->get();
         $jurnal = $modelJurnal
@@ -32,7 +32,7 @@ class Current extends Component
                     ->from($modelJurnal->getTable())
                     ->crossJoin(DB::raw('(SELECT @row_num := 0) as vars'));
             }, 'jurnal')->where('row_num', '>', 1)
-            ->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') = ?", [$today])->orderBy('NoFormulir', 'DESC')
+            ->whereRaw("DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y'), '%Y-%m-%d') = ?", [$today])->orderBy('NoFormulir', 'DESC')
             ->limit(5)
             ->get();
         $ijinGuru = $modelIjinGuru->fromSub(function ($q) use ($modelIjinGuru) {
@@ -41,7 +41,7 @@ class Current extends Component
                 ->crossJoin(DB::raw('(SELECT @row_num := 0) as vars'));
         }, 'ijinguru')
             ->where('row_num', '>', 1)
-            ->whereRaw("DATE_FORMAT(STR_TO_DATE(ijinguru.TglFormulir, '%d-%m-%Y %H:%i'), '%Y-%m-%d') = ?", [$today])->orderBy('ijinguru.NoFormulir', 'DESC')
+            ->whereRaw("DATE_FORMAT(STR_TO_DATE(ijinguru.TglFormulir, '%d-%m-%Y'), '%Y-%m-%d') = ?", [$today])->orderBy('ijinguru.NoFormulir', 'DESC')
             ->limit(5)
             ->get();
         return view('livewire.dashboard.current', compact('presensi', 'jurnal', 'ijinGuru'));

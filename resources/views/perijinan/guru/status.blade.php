@@ -1,9 +1,9 @@
 @if ($row->approve)
-    <h6 class="mb-0 text-success">
-        Di Ijinkan <i class="bx bx-check"></i>
-    </h6>
+    <span class="badge bg-success">
+        Diijinkan <i class="bx bx-check"></i>
+    </span>
 @else
-    <h6 class="mb-0 text-danger">
+    <span class="badge bg-success">
         Belum Diijinkan <i class="bx bx-x"></i>
-    </h6>
+    </span>
 @endif

@@ -32,11 +32,10 @@
             </div>
         </div>
         <div class="tab-pane @if ($currentTab === 'grafik') show active @endif" role="tabpanel">
-            {{-- <x-under-dev></x-under-dev> --}}
 
             <div class="card">
                 <div class="card-body">
-                    <livewire:livewire-line-chart {{-- key="{{ $columnChartModel->reactiveKey() }}" --}} :column-chart-model="$columnChartModel" />
+                    @livewire('dashboard.chart')
                 </div>
             </div>
         </div>

@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('personils', function (Blueprint $table) {
             $table->id();
-            $table->string('NOTELP')->nullable();
+            $table->string('NOTELP')->index();
             $table->string('KELOMPOKGURU')->nullable();
             $table->string('NAMASAJA')->nullable();
             $table->string('JABATAN')->nullable();
@@ -26,7 +26,7 @@ return new class extends Migration {
             $table->string('INDUKPEGAWAI')->nullable();
             $table->string('INDUKPEGAWAIDISPO')->nullable();
             $table->string('MAPEL')->nullable();
-            $table->string('QRCODE1')->nullable();
+            $table->string('QRCODE')->nullable();
             $table->string('FORWARDTO')->nullable();
             $table->string('EMAIL')->nullable();
             $table->timestamps();

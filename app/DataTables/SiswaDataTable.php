@@ -58,11 +58,11 @@ class SiswaDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::make('notelp'),
-            Column::make('nama'),
-            Column::make('nisn'),
-            Column::make('nipd'),
-            Column::make('rombel'),
+            Column::make('NOTELP'),
+            Column::make('NAMA'),
+            Column::make('NISN'),
+            Column::make('NOINDUK'),
+            Column::make('ROMBEL'),
             Column::computed('action')
                 ->exportable(false)
                 ->printable(false)

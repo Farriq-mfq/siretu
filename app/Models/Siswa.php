@@ -9,5 +9,5 @@ class Siswa extends Model
 {
     use HasFactory;
     protected $primaryKey = 'id';
-    protected $fillable = ["nama", "nipd", "jenis_kelamin", "nisn", "tempat_lahir", "tanggal_lahir", "nik", "agama", "alamat", "rt", "rw", "dusun", "kelurahan", "kecamatan", "kode_pos", "jenis_tinggal", "alat_transportasi", "telepon", "notelp", "email", "SKHUN", "penerima_kps", "no_kps", "rombel", "NAMA_WALAS", "PANGGILAN_WALAS", "NAMA_BK", "PANGGILAN_BK", "FORWARDTO"];
+    protected $fillable = ["NAMA", "NOTELP", "NOINDUK", "NISN", "JK", "AGAMA", "ROMBEL", "NoTelp_Walas", "NAMA_WALAS", "PANGGILAN_WALAS", "NoTelp_BK", "NAMA_BK", "PANGGILAN_BK", "FORWARDTO"];
 }

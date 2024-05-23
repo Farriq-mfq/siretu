@@ -16,17 +16,44 @@ class Import extends Component
     public $rules = [
         'file' => 'required|mimes:xlsx, csv, xls'
     ];
+
+
+    public function getNoTelpWalasBK($collection)
+    {
+        $noTelpWalas = collect();
+        $noTelpBK = collect();
+        $noTelpGuru = collect();
+        foreach ($collection as $siswa) {
+            $noTelpWalas->add($siswa['NoTelp_Walas']);
+            $noTelpBK->add($siswa['NoTelp_BK']);
+            $noTelpGuru->add($siswa['NoTelp_Guru']);
+        }
+        $walas = $noTelpWalas->unique()->values()->toArray();
+        $bk = $noTelpBK->unique()->values()->toArray();
+        $guru = $noTelpGuru->unique()->values()->toArray();
+        return [
+            'walas' => collect($this->getPersonilByPhone($walas)),
+            'bk' => collect($this->getPersonilByPhone($bk)),
+            'guru' => collect($this->getPersonilByPhone($guru))
+        ];
+    }
+
+    public function getPersonilByPhone(array $phones)
+    {
+        return Personil::whereIn('NOTELP', $phones)->get();
+    }
     public function handleImport()
     {
         $this->validate();
         try {
             $collection = (new FastExcel)->import($this->file->getPathname());
+            $data = $this->getNoTelpWalasBK($collection);
             foreach ($collection as $kelas) {
-                $guru = Personil::where('NOTELP', $kelas['NoTelp_Guru'])->first();
-                $walas = Personil::where('NOTELP', $kelas['NoTelp_Walas'])->first();
-                $bk = Personil::where('NOTELP', $kelas['NoTelp_BK'])->first();
+                $guru = $data['guru']->where('NOTELP', $kelas['NoTelp_Guru'])->first();
+                $walas = $data['walas']->where('NOTELP', $kelas['NoTelp_Walas'])->first();
+                $bk = $data['bk']->where('NOTELP', $kelas['NoTelp_BK'])->first();
                 if ($guru && $walas && $bk) {
-                    Kelas::create([
+                    Kelas::upsert([
                         'NAMALENGKAP' => $guru['NAMALENGKAP'],
                         'NoTelp' => $guru['NOTELP'],
                         'GURUMAPEL' => $guru['MAPEL'],
@@ -41,7 +68,7 @@ class Import extends Component
                         'NAMA_BK' => $bk['NAMALENGKAP'],
                         'PANGGILAN_BK' => $bk['PANGGILAN'],
                         'FORWARDTO' => $walas['NOTELP'] . ';' . $bk['NOTELP']
-                    ]);
+                    ], 'NoTelp');
                 }
 
             }

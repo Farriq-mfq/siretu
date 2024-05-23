@@ -41,6 +41,9 @@ class PersonilDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             ->addColumn('action', 'personil.action')
+            ->addColumn('kelompok', function ($row) {
+                return $row->KELOMPOKGURU;
+            })
             ->setRowId('id');
     }
 
@@ -82,7 +85,7 @@ class PersonilDataTable extends DataTable
             // Column::make('NOMOR')->printable(false)->exportable(false),
             Column::make('NAMALENGKAP'),
             Column::make("NOTELP"),
-            Column::make('KELOMPOKGURU'),
+            Column::make('kelompok'),
             Column::make('JABATAN'),
             Column::computed('action')->printable(false)->exportable(false),
         ];

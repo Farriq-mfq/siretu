@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Siswa;
 
+use App\Models\Personil;
 use App\Models\Siswa;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 use Livewire\Component;
@@ -13,6 +14,7 @@ class Import extends Component
     protected Siswa $siswa;
     use WithFileUploads, LivewireAlert;
     public $file;
+    public $totalRows;
     public $rules = [
         'file' => 'required|mimes:xlsx, csv, xls'
     ];
@@ -20,43 +22,53 @@ class Import extends Component
     {
         $this->siswa = new Siswa();
     }
+
+    public function getNoTelpWalasBK($collection)
+    {
+        $noTelpWalas = collect();
+        $noTelpBK = collect();
+        foreach ($collection as $siswa) {
+            $noTelpWalas->add($siswa['NoTelp_Walas']);
+            $noTelpBK->add($siswa['NoTelp_BK']);
+        }
+        $walas = $noTelpWalas->unique()->values()->toArray();
+        $bk = $noTelpBK->unique()->values()->toArray();
+        return [
+            'walas' => collect($this->getPersonilByPhone($walas)),
+            'bk' => collect($this->getPersonilByPhone($bk)),
+        ];
+    }
+
+    public function getPersonilByPhone(array $phones)
+    {
+        return Personil::whereIn('NOTELP', $phones)->get();
+    }
+
     public function handleImport()
     {
         $this->validate();
         try {
             $collection = (new FastExcel)->import($this->file->getPathname());
+            $dataWalasBk = $this->getNoTelpWalasBK($collection);
             foreach ($collection as $siswa) {
-                $this->siswa->create([
-                    'nama' => strtoupper($siswa["Nama"]),
-                    'nipd' => $siswa["NIPD"],
-                    'jenis_kelamin' => $siswa["JK"],
-                    'nisn' => $siswa["NISN"],
-                    'tempat_lahir' => $siswa["Tempat Lahir"],
-                    'tanggal_lahir' => $siswa["Tanggal Lahir"],
-                    'nik' => $siswa["NIK"],
-                    'agama' => $siswa["Agama"],
-                    'alamat' => $siswa["Alamat"],
-                    'rt' => $siswa["RT"],
-                    'rw' => $siswa["RW"],
-                    'dusun' => $siswa["Dusun"],
-                    'kelurahan' => $siswa["Kelurahan"],
-                    'kecamatan' => $siswa["Kecamatan"],
-                    'kode_pos' => $siswa["Kode Pos"],
-                    'jenis_tinggal' => $siswa["Jenis Tinggal"],
-                    'alat_transportasi' => $siswa["Alat Transportasi"],
-                    'telepon' => $siswa["Telepon"],
-                    'notelp' => "62" . substr($siswa["HP"], 1),
-                    'email' => $siswa["E-Mail"],
-                    'SKHUN' => $siswa["SKHUN"],
-                    'penerima_kps' => $siswa["Penerima KPS"],
-                    'no_kps' => $siswa["No KPS"],
-                    'rombel' => $siswa["ROMBEL"],
-                    'NAMA_WALAS' => $siswa["NAMA_WALAS"],
-                    'PANGGILAN_WALAS' => $siswa["PANGGILAN_WALAS"],
-                    'NAMA_BK' => $siswa["NAMA_BK"],
-                    'PANGGILAN_BK' => $siswa["PANGGILAN_BK"],
-                    'FORWARDTO' => $siswa["FORWARDTO_BK"],
-                ]);
+                $walas = $dataWalasBk['walas']->where('NOTELP', $siswa['NoTelp_Walas'])->first();
+                $bk = $dataWalasBk['bk']->where('NOTELP', $siswa['NoTelp_BK'])->first();
+                $this->siswa->upsert([
+                    'NOTELP' => $siswa["NOTELP"],
+                    'NAMA' => strtoupper($siswa["NAMA"]),
+                    'NOINDUK' => $siswa["NOINDUK"],
+                    'NISN' => $siswa["NISN"],
+                    'JK' => $siswa["JK"],
+                    'AGAMA' => $siswa["Agama"],
+                    'ROMBEL' => $siswa["ROMBEL"],
+                    'NoTelp_Walas' => $walas ? $walas['NOTELP'] : NULL,
+                    'NAMA_WALAS' => $walas ? $walas['NAMALENGKAP'] : NULL,
+                    'PANGGILAN_WALAS' => $walas ? $walas['PANGGILAN'] : NULL,
+                    'NoTelp_BK' => $bk ? $bk['NOTELP'] : NULL,
+                    'NAMA_BK' => $bk ? $bk['NAMALENGKAP'] : NULL,
+                    'PANGGILAN_BK' => $bk ? $bk['PANGGILAN'] : NULL,
+                    'FORWARDTO' => $walas && $bk ? $walas['NOTELP'] . ';' . $bk['NOTELP'] : NULL
+                ], 'NISN');
             }
             $this->alert('success', 'Berhasil import');
             $this->reset('file');

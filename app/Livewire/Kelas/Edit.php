@@ -17,6 +17,7 @@ class Edit extends Component
     public $bk;
     public $rombel;
     public $mapel;
+    public $forwardto;
     public $rules = [
         'guru' => 'required',
         'walas' => 'required',
@@ -45,7 +46,7 @@ class Edit extends Component
                 'NoTelp_BK' => $bk->NOTELP,
                 'NAMA_BK' => $bk->NAMALENGKAP,
                 'PANGGILAN_BK' => $bk->PANGGILAN,
-                'FORWARDTO' => $walas->NOTELP . ';' . $bk->NOTELP
+                'FORWARDTO' => $this->forwardto ?? $walas->NOTELP . ';' . $bk->NOTELP
             ]);
 
             if ($create) {
@@ -62,6 +63,7 @@ class Edit extends Component
         $this->bk = $this->kelas->NoTelp_BK;
         $this->rombel = $this->kelas->ROMBEL;
         $this->mapel = $this->kelas->MAPEL;
+        $this->forwardto = $this->kelas->FORWARDTO;
     }
     public function render()
     {

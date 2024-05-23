@@ -22,7 +22,7 @@ class Import extends Component
         try {
             $collection = (new FastExcel)->import($this->file->getPathname());
             foreach ($collection as $personil) {
-                Personil::create([
+                Personil::upsert([
                     'NOTELP' => $personil['NOTELP'],
                     'KELOMPOKGURU' => $personil["KELOMPOKGURU"],
                     'NAMASAJA' => $personil['NAMASAJA'] ?? $personil['NAMALENGKAP'],
@@ -37,10 +37,10 @@ class Import extends Component
                     'INDUKPEGAWAI' => $personil['INDUKPEGAWAI'],
                     'INDUKPEGAWAIDISPO' => $personil['INDUKPEGAWAIDISPO'] ?? $personil['INDUKPEGAWAI'],
                     'MAPEL' => $personil['MAPEL'],
-                    'QRCODE1' => 'https://wa.me/' . $personil['QRCODE1'] ?? $personil['NOTELP'],
+                    'QRCODE' => 'https://wa.me/' . $personil['QRCODE'] ?? $personil['NOTELP'],
                     'FORWARDTO' => $personil['FORWARDTO'],
                     'EMAIL' => $personil['EMAIL']
-                ]);
+                ], 'NOTELP');
                 \event(new NotifWa('Nomer anda telah berhasil diregistrasi', [$personil['NOTELP']]));
             }
             $this->alert('success', 'Berhasil import');

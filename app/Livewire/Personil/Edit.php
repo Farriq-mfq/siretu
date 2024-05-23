@@ -83,7 +83,7 @@ class Edit extends Component
             'INDUKPEGAWAI' => $this->no_induk,
             'INDUKPEGAWAIDISPO' => $this->no_induk_dispo ?? $this->no_induk,
             'MAPEL' => $this->mapel,
-            'QRCODE1' => 'https://wa.me/' . $this->notelp,
+            'QRCODE' => 'https://wa.me/' . $this->notelp,
             'FORWARDTO' => $this->forwardto,
             'EMAIL' => $this->email
         ]);

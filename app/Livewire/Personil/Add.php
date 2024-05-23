@@ -49,7 +49,7 @@ class Add extends Component
             'JABATAN' => $this->jabatan,
             'NAMALENGKAP' => $this->namalengkap,
             'KELAMIN' => $this->kelamin,
-            'PANGGILAN' => $this->panggilan,
+            'PANGGILAN' => $this->panggilan ?? $this->kelamin === 'Laki-laki' ? 'Bapak ' . $this->namalengkap : 'Ibu ' . $this->namalengkap,
             'NAMADISPO' => $this->nama_dispo ?? $this->namalengkap,
             'PANGGILANDISPO' => $this->panggilan_dispo ?? $this->namalengkap,
             'JABATANDISPO' => $this->jabatan_dispo ?? $this->jabatan,
@@ -57,13 +57,14 @@ class Add extends Component
             'INDUKPEGAWAI' => $this->no_induk,
             'INDUKPEGAWAIDISPO' => $this->no_induk_dispo ?? $this->no_induk,
             'MAPEL' => $this->mapel,
-            'QRCODE1' => 'https://wa.me/' . $this->notelp,
+            'QRCODE' => 'https://wa.me/' . $this->notelp,
             'FORWARDTO' => $this->forwardto,
             'EMAIL' => $this->email
         ]);
 
         if ($createPersonil) {
-            \event(new NotifWa('Nomer anda telah berhasil diregistrasi', [$this->notelp]));
+            $message = 'Nomer anda telah berhasil diregistrasi : ' . PHP_EOL . 'Tanggal        : ' . \Carbon\Carbon::now()->format('d/m/Y') . '' . PHP_EOL . 'Nama        :  ' . $this->namalengkap . '' . PHP_EOL . 'Jabatan       :  ' . $this->jabatan . '';
+            \event(new NotifWa($message, [$this->notelp]));
             $this->reset('notelp', 'kelompok', 'namalengkap', 'namasaja', 'jabatan', 'kelamin', 'panggilan', 'nama_dispo', 'panggilan_dispo', 'jabatan_dispo', 'status', 'no_induk', 'no_induk_dispo', 'mapel', 'email');
             $this->alert('success', 'Berhasil menambah personil baru');
         } else {

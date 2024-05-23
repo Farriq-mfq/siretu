@@ -2,7 +2,7 @@
     <form method="POST" wire:submit.prevent="handleSubmit">
         <div class="mb-3">
             <label for="guru" class="form-label">
-                Pilih Guru
+                Pilih Guru @isRequired()
             </label>
             <select wire:model="guru" class="form-control @error('guru') is-invalid @enderror">
                 <option value="">--Pilih Guru--</option>
@@ -18,7 +18,7 @@
         </div>
         <div class="mb-3">
             <label for="rombel" class="form-label">
-                Pilih Rombel
+                Pilih Rombel @isRequired()
             </label>
             <select wire:model="rombel" class="form-control @error('rombel') is-invalid @enderror">
                 <option value="">--Pilih Rombel--</option>
@@ -34,7 +34,7 @@
         </div>
         <div class="mb-3">
             <label for="mapel" class="form-label">
-                Masukan Mata Pelajaran
+                Masukan Mata Pelajaran @isRequired()
             </label>
             <input type="text" wire:model="mapel" class="form-control @error('rombel') is-invalid @enderror" />
             @error('mapel')
@@ -45,7 +45,7 @@
         </div>
         <div class="mb-3">
             <label for="walas" class="form-label">
-                Pilih Wali Kelas
+                Pilih Wali Kelas @isRequired()
             </label>
             <select wire:model="walas" class="form-control @error('walas') is-invalid @enderror">
                 <option value="">--Pilih Wali Kelas--</option>
@@ -61,7 +61,7 @@
         </div>
         <div class="mb-3">
             <label for="bk" class="form-label">
-                Pilih BK
+                Pilih BK @isRequired()
             </label>
             <select wire:model="bk" class="form-control @error('bk') is-invalid @enderror">
                 <option value="">--Pilih BK--</option>

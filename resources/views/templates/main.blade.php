@@ -28,35 +28,6 @@
                     <div class="container-xxl flex-grow-1 container-p-y">
                         @yield('content')
                     </div>
-
-                    <div class="modal fade" id="modal-delete-confirmation" tabindex="-1">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title">
-                                        Konfirmasi
-                                    </h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <p>Yakin ingin melakukan aksi ini ?</p>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                                        Batal
-                                    </button>
-                                    <form id="form-delete-button" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger">
-                                            Ya
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <x-toast></x-toast>
                     <div class="content-backdrop fade"></div>
                 </div>
@@ -64,7 +35,7 @@
         </div>
         <div class="layout-overlay layout-menu-toggle"></div>
     </div>
-    @routes()
+    @routes
     @livewireScripts
     @livewireChartsScripts
     @livewire('wire-elements-modal')

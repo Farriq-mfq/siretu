@@ -17,6 +17,7 @@ class GitHubService
 
     public function getLatestReleaseTag()
     {
+
         if (!Cache::has('APP_VERSION')) {
             $url = "https://api.github.com/repos/Farriq-mfq/siretu/tags";
             $response = $this->client->request('GET', $url, [

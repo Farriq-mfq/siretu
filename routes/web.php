@@ -10,6 +10,7 @@ use App\Http\Controllers\PersonilController;
 use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\WaliController;
 use App\Http\Controllers\WifiController;
 use Illuminate\Support\Facades\Route;
 use App\Services\Github\GitHubService;
@@ -80,6 +81,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/import', [SiswaController::class, 'import'])->name('siswa-import');
         Route::get('/reset', [SiswaController::class, 'reset'])->name('siswa-reset');
         Route::get('/download', [SiswaController::class, 'downloadFormat'])->name('siswa-format-download');
+    });
+
+    Route::prefix('wali')->group(function () {
+        Route::get('/', [WaliController::class, 'index'])->name('wali');
     });
     /**
      * END MASTER ROUTES

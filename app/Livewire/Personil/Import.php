@@ -41,7 +41,8 @@ class Import extends Component
                     'FORWARDTO' => $personil['FORWARDTO'],
                     'EMAIL' => $personil['EMAIL']
                 ], 'NOTELP');
-                \event(new NotifWa('Nomer anda telah berhasil diregistrasi', [$personil['NOTELP']]));
+                $message = 'Nomer anda telah berhasil diregistrasi : ' . PHP_EOL . 'Tanggal        : ' . \Carbon\Carbon::now()->format('d/m/Y') . '' . PHP_EOL . 'Nama        :  ' . $personil['NOTELP'] . '' . PHP_EOL . 'Jabatan       :  ' . $personil['JABATAN'] . '';
+                \event(new NotifWa($message, [$personil['NOTELP']]));
             }
             $this->alert('success', 'Berhasil import');
             $this->reset('file');

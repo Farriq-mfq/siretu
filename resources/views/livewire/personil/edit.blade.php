@@ -63,7 +63,8 @@
                 <select wire:model="kelompok" class="form-control @error('kelompok') is-invalid @enderror">
                     <option value="" selected>--PILIH KELOMPOK--</option>
                     @foreach ($kelompoks as $kelompok)
-                        <option value="{{ $kelompok->kelompok }}">{{ $kelompok->kelompok }}</option>
+                        <option @if ($kelompok->kelompok === $personil->KELOMPOKGURU) selected @endif
+                            value="{{ $kelompok->kelompok }}">{{ $kelompok->kelompok }}</option>
                     @endforeach
                 </select>
                 @error('kelompok')

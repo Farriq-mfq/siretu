@@ -61,7 +61,7 @@
         <li class="menu-item @active('dashboard')">
             <a href="{{ route('dashboard') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div data-i18n="Analytics">Dashboard</div>
+                <div>Dashboard</div>
             </a>
         </li>
         <li class="menu-header small text-uppercase">
@@ -72,7 +72,7 @@
         <li class="menu-item @activeHasChild('presensi')">
             <a href="{{ route('presensi') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-book"></i>
-                <div data-i18n="Analytics">Presensi</div>
+                <div>Presensi</div>
             </a>
         </li>
         <li class="menu-item @activeHasChild('ijin')">
@@ -94,13 +94,13 @@
         <li class="menu-item @activeHasChild('jurnal')">
             <a href="{{ route('jurnal') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-pencil"></i>
-                <div data-i18n="Analytics">Jurnal</div>
+                <div>Jurnal</div>
             </a>
         </li>
         <li class="menu-item @active('setting')">
             <a href="{{ route('setting') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-cog"></i>
-                <div data-i18n="Analytics">Settings</div>
+                <div>Settings</div>
             </a>
         </li>
         {{-- <li class="menu-header small text-uppercase">
@@ -134,31 +134,37 @@
         <li class="menu-item @activeHasChild('personil')">
             <a href="{{ route('personil') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
-                <div data-i18n="Analytics">Personil</div>
+                <div>Personil</div>
             </a>
         </li>
         <li class="menu-item @activeHasChild('kelompok')">
             <a href="{{ route('kelompok') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user-pin"></i>
-                <div data-i18n="Analytics">Kelompok</div>
+                <div>Kelompok</div>
             </a>
         </li>
         <li class="menu-item @activeHasChild('siswa')">
             <a href="{{ route('siswa') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
-                <div data-i18n="Analytics">Siswa</div>
+                <div>Siswa</div>
+            </a>
+        </li>
+        <li class="menu-item @activeHasChild('wali')">
+            <a href="{{ route('wali') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-user"></i>
+                <div>Wali</div>
             </a>
         </li>
         <li class="menu-item @activeHasChild('kelas')">
             <a href="{{ route('kelas') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-list-ul"></i>
-                <div data-i18n="Analytics">Kelas</div>
+                <div>Kelas</div>
             </a>
         </li>
         <li class="menu-item @active('wifi')">
             <a href="{{ route('wifi') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-wifi"></i>
-                <div data-i18n="Analytics">WIFI</div>
+                <div>WIFI</div>
             </a>
         </li>
         {{-- <li class="menu-header small text-uppercase">
@@ -169,7 +175,7 @@
         <li class="menu-item">
             <a href="#" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-cog"></i>
-                <div data-i18n="Analytics">
+                <div>
                     Pengaturan
                 </div>
             </a>
@@ -182,7 +188,7 @@
         <li class="menu-item @active('about')">
             <a href="{{ route('about') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-rocket"></i>
-                <div data-i18n="Analytics">Tentang</div>
+                <div>Tentang</div>
             </a>
         </li>
     </ul>

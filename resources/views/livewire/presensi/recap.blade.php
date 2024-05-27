@@ -105,12 +105,12 @@
                                 </th>
                                 <th style="text-align: center;width: 50px;border:1px solid #000">
                                 </th>
-                                <th style="text-align: center;width: 500px;border:1px solid #000">
+                                {{-- <th style="text-align: center;width: 500px;border:1px solid #000">
                                     Uang makan
                                 </th>
                                 <th style="text-align: center;width: 500px;border:1px solid #000">
                                     Uang Transport
-                                </th>
+                                </th> --}}
                             </tr>
 
                         </thead>
@@ -123,10 +123,10 @@
                                         style="width: 300px;padding-left: 3px;border:1px solid #000;min-width: 100px;white-space:nowrap">
                                         {{ $name }}
                                     </td>
-                                    @php
+                                    {{-- @php
                                         $totalUangMakan = 0;
                                         $totalUangTransport = 0;
-                                    @endphp
+                                    @endphp --}}
                                     @foreach ($item as $tgl => $c)
                                         @php
                                             $dayoff = array_filter(current($r)['day_off'], function ($item) use ($tgl) {
@@ -146,7 +146,7 @@
                                                                 $totalUangMakan++;
                                                             @endphp
                                                         @endif --}}
-                                                        @if (compareTimeLess($c['JAM_DATANG'], 6, 46, 0))
+                                                        {{-- @if (compareTimeLess($c['JAM_DATANG'], 6, 46, 0))
                                                             ⭐
                                                             @php
                                                                 $totalUangMakan++;
@@ -157,7 +157,7 @@
                                                             @php
                                                                 $totalUangTransport++;
                                                             @endphp
-                                                        @endif
+                                                        @endif --}}
                                                     </p>
                                                     <p style="color: red">{{ $c['JAM_PULANG'] }}</p>
                                                 </td>
@@ -217,7 +217,7 @@
                                             -
                                         @endif
                                     </td> --}}
-                                    <td style="text-align: center;border:1px solid #000;width: 500px !important">
+                                    {{-- <td style="text-align: center;border:1px solid #000;width: 500px !important">
                                         @if ($totalUangMakan > 0)
                                             {{ $totalUangMakan }} * 13000 =
                                             {{ formatRupiah($totalUangMakan * 13000) }}
@@ -232,7 +232,7 @@
                                         @else
                                             -
                                         @endif
-                                    </td>
+                                    </td> --}}
                                 </tr>
                             @endforeach
                         </tbody>

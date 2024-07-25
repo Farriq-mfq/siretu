@@ -60,12 +60,12 @@
                          </th>
                          <th style="text-align: center;width: 50px;border:1px solid #000">
                          </th>
-                         {{-- <th style="text-align: center;width: 250px;border:1px solid #000">
+                         <th style="text-align: center;width: 250px;border:1px solid #000">
                              Uang makan
                          </th>
                          <th style="text-align: center;width: 250px;border:1px solid #000">
                              Uang Transport
-                         </th> --}}
+                         </th>
                      </tr>
 
                  </thead>
@@ -78,10 +78,10 @@
                                  style="width: 300px;padding-left: 3px;border:1px solid #000;min-width: 100px;white-space:nowrap">
                                  {{ $name }}
                              </td>
-                             {{-- @php
+                             @php
                                  $totalUangMakan = 0;
                                  $totalUangTransport = 0;
-                             @endphp --}}
+                             @endphp
                              @foreach ($item as $tgl => $c)
                                  @php
                                      $dayoff = array_filter(current($r)['day_off'], function ($item) use ($tgl) {

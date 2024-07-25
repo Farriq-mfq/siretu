@@ -11,7 +11,8 @@
             <!-- Search -->
             <div class="navbar-nav align-items-center">
                 <div class="nav-item d-flex align-items-center">
-                    Selamat datang <b class="ms-1">{{ auth()->user()->username }}</b>
+                    Selamat datang
+                    {{-- <b class="ms-1">{{ auth()->user()->username }}</b> --}}
                 </div>
             </div>
             <ul class="navbar-nav flex-row align-items-center ms-auto">

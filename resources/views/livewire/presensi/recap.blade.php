@@ -39,9 +39,6 @@
             <span wire:loading.remove wire:target="exportRecap">Download Rekap Laporan</span>
             <span wire:loading wire:target="exportRecap">Downloading...</span>
         </button>
-        {{-- @if ($year && $month)
-            <p>lro</p>
-        @else --}}
         <div class="d-grid gap-5 mt-5" style="overflow: auto">
             @foreach ($recap as $r)
                 @if (current($r)['data'])
@@ -87,6 +84,7 @@
                                             return $i === \Carbon\Carbon::parse($item->tanggal)->day;
                                         });
                                         $filterDayOff = (array) current($dayoff);
+
                                     @endphp
                                     <th
                                         style="text-align:center;position:relative;
@@ -100,10 +98,14 @@
 
                                 <th
                                     style="text-align: center;width: 50px;border:1px solid #000;background:green;color:white">
+                                    Lengkap
                                 </th>
-                                <th style="text-align: center;width: 50px;border:1px solid #000;;background:orange">
+                                <th
+                                    style="text-align: center;width: 50px;border:1px solid #000;;background:orange;color:white">
+                                    Belum Lengkap
                                 </th>
                                 <th style="text-align: center;width: 50px;border:1px solid #000">
+                                    ALPHA
                                 </th>
                                 {{-- <th style="text-align: center;width: 500px;border:1px solid #000">
                                     Uang makan
@@ -116,6 +118,15 @@
                         </thead>
                         <tbody>
                             @foreach (current($r)['data'] as $name => $item)
+                                @php
+                                    $ijin = array_filter(
+                                        current($r)['data_ijin'],
+                                        function ($key) use ($name) {
+                                            return $key === $name;
+                                        },
+                                        ARRAY_FILTER_USE_KEY,
+                                    );
+                                @endphp
                                 <tr>
                                     <td style="text-align: center;border:1px solid #000;min-width: 50px;">
                                         {{ $loop->iteration }}</td>
@@ -123,16 +134,26 @@
                                         style="width: 300px;padding-left: 3px;border:1px solid #000;min-width: 100px;white-space:nowrap">
                                         {{ $name }}
                                     </td>
-                                    {{-- @php
+                                    @php
                                         $totalUangMakan = 0;
                                         $totalUangTransport = 0;
-                                    @endphp --}}
+                                    @endphp
                                     @foreach ($item as $tgl => $c)
                                         @php
                                             $dayoff = array_filter(current($r)['day_off'], function ($item) use ($tgl) {
                                                 return $tgl === \Carbon\Carbon::parse($item->tanggal)->day;
                                             });
                                             $filterDayOff = (array) current($dayoff);
+                                            $checkIsIjin =
+                                                count($ijin) > 0
+                                                    ? array_filter(
+                                                        current($ijin),
+                                                        function ($key) use ($tgl) {
+                                                            return $tgl === $key;
+                                                        },
+                                                        ARRAY_FILTER_USE_KEY,
+                                                    )
+                                                    : false;
                                         @endphp
                                         @if ($c)
                                             @if ($c['JAM_DATANG'] && $c['JAM_PULANG'])
@@ -174,6 +195,23 @@
                                             <td style="height: 40px;border:1px solid #000;min-width: 100px;">
                                                 @if (count($filterDayOff) === 3 && $filterDayOff['is_cuti'] === true)
                                                     <i style="margin: 0 10px;">OFF</i>
+                                                @elseif(count($filterDayOff) === 3)
+                                                    <i style="margin: 0 10px;transform: rotate(90deg);">
+                                                        {{ $filterDayOff['keterangan'] }}
+                                                    </i>
+                                                @else
+                                                    @if ($checkIsIjin && current($checkIsIjin))
+                                                        <i style="margin: 0 10px;">
+                                                            {{-- @php
+                                                                print_r(current($checkIsIjin));
+                                                            @endphp --}}
+                                                            Ijin
+                                                        </i>
+                                                    @else
+                                                        <i style="margin: 0 10px;">
+                                                            Alpha
+                                                        </i>
+                                                    @endif
                                                 @endif
                                             </td>
                                         @endif
@@ -216,8 +254,8 @@
                                         @else
                                             -
                                         @endif
-                                    </td> --}}
-                                    {{-- <td style="text-align: center;border:1px solid #000;width: 500px !important">
+                                    </td>
+                                    <td style="text-align: center;border:1px solid #000;width: 500px !important">
                                         @if ($totalUangMakan > 0)
                                             {{ $totalUangMakan }} * 13000 =
                                             {{ formatRupiah($totalUangMakan * 13000) }}

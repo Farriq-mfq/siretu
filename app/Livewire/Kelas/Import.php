@@ -53,7 +53,7 @@ class Import extends Component
                 $walas = $data['walas']->where('NOTELP', $kelas['NoTelp_Walas'])->first();
                 $bk = $data['bk']->where('NOTELP', $kelas['NoTelp_BK'])->first();
                 if ($guru && $walas && $bk) {
-                    Kelas::upsert([
+                    Kelas::create([
                         'NAMALENGKAP' => $guru['NAMALENGKAP'],
                         'NoTelp' => $guru['NOTELP'],
                         'GURUMAPEL' => $guru['MAPEL'],

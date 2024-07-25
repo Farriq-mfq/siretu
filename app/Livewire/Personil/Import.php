@@ -47,6 +47,7 @@ class Import extends Component
             $this->alert('success', 'Berhasil import');
             $this->reset('file');
         } catch (\Exception $e) {
+            dd($e);
             $this->alert('error', 'Terjadi kesalahan sistem');
         }
     }

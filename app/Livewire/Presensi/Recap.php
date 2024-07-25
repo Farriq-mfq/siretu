@@ -3,6 +3,7 @@
 namespace App\Livewire\Presensi;
 
 use App\Exports\PresensiRecap;
+use App\Models\IjinGuru;
 use App\Models\Presensi;
 use App\Services\DayOff\DayOff;
 use Carbon\Carbon;
@@ -22,6 +23,7 @@ class Recap extends Component
     {
         $this->validate();
         $presensiModel = new Presensi();
+        $ijinModel = new IjinGuru();
         $dayOff = new DayOff();
         $months = getMonths();
         if ($this->month) {
@@ -35,6 +37,17 @@ class Recap extends Component
                 ->whereRaw("YEAR(DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y'), '%Y-%m-%d'))=?", $this->year)
                 ->select("*", DB::raw("MONTH(DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y'), '%Y-%m-%d')) as month"), DB::raw("DAY(DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y'), '%Y-%m-%d')) as day"))
                 ->get();
+            $ijin =  $ijinModel
+                ->fromSub(function ($q) use ($ijinModel) {
+                    $q->select('*', DB::raw('@row_num := @row_num + 1 as row_num'))
+                        ->from($ijinModel->getTable())
+                        ->crossJoin(DB::raw('(SELECT @row_num := 0) as vars'));
+                }, 'row_number')->where('row_num', '>', 1)
+                ->whereRaw("MONTH(DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y'), '%Y-%m-%d'))=?", $this->month)
+                ->whereRaw("YEAR(DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y'), '%Y-%m-%d'))=?", $this->year)
+                ->select("*", DB::raw("MONTH(DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y'), '%Y-%m-%d')) as month"), DB::raw("DAY(DATE_FORMAT(STR_TO_DATE(TglFormulir, '%d-%m-%Y'), '%Y-%m-%d')) as day"))
+                ->get();
+
             $getDays = Carbon::createFromDate(null, $this->month, null)->daysInMonth;
 
             $numberOfDays = collect(range(1, $getDays));
@@ -47,13 +60,26 @@ class Recap extends Component
                 }
                 return $r;
             }, $presensi->groupBy('NAMALENGKAP')->toArray());
+
+            $resultsIjin = array_map(function ($filterPerday) use ($numberOfDays) {
+                $r = [];
+                for ($i = 1; $i <= $numberOfDays->count(); $i++) {
+                    $r[$i] = current(array_filter($filterPerday, function ($val) use ($i) {
+                        return $val['day'] === $i;
+                    }));
+                }
+                return $r;
+            }, $ijin->groupBy('NAMALENGKAP')->toArray());
+
             $permonths[] = [
                 $months[$this->month] => [
                     'total_days' => $getDays,
                     'day_off' => $dayOff->withMonth($this->month)->withYear($this->year)->getDayOff(),
                     'data' => $results,
+                    'data_ijin' => $resultsIjin
                 ]
             ];
+
             $this->recap = $permonths;
         } else {
             $presensi = $presensiModel
@@ -89,13 +115,10 @@ class Recap extends Component
                         'data' => $results,
                     ]
                 ];
-
             }
 
             $this->recap = $permonths;
         }
-
-
     }
 
     public function exportRecap()

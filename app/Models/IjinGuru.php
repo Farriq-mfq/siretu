@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\DB;
 class IjinGuru extends Model
 {
     use HasFactory;
-    // protected $table = 'ijinguru';
-    protected $table = 'oramlebu';
+    protected $table = 'ijinguru';
+    // protected $table = 'oramlebu';
     public $timesTamps = false;
     public function getApproveAttribute()
     {
